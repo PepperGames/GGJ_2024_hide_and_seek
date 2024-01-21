@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4375663383254131467}
   - component: {fileID: -2043029926038760286}
   - component: {fileID: 6056259179440491145}
+  - component: {fileID: 5237264554038096032}
   m_Layer: 0
   m_Name: Cop_PlayerPrefab
   m_TagString: Untagged
@@ -110,6 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0e9ede1570af041979d8688b24a0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5237264554038096032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646b3ed0802448441884239af5d4a728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityKeyCode: 32
+  abilityName: CopHitAbility
+  cooldown: 1
 --- !u!1001 &1335627687740129247
 PrefabInstance:
   m_ObjectHideFlags: 0
