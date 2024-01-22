@@ -21,23 +21,20 @@ public class ThirdPersonController : MonoBehaviourPun
     [Tooltip("Move speed of the character in m/s")]
     public float MoveSpeed = 2.0f;
 
-    [Tooltip("How fast the character turns to face movement direction")]
-    [Range(0.0f, 0.3f)]
-    public float RotationSmoothTime = 0.12f;
-
-    [Tooltip("Acceleration and deceleration")]
-    public float SpeedChangeRate = 10.0f;
-
+    [Header("AudioClips")]
     public AudioClip LandingAudioClip;
     public AudioClip[] FootstepAudioClips;
     [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
 
+    [Header("Jump")]
     [Space(10)]
     [Tooltip("The height the player can jump")]
     public float JumpHeight = 1.2f;
 
-    [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-    public float Gravity = -15.0f;
+    private int jumpCount = 0; // Счетчик прыжков
+    public int maxJumpCount = 2; // Максимальное количество прыжков
+    public float JumpPower1 = 2f;
+    public float JumpPower2 = 2f;
 
     [Space(10)]
     [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
@@ -46,7 +43,10 @@ public class ThirdPersonController : MonoBehaviourPun
     [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
     public float FallTimeout = 0.15f;
 
-    [Header("Player Grounded")]
+    [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+    public float Gravity = -15.0f;
+
+    [Header("Grounded")]
     [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
     public bool Grounded = true;
 
@@ -59,44 +59,17 @@ public class ThirdPersonController : MonoBehaviourPun
     [Tooltip("What layers the character uses as ground")]
     public LayerMask GroundLayers;
 
-    [Header("Cinemachine")]
-    [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-    public GameObject CinemachineCameraTarget;
-
-    [Tooltip("How far in degrees can you move the camera up")]
-    public float TopClamp = 70.0f;
-
-    [Tooltip("How far in degrees can you move the camera down")]
-    public float BottomClamp = -30.0f;
-
-    [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-    public float CameraAngleOverride = 0.0f;
-
-    // player
-    private float _speed;
-    private float _animationBlend;
-    private float _targetRotation = 0.0f;
-    private float _rotationVelocity;
     private float _verticalVelocity;
-    [SerializeField] private float _terminalVelocity = 53.0f;
+    private float _terminalVelocity = 53.0f;
 
     // timeout deltatime
     private float _jumpTimeoutDelta;
     private float _fallTimeoutDelta;
 
-    // animation IDs
-    private int _animIDSpeed;
-    private int _animIDGrounded;
-    private int _animIDJump;
-    private int _animIDFreeFall;
-    private int _animIDMotionSpeed;
-
     public float rotationSpeed = 5f;
-    public float pitchRange = 80f;
+    public float pitchRangeTop = 80f;
+    public float pitchRangeBot = -80f;
     private float pitch = 0f;
-
-    public float power1 = 2f;
-    public float power2 = 2f;
 
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
@@ -120,16 +93,6 @@ public class ThirdPersonController : MonoBehaviourPun
         }
     }
 
-
-    //private void Awake()
-    //{
-    //    // get a reference to our main camera
-    //    if (_mainCamera == null)
-    //    {
-    //        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-    //    }
-    //}
-
     private void Start()
     {
         _hasAnimator = TryGetComponent(out _animator);
@@ -140,8 +103,6 @@ public class ThirdPersonController : MonoBehaviourPun
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
-        AssignAnimationIDs();
 
         // reset our timeouts on start
         _jumpTimeoutDelta = JumpTimeout;
@@ -160,20 +121,6 @@ public class ThirdPersonController : MonoBehaviourPun
         }
     }
 
-    //private void LateUpdate()
-    //{
-    //    CameraRotation();
-    //}
-
-    private void AssignAnimationIDs()
-    {
-        _animIDSpeed = Animator.StringToHash("Speed");
-        _animIDGrounded = Animator.StringToHash("Grounded");
-        _animIDJump = Animator.StringToHash("Jump");
-        _animIDFreeFall = Animator.StringToHash("FreeFall");
-        _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-    }
-
     private void GroundedCheck()
     {
         // set sphere position, with offset
@@ -181,12 +128,6 @@ public class ThirdPersonController : MonoBehaviourPun
             transform.position.z);
         Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
             QueryTriggerInteraction.Ignore);
-
-        // update animator if using character
-        if (_hasAnimator)
-        {
-            _animator.SetBool(_animIDGrounded, Grounded);
-        }
     }
 
     private void Move()
@@ -199,7 +140,7 @@ public class ThirdPersonController : MonoBehaviourPun
 
         // Вращение камеры вокруг оси X с ограничением по углам
         pitch -= mouseY * rotationSpeed;
-        pitch = Mathf.Clamp(pitch, -pitchRange, pitchRange);
+        pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
 
         // Применение вращения камеры
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
@@ -218,27 +159,24 @@ public class ThirdPersonController : MonoBehaviourPun
         _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
     }
 
-    private int jumpCount = 0; // Счетчик прыжков
-    public int maxJumpCount = 2; // Максимальное количество прыжков
-
     private void JumpAndGravity()
     {
         if (Grounded)
         {
             jumpCount = 0;
-            Debug.Log("JumpCount1 " + jumpCount);
+            //Debug.Log("JumpCount1 " + jumpCount);
             _fallTimeoutDelta = FallTimeout;
 
             if (_verticalVelocity < 0.0f)
             {
-                _verticalVelocity = -power1;
+                _verticalVelocity = -JumpPower1;
             }
 
             if (_input.jump && _jumpTimeoutDelta <= 0.0f && jumpCount == 0)
             {
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -power1 * Gravity);
+                _verticalVelocity = Mathf.Sqrt(JumpHeight * -JumpPower1 * Gravity);
                 jumpCount++;
-                Debug.Log("JumpCount2 " + jumpCount);
+                //Debug.Log("JumpCount2 " + jumpCount);
             }
 
             if (_jumpTimeoutDelta >= 0.0f)
@@ -259,12 +197,12 @@ public class ThirdPersonController : MonoBehaviourPun
                 _jumpTimeoutDelta = JumpTimeout;
                 if (_input.doubleJump)
                 {
-                    Debug.Log("doubleJump");
-                    Debug.Log("_verticalVelocity " + _verticalVelocity);
+                    //Debug.Log("doubleJump");
+                    //Debug.Log("_verticalVelocity " + _verticalVelocity);
                     jumpCount++;
-                    Debug.Log("JumpCount3 " + jumpCount);
+                   // Debug.Log("JumpCount3 " + jumpCount);
 
-                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -power2 * Gravity);
+                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -JumpPower2 * Gravity);
                     _fallTimeoutDelta += FallTimeout;
                 }
                 if (_fallTimeoutDelta >= 0.0f)
@@ -272,11 +210,10 @@ public class ThirdPersonController : MonoBehaviourPun
                     _fallTimeoutDelta -= Time.deltaTime;
                 }
 
-                Debug.Log("JumpCount4 " + jumpCount);
+               //Debug.Log("JumpCount4 " + jumpCount);
             }
         }
 
-        // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
         if (_verticalVelocity < _terminalVelocity)
         {
             _verticalVelocity += Gravity * Time.deltaTime;
