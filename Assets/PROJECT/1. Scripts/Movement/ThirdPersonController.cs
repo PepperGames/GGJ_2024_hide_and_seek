@@ -20,9 +20,6 @@ public class ThirdPersonController : MonoBehaviour
     [Tooltip("Move speed of the character in m/s")]
     public float MoveSpeed = 2.0f;
 
-    [Tooltip("Sprint speed of the character in m/s")]
-    public float SprintSpeed = 5.335f;
-
     [Tooltip("How fast the character turns to face movement direction")]
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
@@ -43,7 +40,7 @@ public class ThirdPersonController : MonoBehaviour
 
     [Space(10)]
     [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-    public float JumpTimeout = 0.50f;
+    public float JumpTimeout = 0.50f;// 0.50f;
 
     [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
     public float FallTimeout = 0.15f;
@@ -103,10 +100,10 @@ public class ThirdPersonController : MonoBehaviour
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
 #endif
-    private Animator _animator;
+    [SerializeField] private Animator _animator;
     private CharacterController _controller;
     private StarterAssetsInputs _input;
-    private GameObject _mainCamera;
+    [SerializeField] private GameObject _mainCamera;
 
     private const float _threshold = 0.01f;
 
@@ -125,14 +122,14 @@ public class ThirdPersonController : MonoBehaviour
     }
 
 
-    private void Awake()
-    {
-        // get a reference to our main camera
-        if (_mainCamera == null)
-        {
-            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        }
-    }
+    //private void Awake()
+    //{
+    //    // get a reference to our main camera
+    //    if (_mainCamera == null)
+    //    {
+    //        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+    //    }
+    //}
 
     private void Start()
     {
@@ -216,7 +213,7 @@ public class ThirdPersonController : MonoBehaviour
     private void Move()
     {
         // set target speed based on move speed, sprint speed and if sprint is pressed
-        float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+        float targetSpeed = MoveSpeed;
 
         // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
