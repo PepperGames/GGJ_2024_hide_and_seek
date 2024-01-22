@@ -286,6 +286,7 @@ MonoBehaviour:
   laughterDecreaseRate: 10
   laughterIncreaseRate: 2
   isUsingLaughter: 0
+  isUncontrollableLaughter: 0
 --- !u!114 &975447698259729727
 MonoBehaviour:
   m_ObjectHideFlags: 0

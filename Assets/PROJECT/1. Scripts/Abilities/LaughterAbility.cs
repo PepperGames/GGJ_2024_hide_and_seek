@@ -15,6 +15,20 @@ public class LaughterAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
+        if (laughterMeter.isUncontrollableLaughter)
+        {
+            // Логика для неосознанного смеха
+            HandleUncontrollableLaughter();
+        }
+        else
+        {
+            // Обычная логика смеха
+            HandleControlledLaughter();
+        }
+    }
+
+    private void HandleControlledLaughter()
+    {
         if (Input.GetMouseButtonDown(1) && laughterMeter.currentLaughter > 0)
         {
             StartLaughter();
@@ -30,6 +44,14 @@ public class LaughterAbility : BaseAbility
         else if (Input.GetMouseButtonUp(1) || laughterMeter.currentLaughter <= 0)
         {
             StopLaughter();
+        }
+    }
+
+    private void HandleUncontrollableLaughter()
+    {
+        if (!audioSource.isPlaying)
+        {
+            StartLaughter();
         }
     }
 

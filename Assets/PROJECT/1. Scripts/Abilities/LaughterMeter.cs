@@ -8,25 +8,39 @@ public class LaughterMeter : MonoBehaviour
     public float laughterIncreaseRate = 5f;
     
     public bool isUsingLaughter = false; // Добавлено для отслеживания использования способности
+    public bool isUncontrollableLaughter = false;
     
     
     void Start()
     {
-        currentLaughter = maxLaughter;
+        currentLaughter = 0;
     }
 
     void Update()
     {
-        if (!isUsingLaughter && currentLaughter < maxLaughter)
+        if (currentLaughter >= maxLaughter)
+        {
+            isUncontrollableLaughter = true;
+            // Здесь можно вызвать метод для начала неосознанного смеха, если он еще не активен
+        }
+
+        if (isUncontrollableLaughter)
+        {
+            if (currentLaughter > 0)
+            {
+                currentLaughter -= Time.deltaTime * laughterDecreaseRate;
+            }
+            else
+            {
+                isUncontrollableLaughter = false;
+                currentLaughter = 0;
+                // Здесь можно вызвать метод для остановки неосознанного смеха
+            }
+        }
+        else if (currentLaughter < maxLaughter)
         {
             currentLaughter += Time.deltaTime * laughterIncreaseRate;
             currentLaughter = Mathf.Min(currentLaughter, maxLaughter);
-        }
-
-        // Округление до 0, если значение слишком мало
-        if (currentLaughter < 0.01f)
-        {
-            currentLaughter = 0;
         }
     }
 

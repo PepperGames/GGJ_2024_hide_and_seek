@@ -31,7 +31,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public UnityEvent OnDiconnect;
     public UnityEvent OnJoinedRoomEvent;
     public UnityEvent OnLeftRoomEvent;
-    
+    public UnityEvent OnIRoomOwner;
+
     private double startTime = 0;
 
 
@@ -51,9 +52,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                Debug.Log("GAME START!");
+                //Debug.Log("GAME START!");
                 startTime = 0;
-                PhotonNetwork.LoadLevel(ConstantsHolder.LEVEL_SCENENAME_NAME);
+                
             }
         }
     }
@@ -102,8 +103,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         TryJoiningRoom();
     }
 
-    
-    
+    public void StartGameManualy()
+    {
+        photonView.RPC("SyncLoadScene", RpcTarget.AllBuffered);
+    }
+
     private void TryJoiningRoom()
     {
         PhotonNetwork.JoinRandomRoom(); // Попытка присоединиться к случайной комнате
@@ -134,8 +138,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private string ChooseTeam()
     {
-        return (Random.Range(0, 2) == 0) ? Team.Bobs.ToString() : Team.Cops.ToString();
+        // Проверяем, существует ли текущая комната
+        if (PhotonNetwork.CurrentRoom != null)
+        {
+            int playersCount = PhotonNetwork.CurrentRoom.PlayerCount;
+            return (playersCount % 2 == 0) ? Team.Cops.ToString() : Team.Bobs.ToString();
+        }
+        else
+        {
+            // Если комната не существует, выбираем команду случайным образом
+            return (Random.Range(0, 2) == 0) ? Team.Bobs.ToString() : Team.Cops.ToString();
+        }
     }
+
 
 
     private void UpdatePlayerList()
@@ -204,7 +219,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         startTime = time;
     }
-    
+
+    [PunRPC]
+    void SyncLoadScene()
+    {
+        PhotonNetwork.LoadLevel(ConstantsHolder.LEVEL_SCENENAME_NAME);
+    }
+
     void DisplayTimer(double time)
     {
         // Отобразите таймер на экране
@@ -245,6 +266,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
+            OnIRoomOwner.Invoke();
             startTime = PhotonNetwork.Time + ConstantsHolder.GAME_START_COUNTDOWN_TIME;
             photonView.RPC("SyncStartTime", RpcTarget.AllBuffered, startTime);
         }
