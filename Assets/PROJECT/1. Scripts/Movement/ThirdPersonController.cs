@@ -165,7 +165,7 @@ public class ThirdPersonController : MonoBehaviourPun
 
             JumpAndGravity();
             GroundedCheck();
-            //   Move();
+            Move();
             Rotate();
         }
     }
@@ -214,106 +214,72 @@ public class ThirdPersonController : MonoBehaviourPun
         // Применение вращения камеры
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-        // Применение движения персонажа
-        float verticalInput = Input.GetAxisRaw("Vertical");
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        //// Применение движения персонажа
+        //float verticalInput = Input.GetAxisRaw("Vertical");
+        //float horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        //Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
-        if (moveDirection.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-            Vector3 moveAngle = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(moveAngle.normalized * Time.deltaTime * rotationSpeed);
-        }
+        //if (moveDirection.magnitude >= 0.1f)
+        //{
+        //    float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+        //    Vector3 moveAngle = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        //    _controller.Move(moveAngle.normalized * Time.deltaTime * rotationSpeed);
+        //}
     }
 
+    private void Move()
+    {
+        // set target speed based on move speed, sprint speed and if sprint is pressed
+        float targetSpeed = MoveSpeed;
 
-    //private void CameraRotation()
-    //{
-    //    // if there is an input and camera position is not fixed
-    //    if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
-    //    {
-    //        //Don't multiply mouse input by Time.deltaTime;
-    //        float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+        // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
-    //        _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier;
-    //        _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
-    //    }
+        // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+        // if there is no input, set the target speed to 0
+        if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
-    //    // clamp our rotations so our values are limited 360 degrees
-    //    _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-    //    _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+        // a reference to the players current horizontal velocity
+        float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
-    //    // Cinemachine will follow this target
-    //    CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-    //        _cinemachineTargetYaw, 0.0f);
-    //}
+        float speedOffset = 0.1f;
+        float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-    //private void Move()
-    //{
-    //    // set target speed based on move speed, sprint speed and if sprint is pressed
-    //    float targetSpeed = MoveSpeed;
+        // accelerate or decelerate to target speed
+        if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+            currentHorizontalSpeed > targetSpeed + speedOffset)
+        {
+            // creates curved result rather than a linear one giving a more organic speed change
+            // note T in Lerp is clamped, so we don't need to clamp our speed
+            _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                Time.deltaTime * SpeedChangeRate);
 
-    //    // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+            // round speed to 3 decimal places
+            _speed = Mathf.Round(_speed * 1000f) / 1000f;
+        }
+        else
+        {
+            _speed = targetSpeed;
+        }
 
-    //    // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-    //    // if there is no input, set the target speed to 0
-    //    if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+        if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-    //    // a reference to the players current horizontal velocity
-    //    float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+        // normalise input direction
+        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-    //    float speedOffset = 0.1f;
-    //    float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-    //    // accelerate or decelerate to target speed
-    //    if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-    //        currentHorizontalSpeed > targetSpeed + speedOffset)
-    //    {
-    //        // creates curved result rather than a linear one giving a more organic speed change
-    //        // note T in Lerp is clamped, so we don't need to clamp our speed
-    //        _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-    //            Time.deltaTime * SpeedChangeRate);
+        // move the player
+        _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) +
+                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
-    //        // round speed to 3 decimal places
-    //        _speed = Mathf.Round(_speed * 1000f) / 1000f;
-    //    }
-    //    else
-    //    {
-    //        _speed = targetSpeed;
-    //    }
-
-    //    _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-    //    if (_animationBlend < 0.01f) _animationBlend = 0f;
-
-    //    // normalise input direction
-    //    Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-    //    // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-    //    // if there is a move input rotate player when the player is moving
-    //    //if (_input.move != Vector2.zero)
-    //    //{
-    //    //    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-    //    //                      _mainCamera.transform.eulerAngles.y;
-    //    //    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-    //    //        RotationSmoothTime);
-
-    //    //    // rotate to face input direction relative to camera position
-    //    //    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-    //    //}
-
-    //    // move the player
-    //    _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) +
-    //                     new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-    //    // update animator if using character
-    //    if (_hasAnimator)
-    //    {
-    //        _animator.SetFloat(_animIDSpeed, _animationBlend);
-    //        _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-    //    }
-    //}
+        // update animator if using character
+        if (_hasAnimator)
+        {
+            _animator.SetFloat(_animIDSpeed, _animationBlend);
+            _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+        }
+    }
 
     private void JumpAndGravity()
     {

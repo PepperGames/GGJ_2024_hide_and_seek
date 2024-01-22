@@ -154,7 +154,7 @@ MonoBehaviour:
   rotationSpeed: 5
   pitchRange: 80
   _animator: {fileID: 1430970419460015035}
-  _mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 1144387141785737046}
 --- !u!114 &6243281956424741938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,6 +542,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 298cc572bfcebf045b252613b8883485, type: 3}
+--- !u!1 &1144387141785737046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7631684511873320326, guid: 298cc572bfcebf045b252613b8883485,
+    type: 3}
+  m_PrefabInstance: {fileID: 7352300852711166672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1190461039711303732 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
