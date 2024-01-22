@@ -290,7 +290,7 @@ MonoBehaviour:
   JumpTimeout: 0.5
   FallTimeout: 0.15
   Grounded: 1
-  GroundedOffset: 0.95
+  GroundedOffset: 0.81
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
@@ -299,10 +299,14 @@ MonoBehaviour:
   TopClamp: 70
   BottomClamp: -30
   CameraAngleOverride: 0
+  _terminalVelocity: 53
   rotationSpeed: 5
   pitchRange: 80
+  power1: 2
+  power2: 2
   _animator: {fileID: 1886379813479661918}
   _mainCamera: {fileID: 5194695486177420615}
+  maxJumpCount: 2
 --- !u!114 &-8311879869627118799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +339,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   jump: 0
+  doubleJump: 0
   sprint: 0
   analogMovement: 0
   cursorLocked: 1

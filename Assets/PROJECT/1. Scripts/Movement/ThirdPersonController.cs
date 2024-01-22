@@ -78,7 +78,7 @@ public class ThirdPersonController : MonoBehaviourPun
     private float _targetRotation = 0.0f;
     private float _rotationVelocity;
     private float _verticalVelocity;
-    private float _terminalVelocity = 53.0f;
+    [SerializeField] private float _terminalVelocity = 53.0f;
 
     // timeout deltatime
     private float _jumpTimeoutDelta;
@@ -95,6 +95,9 @@ public class ThirdPersonController : MonoBehaviourPun
     public float pitchRange = 80f;
     private float pitch = 0f;
 
+    public float power1 = 2f;
+    public float power2 = 2f;
+
 #if ENABLE_INPUT_SYSTEM
     private PlayerInput _playerInput;
 #endif
@@ -102,8 +105,6 @@ public class ThirdPersonController : MonoBehaviourPun
     private CharacterController _controller;
     private StarterAssetsInputs _input;
     [SerializeField] private GameObject _mainCamera;
-
-    private const float _threshold = 0.01f;
 
     private bool _hasAnimator;
 
@@ -131,8 +132,6 @@ public class ThirdPersonController : MonoBehaviourPun
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // блокировка курсора в центре экрана
-
         _hasAnimator = TryGetComponent(out _animator);
         _controller = GetComponent<CharacterController>();
         _input = GetComponent<StarterAssetsInputs>();
@@ -205,46 +204,8 @@ public class ThirdPersonController : MonoBehaviourPun
         // Применение вращения камеры
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-        //// set target speed based on move speed, sprint speed and if sprint is pressed
-        //float targetSpeed = MoveSpeed;
-
-        //// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
-
-        //// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-        //// if there is no input, set the target speed to 0
-        //if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
-        //// a reference to the players current horizontal velocity
-        //float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
-        //float speedOffset = 0.1f;
-        //float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
-        //// accelerate or decelerate to target speed
-        //if (currentHorizontalSpeed < targetSpeed - speedOffset ||
-        //    currentHorizontalSpeed > targetSpeed + speedOffset)
-        //{
-        //    // creates curved result rather than a linear one giving a more organic speed change
-        //    // note T in Lerp is clamped, so we don't need to clamp our speed
-        //    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-        //        Time.deltaTime * SpeedChangeRate);
-
-        //    // round speed to 3 decimal places
-        //    _speed = Mathf.Round(_speed * 1000f) / 1000f;
-        //}
-        //else
-        //{
-        //    _speed = targetSpeed;
-        //}
-
-        // Применение движения персонажа
-
         float verticalInput = Input.GetAxisRaw("Vertical");
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        Debug.Log("_input.move.x" + _input.move.x);
-        Debug.Log("_input.move.y" + _input.move.y);
-        Debug.Log("horizontalInput" + horizontalInput);
-        Debug.Log("horizontalInput" + horizontalInput);
 
         Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
@@ -257,66 +218,62 @@ public class ThirdPersonController : MonoBehaviourPun
         _controller.Move(new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
     }
 
+    private int jumpCount = 0; // Счетчик прыжков
+    public int maxJumpCount = 2; // Максимальное количество прыжков
+
     private void JumpAndGravity()
     {
         if (Grounded)
         {
-            // reset the fall timeout timer
+            jumpCount = 0;
+            Debug.Log("JumpCount1 " + jumpCount);
             _fallTimeoutDelta = FallTimeout;
 
-            // update animator if using character
-            if (_hasAnimator)
-            {
-                _animator.SetBool(_animIDJump, false);
-                _animator.SetBool(_animIDFreeFall, false);
-            }
-
-            // stop our velocity dropping infinitely when grounded
             if (_verticalVelocity < 0.0f)
             {
-                _verticalVelocity = -2f;
+                _verticalVelocity = -power1;
             }
 
-            // Jump
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+            if (_input.jump && _jumpTimeoutDelta <= 0.0f && jumpCount == 0)
             {
-                // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-                // update animator if using character
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDJump, true);
-                }
+                _verticalVelocity = Mathf.Sqrt(JumpHeight * -power1 * Gravity);
+                jumpCount++;
+                Debug.Log("JumpCount2 " + jumpCount);
             }
 
-            // jump timeout
             if (_jumpTimeoutDelta >= 0.0f)
             {
                 _jumpTimeoutDelta -= Time.deltaTime;
             }
+
+            if (jumpCount == 0)
+            {
+                _input.jump = false;
+                _input.doubleJump = false;
+            }
         }
         else
         {
-            // reset the jump timeout timer
-            _jumpTimeoutDelta = JumpTimeout;
-
-            // fall timeout
-            if (_fallTimeoutDelta >= 0.0f)
+            if (jumpCount < maxJumpCount)
             {
-                _fallTimeoutDelta -= Time.deltaTime;
-            }
-            else
-            {
-                // update animator if using character
-                if (_hasAnimator)
+                _jumpTimeoutDelta = JumpTimeout;
+                if (_input.doubleJump)
                 {
-                    _animator.SetBool(_animIDFreeFall, true);
-                }
-            }
+                    Debug.Log("doubleJump");
+                    Debug.Log("_verticalVelocity " + _verticalVelocity);
+                    jumpCount++;
+                    Debug.Log("JumpCount3 " + jumpCount);
 
-            // if we are not grounded, do not jump
-            _input.jump = false;
+                    _verticalVelocity = Mathf.Sqrt(JumpHeight * -power2 * Gravity);
+                    _fallTimeoutDelta += FallTimeout;
+                }
+                if (_fallTimeoutDelta >= 0.0f)
+                {
+                    _fallTimeoutDelta -= Time.deltaTime;
+                }
+
+                Debug.Log("JumpCount4 " + jumpCount);
+            }
         }
 
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
