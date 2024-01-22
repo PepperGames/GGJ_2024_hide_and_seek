@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BaseAbility : MonoBehaviourPun
 {
-    public KeyCode abilityKeyCode = KeyCode.Space;
     public string abilityName = "BaseSpell";
     public float cooldown = 5f; // Время перезарядки в секундах
 
@@ -12,10 +11,16 @@ public class BaseAbility : MonoBehaviourPun
 
     void Update()
     {
-        if (photonView.IsMine && Input.GetKeyDown(abilityKeyCode) && !isCooldown)
+        if (photonView.IsMine && !isCooldown)
         {
-            ActivateAbility();
+            CheckAbilityUse();
         }
+    }
+
+    public virtual void CheckAbilityUse()
+    {
+        //Проверка на использование способности, типо кнопки или ПКМ, ЛКМ
+        //Затем вызов ActivateAbility();
     }
 
     private void ActivateAbility()
