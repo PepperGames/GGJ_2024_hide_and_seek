@@ -61,6 +61,11 @@ public class LaughterAbility : BaseAbility
         audioSource.loop = true;
         audioSource.PlayOneShot(laughterSound);
         photonView.RPC("PlayLaughterSoundOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
+
+        foreach (var cop in FindObjectsOfType<CopsLaughterResponse>())
+        {
+            cop.photonView.RPC("TryFindLaughterSource", RpcTarget.All, photonView.Owner.ActorNumber);
+        }
     }
 
     private void StopLaughter()
@@ -95,10 +100,10 @@ public class LaughterAbility : BaseAbility
             ability.audioSource.loop = false; // Отключаем зацикливание
             ability.audioSource.Stop();
         }
+        
+        
     }
-
-
-
+    
     LaughterAbility FindAbilityByActorNumber(int actorNumber)
     {
         foreach (var player in FindObjectsOfType<LaughterAbility>())
@@ -110,4 +115,5 @@ public class LaughterAbility : BaseAbility
         }
         return null;
     }
+
 }
