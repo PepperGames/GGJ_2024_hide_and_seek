@@ -98,7 +98,6 @@ public class ThirdPersonController : MonoBehaviourPun
     private int _animIDFreeFall;
     private int _animIDMotionSpeed;
 
-
     public float rotationSpeed = 5f;
     public float pitchRange = 80f;
     private float pitch = 0f;
@@ -165,8 +164,8 @@ public class ThirdPersonController : MonoBehaviourPun
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
             Rotate();
+            Move();
         }
     }
 
@@ -214,22 +213,6 @@ public class ThirdPersonController : MonoBehaviourPun
         // Применение вращения камеры
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-        //// Применение движения персонажа
-        //float verticalInput = Input.GetAxisRaw("Vertical");
-        //float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        //Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
-        //if (moveDirection.magnitude >= 0.1f)
-        //{
-        //    float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-        //    Vector3 moveAngle = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        //    _controller.Move(moveAngle.normalized * Time.deltaTime * rotationSpeed);
-        //}
-    }
-
-    private void Move()
-    {
         // set target speed based on move speed, sprint speed and if sprint is pressed
         float targetSpeed = MoveSpeed;
 
@@ -262,23 +245,64 @@ public class ThirdPersonController : MonoBehaviourPun
             _speed = targetSpeed;
         }
 
-        _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        // Применение движения персонажа
 
-        // normalise input direction
-        Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+        float horizontalInput = _input.move.x;
+        float verticalInput = _input.move.y;
+        Debug.Log("_input.move.x" + _input.move.x);
+        Debug.Log("_input.move.y" + _input.move.y);
+        Debug.Log("horizontalInput" + horizontalInput);
+        Debug.Log("horizontalInput" + horizontalInput);
+        Vector3 moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
 
-        // move the player
-        _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) +
-                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        Debug.Log("_speed" + _speed);
 
-        // update animator if using character
-        if (_hasAnimator)
-        {
-            _animator.SetFloat(_animIDSpeed, _animationBlend);
-            _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-        }
+        float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
+        Vector3 moveAngle = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        _controller.Move(moveAngle.normalized * Time.deltaTime * _speed +
+            new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+    }
+
+    private void Move()
+    {
+        //float targetSpeed = MoveSpeed;
+
+        //if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+
+        //float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
+        //float speedOffset = 0.1f;
+        //float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+
+        //if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+        //    currentHorizontalSpeed > targetSpeed + speedOffset)
+        //{
+        //    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+        //        Time.deltaTime * SpeedChangeRate);
+
+        //    _speed = Mathf.Round(_speed * 1000f) / 1000f;
+        //}
+        //else
+        //{
+        //    _speed = targetSpeed;
+        //}
+
+        //_animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+        //if (_animationBlend < 0.01f) _animationBlend = 0f;
+
+        //Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+
+
+        //_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) +
+        //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+        //if (_hasAnimator)
+        //{
+        //    _animator.SetFloat(_animIDSpeed, _animationBlend);
+        //    _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+        //}
     }
 
     private void JumpAndGravity()
