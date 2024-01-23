@@ -20,7 +20,15 @@ public class SpectratorCameraController : MonoBehaviour
         DetermineTeam();
         StartSpectrate();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(0))
+        {
+            InitializeSpectrators();
+        }
+    }
+
     private void DetermineTeam()
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(ConstantsHolder.TEAM_PARAM_NAME, out object teamValue))
@@ -59,8 +67,15 @@ public class SpectratorCameraController : MonoBehaviour
 
     public void InitializeSpectrators()
     {
-        potentialTargets = new List<Transform>();
-
+        if (potentialTargets == null)
+        {
+            potentialTargets = new List<Transform>();
+        }
+        else
+        {
+            potentialTargets.Clear();
+        }
+        
         foreach (var player in PhotonNetwork.PlayerList)
         {
             if (player.CustomProperties.TryGetValue(ConstantsHolder.TEAM_PARAM_NAME, out object teamValue) &&
@@ -93,6 +108,8 @@ public class SpectratorCameraController : MonoBehaviour
         }
         else
         {
+            myCamera.Follow = null;
+            myCamera.LookAt = null;
             Debug.Log("No alive teammates found");
         }
     }
