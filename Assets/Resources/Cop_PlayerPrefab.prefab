@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5582407531342326920}
   - component: {fileID: 6293670319810772771}
   - component: {fileID: 2776210761849850433}
+  - component: {fileID: 8457601614620562489}
   m_Layer: 14
   m_Name: Cop_PlayerPrefab
   m_TagString: Player
@@ -279,6 +280,22 @@ CapsuleCollider:
   m_Height: 1.92
   m_Direction: 1
   m_Center: {x: 0, y: 0.91, z: 0}
+--- !u!114 &8457601614620562489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4159c999b77304fa14dad54fdf87df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: CopsDash
+  cooldown: 12
+  dashKeyCode: 304
+  dashForce: 500
 --- !u!1001 &1335627687740129247
 PrefabInstance:
   m_ObjectHideFlags: 0
