@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: -5200011447130106445}
   - component: {fileID: -1424951920428829711}
   - component: {fileID: 1734278868276519339}
+  - component: {fileID: 2296890268698560648}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -291,7 +292,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263300691575067562}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f29078bb360e01e4892f543957b91d91, type: 3}
   m_Name: 
@@ -318,6 +319,7 @@ MonoBehaviour:
   pitchRangeBot: -80
   _animator: {fileID: 1886379813479661918}
   _mainCamera: {fileID: 5194695486177420615}
+  force: 80
 --- !u!114 &-8311879869627118799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,6 +520,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2296890268698560648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e632447967530eb49851e0c8bc81c28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0
