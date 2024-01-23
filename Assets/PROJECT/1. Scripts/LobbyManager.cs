@@ -105,6 +105,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void StartGameManualy()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+        }
+
         photonView.RPC("SyncLoadScene", RpcTarget.AllBuffered);
     }
 
@@ -223,6 +229,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void SyncLoadScene()
     {
+        
         PhotonNetwork.LoadLevel(ConstantsHolder.LEVEL_SCENENAME_NAME);
     }
 

@@ -295,7 +295,7 @@ MonoBehaviour:
   abilityName: CopsDash
   cooldown: 12
   dashKeyCode: 304
-  dashForce: 500
+  dashForce: 8000
 --- !u!1001 &1335627687740129247
 PrefabInstance:
   m_ObjectHideFlags: 0

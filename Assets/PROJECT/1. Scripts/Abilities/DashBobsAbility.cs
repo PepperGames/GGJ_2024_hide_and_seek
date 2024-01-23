@@ -26,7 +26,7 @@ public class DashBobsAbility : BaseAbility
         if (playerRigidbody != null)
         {
             Vector3 dashDirection = transform.forward; // Вперед относительно направления игрока
-            playerRigidbody.AddForce(dashDirection * dashForce); // Применяем силу для толчка
+            playerRigidbody.AddForce(dashDirection * dashForce, ForceMode.Acceleration); // Применяем силу для толчка
         }
         else
         {
