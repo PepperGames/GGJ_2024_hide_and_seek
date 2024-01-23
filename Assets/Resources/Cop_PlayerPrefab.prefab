@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  pitchRangeTop: 80
-  pitchRangeBot: -80
+  pitchRangeTop: 50
+  pitchRangeBot: -45
   jumpForce: 5
   groundDistance: 0.5
   _mainCamera: {fileID: 1144387141785737046}
