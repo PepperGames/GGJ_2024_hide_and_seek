@@ -58,9 +58,9 @@ public class MyOffScreenIndicator : MonoBehaviour
         // Если цель на экране и перед камерой, скрываем индикатор и возвращаемся
         if (onScreen)
         {
-            baseImageColor.a = 0;
-            imageToDisable.color = baseImageColor;
-            return;
+            //baseImageColor.a = 0;
+            //imageToDisable.color = baseImageColor;
+            //return;
         }
 
         // Если цель за пределами экрана, показываем индикатор
