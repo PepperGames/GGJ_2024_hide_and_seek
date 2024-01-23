@@ -20,7 +20,7 @@ public class ThirdPersonControllerNew : MonoBehaviour
     public float GroundedRadius = 0.28f;
     public float GroundedOffset = -0.14f;
     public LayerMask GroundLayers;
-
+    public float movementSpeed = 5f;
 
     private void FixedUpdate()
     {
@@ -30,6 +30,7 @@ public class ThirdPersonControllerNew : MonoBehaviour
     {
         GroundedCheck();
         Rotate();
+        Move();
         Jump();
     }
 
@@ -49,18 +50,11 @@ public class ThirdPersonControllerNew : MonoBehaviour
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 
-    private void CheckIsGrounded()
+    private void Move()
     {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance);
-    }
-
-    private void GroundedCheck()
-    {
-        // set sphere position, with offset
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
-            transform.position.z);
-        isGrounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
-            QueryTriggerInteraction.Ignore);
+        Vector3 playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        Vector3 moveVector = transform.TransformDirection(playerMovementInput) * movementSpeed;
+        rigidBody.velocity = new Vector3(moveVector.x, rigidBody.velocity.y, moveVector.z);
     }
 
     private void Jump()
@@ -78,6 +72,20 @@ public class ThirdPersonControllerNew : MonoBehaviour
                 canDoubleJump = false;
             }
         }
+    }
+
+    private void CheckIsGrounded()
+    {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance);
+    }
+
+    private void GroundedCheck()
+    {
+        // set sphere position, with offset
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
+            transform.position.z);
+        isGrounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+            QueryTriggerInteraction.Ignore);
     }
 
     private void OnDrawGizmosSelected()
