@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class ThirdPersonControllerNew : MonoBehaviour
+public class ThirdPersonControllerNew : MonoBehaviourPun
 {
     public float rotationSpeed = 5f;
     public float pitchRangeTop = 80f;
@@ -22,16 +24,23 @@ public class ThirdPersonControllerNew : MonoBehaviour
     public LayerMask GroundLayers;
     public float movementSpeed = 5f;
 
-    private void FixedUpdate()
+    private void Start()
     {
+        if (!photonView.IsMine)
+        {
+            enabled = false;
+        }
     }
 
     private void Update()
     {
-        GroundedCheck();
-        Rotate();
-        Move();
-        Jump();
+        if (photonView.IsMine)
+        {
+            GroundedCheck();
+            Rotate();
+            Move();
+            Jump();
+        }
     }
 
     private void Rotate()
@@ -39,14 +48,14 @@ public class ThirdPersonControllerNew : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // Вращение персонажа вокруг оси Y
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Y
         transform.Rotate(Vector3.up * mouseX * rotationSpeed);
 
-        // Вращение камеры вокруг оси X с ограничением по углам
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ X пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
 
-        // Применение вращения камеры
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 

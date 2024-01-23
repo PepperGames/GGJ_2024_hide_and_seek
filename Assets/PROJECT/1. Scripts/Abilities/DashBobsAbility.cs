@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DashBobsAbility : BaseAbility
 {
+    public KeyCode dashKeyCode = KeyCode.LeftShift;
     public float dashForce = 500f; // Сила толчка
 
     private Rigidbody playerRigidbody;
@@ -9,6 +10,14 @@ public class DashBobsAbility : BaseAbility
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+    }
+
+    public override void CheckAbilityUse()
+    {
+        if (Input.GetKeyDown(dashKeyCode))
+        {
+            ActivateAbility();
+        }
     }
 
     public override void LocalUseOfAbility()

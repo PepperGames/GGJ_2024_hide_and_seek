@@ -23,7 +23,7 @@ public class BaseAbility : MonoBehaviourPun
         //Затем вызов ActivateAbility();
     }
 
-    private void ActivateAbility()
+    public void ActivateAbility()
     {
         // Локальное действие способности
         LocalUseOfAbility();
