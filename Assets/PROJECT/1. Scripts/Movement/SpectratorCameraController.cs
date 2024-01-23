@@ -14,6 +14,7 @@ public class SpectratorCameraController : MonoBehaviour
     private int parentInstanceID;
     private Team myTeam;
     private List<Transform> potentialTargets;
+    private int currentTargetIndex = 0; // Текущий индекс в списке целей
     
     private void Start()
     {
@@ -23,10 +24,30 @@ public class SpectratorCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(0))
+        if (Input.GetMouseButtonDown(0)) // Проверка на нажатие ЛКМ
         {
-            InitializeSpectrators();
+            SwitchTarget();
         }
+    }
+    
+    private void SwitchTarget()
+    {
+        if (potentialTargets == null || potentialTargets.Count == 0 || potentialTargets.Count == 1)
+        {
+            return;
+        }
+
+        // Увеличиваем индекс текущей цели
+        currentTargetIndex++;
+        if (currentTargetIndex >= potentialTargets.Count)
+        {
+            currentTargetIndex = 0;
+        }
+
+        // Обновляем цель камеры
+        Transform newTarget = potentialTargets[currentTargetIndex];
+        myCamera.Follow = newTarget;
+        myCamera.LookAt = newTarget;
     }
 
     private void DetermineTeam()
@@ -67,14 +88,7 @@ public class SpectratorCameraController : MonoBehaviour
 
     public void InitializeSpectrators()
     {
-        if (potentialTargets == null)
-        {
-            potentialTargets = new List<Transform>();
-        }
-        else
-        {
-            potentialTargets.Clear();
-        }
+        potentialTargets = new List<Transform>();
         
         foreach (var player in PhotonNetwork.PlayerList)
         {
@@ -102,7 +116,8 @@ public class SpectratorCameraController : MonoBehaviour
 
         if (potentialTargets.Count > 0)
         {
-            Transform target = potentialTargets[Random.Range(0, potentialTargets.Count)];
+            currentTargetIndex = Random.Range(0, potentialTargets.Count);
+            Transform target = potentialTargets[currentTargetIndex];
             myCamera.Follow = target;
             myCamera.LookAt = target;
         }

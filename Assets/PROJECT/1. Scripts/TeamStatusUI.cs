@@ -14,6 +14,7 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
 {
     public TMP_Text copsAliveCountText;
     public TMP_Text bobsAliveCountText;
+    public bool timeIsOut;
     public UnityEvent OnTeamWin;
     public UnityEvent OnTeamLost;
 
@@ -43,7 +44,7 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
         }
     }
 
-    private void UpdateTeamCounts()
+    public void UpdateTeamCounts()
     {
         int copsAliveCount = 0;
         int bobsAliveCount = 0;
@@ -76,10 +77,18 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
             return;
         }
 
+        if (timeIsOut)
+        {
+            CheckTimeOutWinCond(copsAliveCount, bobsAliveCount);
+            return;
+        }
+        
         if (initialize)
         {
             CheckForTeamWinOrLoss(copsAliveCount, bobsAliveCount);
         }
+
+        
     }
 
     private void CheckForTeamWinOrLoss(int copsAliveCount, int bobsAliveCount)
@@ -88,28 +97,59 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
         {
             winnerDetermined = true;
             OnTeamWin.Invoke();
+            CallTimeOff();
         }
         else if (myTeam == Team.Cops && copsAliveCount == 0)
         {
             winnerDetermined = true;
             OnTeamLost.Invoke();
+            CallTimeOff();
         }
         else if (myTeam == Team.Bobs && copsAliveCount == 0)
         {
             winnerDetermined = true;
             OnTeamWin.Invoke();
+            CallTimeOff();
         }
         else if (myTeam == Team.Bobs && bobsAliveCount == 0)
         {
             winnerDetermined = true;
             OnTeamLost.Invoke();
+            CallTimeOff();
         }
+    }
+
+    private void CheckTimeOutWinCond(int copsAliveCount, int bobsAliveCount)
+    {
+        if (copsAliveCount > 0 && bobsAliveCount > 0)
+        {
+            if (myTeam == Team.Bobs)
+            {
+                winnerDetermined = true;
+                OnTeamWin.Invoke();
+                CallTimeOff();
+            }
+            if (myTeam == Team.Cops)
+            {
+                winnerDetermined = true;
+                OnTeamLost.Invoke();
+                CallTimeOff();
+            }
+        }
+    }
+
+    public void CallTimeOff()
+    {
+        Time.timeScale = 0;
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         UpdateTeamCounts();
     }
-    
-    
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdateTeamCounts();
+    }
 }

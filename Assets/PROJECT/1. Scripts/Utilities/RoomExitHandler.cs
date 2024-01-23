@@ -13,6 +13,7 @@ public class RoomExitHandler : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        Time.timeScale = 1;
         Debug.Log("Left the room successfully.");
     }
 
