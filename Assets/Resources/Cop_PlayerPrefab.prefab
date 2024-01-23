@@ -9,15 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2508577765235283258}
-  - component: {fileID: 4375663383254131467}
-  - component: {fileID: 6056259179440491145}
-  - component: {fileID: 5237264554038096032}
   - component: {fileID: 1615669039517295771}
   - component: {fileID: 5001450234021578388}
   - component: {fileID: 6243281956424741938}
   - component: {fileID: 8367201638978693347}
   - component: {fileID: 5631840458241740038}
+  - component: {fileID: 4375663383254131467}
   - component: {fileID: 8086255486485315544}
+  - component: {fileID: 6056259179440491145}
+  - component: {fileID: 7598135589879227762}
   m_Layer: 14
   m_Name: Cop_PlayerPrefab
   m_TagString: Untagged
@@ -42,55 +42,6 @@ Transform:
   - {fileID: 1190461039711303732}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4375663383254131467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199194163272832008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 1
-  OwnershipTransfer: 2
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 8086255486485315544}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &6056259179440491145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199194163272832008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de0e9ede1570af041979d8688b24a0f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5237264554038096032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2199194163272832008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646b3ed0802448441884239af5d4a728, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityName: CopHitAbility
-  cooldown: 1
 --- !u!143 &1615669039517295771
 CharacterController:
   m_ObjectHideFlags: 0
@@ -130,34 +81,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 8.99
-  RotationSmoothTime: 0.12
-  SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
   JumpHeight: 1.2
-  Gravity: -15
+  maxJumpCount: 2
+  JumpPower1: 2
+  JumpPower2: 2
   JumpTimeout: 0.5
   FallTimeout: 0.15
+  Gravity: -15
   Grounded: 1
   GroundedOffset: 0.8
   GroundedRadius: 0.28
   GroundLayers:
     serializedVersion: 2
     m_Bits: 1
-  CinemachineCameraTarget: {fileID: 3643271163400482235, guid: 77080451fda264549ac20e5a401c3bde,
-    type: 3}
-  TopClamp: 70
-  BottomClamp: -30
-  CameraAngleOverride: 0
-  _terminalVelocity: 53
   rotationSpeed: 5
-  pitchRange: 80
-  power1: 2
-  power2: 2
+  pitchRangeTop: 80
+  pitchRangeBot: -80
   _animator: {fileID: 1430970419460015035}
   _mainCamera: {fileID: 1144387141785737046}
-  maxJumpCount: 2
 --- !u!114 &6243281956424741938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +170,29 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4375663383254131467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 1
+  OwnershipTransfer: 2
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8086255486485315544}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &8086255486485315544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +226,46 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &6056259179440491145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de0e9ede1570af041979d8688b24a0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnNotMyView:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerIsBOB:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerIsCOP:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMyPhotonView:
+    m_PersistentCalls:
+      m_Calls: []
+  mainCamera: {fileID: 0}
+  UIDeterminer: {fileID: 0}
+--- !u!114 &7598135589879227762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e326c1c27f3bef4dbb9ccb943efd59f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistanceToReact: 7
+  indicatorDisableDelay: 2
 --- !u!1001 &1335627687740129247
 PrefabInstance:
   m_ObjectHideFlags: 0

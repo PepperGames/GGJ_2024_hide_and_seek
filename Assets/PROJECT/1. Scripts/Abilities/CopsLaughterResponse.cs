@@ -9,7 +9,8 @@ public class CopsLaughterResponse : MonoBehaviourPun
     public float minDistanceToReact = 5f;
     public float indicatorDisableDelay;
 
-    private Target indicatorTarget;
+    private Dictionary<int, Coroutine> activeIndicatorCoroutines = new Dictionary<int, Coroutine>();
+    private Dictionary<int, Target> activeIndicators = new Dictionary<int, Target>();
 
     private void Start()
     {
@@ -35,13 +36,27 @@ public class CopsLaughterResponse : MonoBehaviourPun
         if (ability != null)
         {
             float distanceToSource = Vector3.Distance(transform.position, ability.transform.position);
-
             if (distanceToSource <= minDistanceToReact)
             {
                 Debug.Log("Cop hear the sound from ActorNumber: " + actorNumber);
-                indicatorTarget = ability.gameObject.GetComponent<Target>();
-                indicatorTarget.enabled = true;
-                StartCoroutine(DisableIndicator());
+                Target indicatorTarget = ability.gameObject.GetComponent<Target>();
+
+                if (indicatorTarget != null)
+                {
+                    if (activeIndicatorCoroutines.ContainsKey(actorNumber))
+                    {
+                        // Обновляем время отключения индикатора
+                        StopCoroutine(activeIndicatorCoroutines[actorNumber]);
+                        activeIndicatorCoroutines[actorNumber] = StartCoroutine(DisableIndicator(actorNumber));
+                    }
+                    else
+                    {
+                        // Включаем индикатор и запускаем таймер его отключения
+                        indicatorTarget.enabled = true;
+                        activeIndicators.Add(actorNumber, indicatorTarget);
+                        activeIndicatorCoroutines.Add(actorNumber, StartCoroutine(DisableIndicator(actorNumber)));
+                    }
+                }
             }
         }
     }
@@ -58,10 +73,14 @@ public class CopsLaughterResponse : MonoBehaviourPun
         return null;
     }
 
-    private IEnumerator DisableIndicator()
+    private IEnumerator DisableIndicator(int actorNumber)
     {
         yield return new WaitForSeconds(indicatorDisableDelay);
-        indicatorTarget.enabled = false;
-        indicatorTarget = null;
+        if (activeIndicators.TryGetValue(actorNumber, out Target indicatorTarget))
+        {
+            indicatorTarget.enabled = false;
+        }
+        activeIndicatorCoroutines.Remove(actorNumber);
+        activeIndicators.Remove(actorNumber);
     }
 }
