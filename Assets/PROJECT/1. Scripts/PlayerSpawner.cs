@@ -13,7 +13,7 @@ public class PlayerSpawner : MonoBehaviour
     public Transform[] bobsSpawnPoints; // Точки спавна для команды Bobs
     public Transform[] copsSpawnPoints; // Точки спавна для команды Cops
 
-    void Start()
+    private void Awake()
     {
         SpawnPlayer();
     }
@@ -26,6 +26,16 @@ public class PlayerSpawner : MonoBehaviour
             Transform[] spawnPoints = (playerTeam == Team.Bobs) ? bobsSpawnPoints : copsSpawnPoints;
             GameObject prefab = (playerTeam == Team.Bobs) ? bobsPrefab : copsPrefab;
             Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            
+            // Получаем текущие пользовательские свойства
+            ExitGames.Client.Photon.Hashtable currentProps = PhotonNetwork.LocalPlayer.CustomProperties;
+
+            // Добавляем или обновляем свойство LifeStatus
+            currentProps[ConstantsHolder.LIVE_STATUS_PARAM_NAME] = "Alive";
+
+            // Устанавливаем обновленные пользовательские свойства
+            PhotonNetwork.LocalPlayer.SetCustomProperties(currentProps);
+            
             PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
         }
         else

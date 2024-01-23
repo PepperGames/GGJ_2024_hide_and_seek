@@ -14,7 +14,7 @@ public class PlayerPUNInfos : MonoBehaviourPun
     public Camera mainCamera;
     public CameraUIDeterminer UIDeterminer;
 
-    private void Awake()
+    private void Start()
     {
         if (!photonView.IsMine)
         {

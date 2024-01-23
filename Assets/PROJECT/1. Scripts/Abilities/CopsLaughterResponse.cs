@@ -41,6 +41,11 @@ public class CopsLaughterResponse : MonoBehaviourPun
     [PunRPC]
     void TryFindLaughterSource(int actorNumber)
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         LaughterAbility ability = FindAbilityByActorNumber(actorNumber);
         if (ability != null)
         {
