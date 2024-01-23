@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 8169780711870194636}
   - component: {fileID: 6869584291226208421}
   - component: {fileID: 3119504746600372739}
+  - component: {fileID: 2944219660313572814}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -195,6 +196,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -1424951920428829711}
+  - {fileID: 2944219660313572814}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -482,6 +484,22 @@ MonoBehaviour:
   cooldown: 12
   dashKeyCode: 0
   dashForce: 8000
+--- !u!114 &2944219660313572814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0
