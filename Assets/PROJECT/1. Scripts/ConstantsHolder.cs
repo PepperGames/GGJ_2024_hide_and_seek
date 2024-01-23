@@ -9,4 +9,5 @@ public static class ConstantsHolder
     public static string LEVEL_SCENENAME_NAME = "Gameplay";
     public static float GAME_START_COUNTDOWN_TIME = 20;
     public static float COPS_SPAWN_TIME_DELAY = 0;
+    public static float LAUGHTER_BROADCAST_TIME = 0.1f;
 }
