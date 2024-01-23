@@ -141,14 +141,14 @@ GameObject:
   - component: {fileID: -1167804830916443016}
   - component: {fileID: 3685828444586502812}
   - component: {fileID: 975447698259729727}
-  - component: {fileID: 4726340075418647400}
-  - component: {fileID: 6901667342705458740}
   - component: {fileID: -8311879869627118799}
   - component: {fileID: 9115608176702663337}
   - component: {fileID: -5200011447130106445}
   - component: {fileID: -1424951920428829711}
   - component: {fileID: 1734278868276519339}
   - component: {fileID: 2296890268698560648}
+  - component: {fileID: 4899974266259722006}
+  - component: {fileID: 8169780711870194636}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -196,7 +196,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -1424951920428829711}
-  sceneViewId: 0
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &-1167804830916443016
@@ -259,67 +259,6 @@ MonoBehaviour:
   cooldown: 0
   laughterSound: {fileID: 8300000, guid: 44aee40475e0b0d4bb7f88da384eba05, type: 3}
   audioSource: {fileID: 6223158903590736176}
---- !u!143 &4726340075418647400
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263300691575067562}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.1
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6901667342705458740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263300691575067562}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f29078bb360e01e4892f543957b91d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 8.99
-  LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
-  FootstepAudioClips: []
-  FootstepAudioVolume: 0.5
-  JumpHeight: 1.2
-  maxJumpCount: 2
-  JumpPower1: 2
-  JumpPower2: 2
-  JumpTimeout: 0.5
-  FallTimeout: 0.15
-  Gravity: -15
-  Grounded: 1
-  GroundedOffset: 0.81
-  GroundedRadius: 0.28
-  GroundLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  rotationSpeed: 5
-  pitchRangeTop: 80
-  pitchRangeBot: -80
-  _animator: {fileID: 1886379813479661918}
-  _mainCamera: {fileID: 5194695486177420615}
-  force: 80
 --- !u!114 &-8311879869627118799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +399,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4726340075418647400}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -472,7 +411,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6901667342705458740}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -532,7 +471,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e632447967530eb49851e0c8bc81c28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  rotationSpeed: 5
+  pitchRangeTop: 80
+  pitchRangeBot: -80
+  jumpForce: 5
+  groundDistance: 0.5
+  _mainCamera: {fileID: 5194695486177420615}
+  rigidBody: {fileID: 8169780711870194636}
+  canDoubleJump: 0
+--- !u!64 &4899974266259722006
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &8169780711870194636
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -824,6 +819,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293473857425320919, guid: d9ec729e14ee91a4d9ae602fa37891b3,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8255580974920138558, guid: d9ec729e14ee91a4d9ae602fa37891b3,
         type: 3}
@@ -1176,12 +1176,6 @@ PrefabInstance:
       addedObject: {fileID: 5246576757841303647}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a71738add6483c4e8a1479556240d54, type: 3}
---- !u!95 &1886379813479661918 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95365376127056996, guid: 6a71738add6483c4e8a1479556240d54,
-    type: 3}
-  m_PrefabInstance: {fileID: 1981313630020369722}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1977533849522780748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4106335723276150, guid: 6a71738add6483c4e8a1479556240d54,
