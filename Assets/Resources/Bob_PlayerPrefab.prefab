@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 9115608176702663337}
   - component: {fileID: -5200011447130106445}
   - component: {fileID: -1424951920428829711}
-  - component: {fileID: 4638435520419391483}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Untagged
@@ -211,19 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnNotMyView:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4638435520419391483}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnPlayerIsBOB:
     m_PersistentCalls:
       m_Calls: []
@@ -430,23 +417,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &4638435520419391483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263300691575067562}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5dd462da48ed9b49a885f1a9cf94fe1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetColor: {r: 1, g: 0, b: 0, a: 1}
-  needBoxIndicator: 1
-  needArrowIndicator: 1
-  needDistanceText: 0
-  indicator: {fileID: 0}
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0

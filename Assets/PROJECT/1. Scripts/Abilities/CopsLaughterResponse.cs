@@ -9,14 +9,23 @@ public class CopsLaughterResponse : MonoBehaviourPun
     public float minDistanceToReact = 5f;
     public float indicatorDisableDelay;
 
-    private Dictionary<int, Coroutine> activeIndicatorCoroutines = new Dictionary<int, Coroutine>();
-    private Dictionary<int, Target> activeIndicators = new Dictionary<int, Target>();
+    private List<MyOffScreenIndicator> availableIndicators;
+    private Dictionary<int, MyOffScreenIndicator> activeIndicators = new Dictionary<int, MyOffScreenIndicator>();
 
     private void Start()
     {
+        if (!photonView.IsMine)
+        {
+            enabled = false; 
+        }
         if (!IsPlayerACop())
         {
-            this.enabled = false; // Отключаем скрипт, если локальный игрок не коп
+            enabled = false;
+        }
+        if(IsPlayerACop() && photonView.IsMine)
+        {
+            // Находим и запоминаем все доступные индикаторы
+            availableIndicators = new List<MyOffScreenIndicator>(FindObjectsOfType<MyOffScreenIndicator>());
         }
     }
     
@@ -38,27 +47,33 @@ public class CopsLaughterResponse : MonoBehaviourPun
             float distanceToSource = Vector3.Distance(transform.position, ability.transform.position);
             if (distanceToSource <= minDistanceToReact)
             {
-                Debug.Log("Cop hear the sound from ActorNumber: " + actorNumber);
-                Target indicatorTarget = ability.gameObject.GetComponent<Target>();
-
-                if (indicatorTarget != null)
+                Debug.Log("Cop hear sound from actor: " + actorNumber);
+                // Проверяем, есть ли уже активный индикатор для этого источника смеха
+                if (!activeIndicators.ContainsKey(actorNumber))
                 {
-                    if (activeIndicatorCoroutines.ContainsKey(actorNumber))
+                    // Находим свободный индикатор и активируем его
+                    MyOffScreenIndicator indicator = GetAvailableIndicator();
+                    if (indicator != null)
                     {
-                        // Обновляем время отключения индикатора
-                        StopCoroutine(activeIndicatorCoroutines[actorNumber]);
-                        activeIndicatorCoroutines[actorNumber] = StartCoroutine(DisableIndicator(actorNumber));
-                    }
-                    else
-                    {
-                        // Включаем индикатор и запускаем таймер его отключения
-                        indicatorTarget.enabled = true;
-                        activeIndicators.Add(actorNumber, indicatorTarget);
-                        activeIndicatorCoroutines.Add(actorNumber, StartCoroutine(DisableIndicator(actorNumber)));
+                        indicator.target = ability.transform; // Назначаем цель индикатора
+                        Debug.Log("Indicator set for actor: " + actorNumber);
+                        activeIndicators.Add(actorNumber, indicator); // Добавляем в активные
+                        StartCoroutine(DisableIndicator(actorNumber, indicator)); // Запускаем таймер отключения
                     }
                 }
             }
         }
+    }
+    
+    private MyOffScreenIndicator GetAvailableIndicator()
+    {
+        if (availableIndicators != null && availableIndicators.Count > 0)
+        {
+            // Ищем индикатор, у которого target не установлен (null)
+            return availableIndicators.Find(indicator => indicator.target == null);
+        }
+
+        return null;
     }
 
     LaughterAbility FindAbilityByActorNumber(int actorNumber)
@@ -73,14 +88,10 @@ public class CopsLaughterResponse : MonoBehaviourPun
         return null;
     }
 
-    private IEnumerator DisableIndicator(int actorNumber)
+    private IEnumerator DisableIndicator(int actorNumber, MyOffScreenIndicator indicator)
     {
         yield return new WaitForSeconds(indicatorDisableDelay);
-        if (activeIndicators.TryGetValue(actorNumber, out Target indicatorTarget))
-        {
-            indicatorTarget.enabled = false;
-        }
-        activeIndicatorCoroutines.Remove(actorNumber);
-        activeIndicators.Remove(actorNumber);
+        indicator.target = null; // Сбрасываем цель индикатора
+        activeIndicators.Remove(actorNumber); // Удаляем из активных
     }
 }
