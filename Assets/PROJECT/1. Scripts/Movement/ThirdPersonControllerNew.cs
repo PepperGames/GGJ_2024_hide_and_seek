@@ -23,6 +23,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if (!photonView.IsMine)
         {
             enabled = false;
