@@ -1,3 +1,4 @@
+using System.Collections;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,13 +23,16 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     public float groundedOffset = 0.8f;
     public LayerMask groundLayers;
 
+    public UnityEvent OnIdle;
     public UnityEvent OnMove;
     public UnityEvent OnJump;
     public UnityEvent OnDoubleJump;
+    public UnityEvent OnNotGrounded;
     public UnityEvent OnLanding;
 
     private void Start()
     {
+        StartCoroutine(LandingCheck());
         Cursor.lockState = CursorLockMode.Locked;
         if (!photonView.IsMine)
         {
@@ -44,6 +48,11 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
             Rotate();
             Move();
             Jump();
+
+            if (!isGrounded)
+            {
+                OnNotGrounded?.Invoke();
+            }
         }
     }
 
@@ -68,6 +77,11 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         {
             OnMove?.Invoke();
         }
+        else
+        {
+            OnIdle?.Invoke();
+        }
+
         rigidBody.velocity = new Vector3(moveVector.x, rigidBody.velocity.y, moveVector.z);
     }
 
@@ -86,7 +100,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
                 rigidBody.velocity = Vector3.up * jumpForce;
                 canDoubleJump = false;
                 OnJump?.Invoke();
-                OnDoubleJump?.Invoke();
+                //OnDoubleJump?.Invoke();
             }
         }
     }
@@ -97,13 +111,21 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
             transform.position.z);
 
-        bool prevIsGrounded = isGrounded;
-
         isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
             QueryTriggerInteraction.Ignore);
-        if (prevIsGrounded == false && isGrounded == true)
+        
+    }
+
+    private IEnumerator LandingCheck()
+    {
+        while (true)
         {
-            OnLanding?.Invoke();
+            bool prevIsGrounded = isGrounded;
+            yield return new WaitForSeconds(ConstantsHolder.LANDING_CHECK_TIME);
+            if (!prevIsGrounded && isGrounded)
+            {
+                OnLanding?.Invoke();
+            }
         }
     }
 

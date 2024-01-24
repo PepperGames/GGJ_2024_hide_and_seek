@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class CopPunchAbility : BaseAbility
 {
-    public Animator anim;
     public UnityEvent OnPunch;
     public GameObject bobDeathCollider;
     public Transform deathColliderSpawnPoint;
@@ -23,8 +22,6 @@ public class CopPunchAbility : BaseAbility
     public override void LocalUseOfAbility()
     {
         OnPunch.Invoke();
-        photonView.RPC("AnimateCopPunch", RpcTarget.Others);
-
         //SpawnBobDeathProjectile();
     }
 
@@ -53,11 +50,4 @@ public class CopPunchAbility : BaseAbility
             PhotonNetwork.Instantiate(bobDeathCollider.name, spawnPosition, spawnRotation);
         }
     }
-
-    [PunRPC]
-    void AnimateCopPunch()
-    {
-        anim.SetTrigger(ConstantsHolder.COP_PUNCH_TRIGGER_NAME);
-    }
-
 }

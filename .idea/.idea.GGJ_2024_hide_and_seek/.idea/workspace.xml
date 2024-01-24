@@ -14,6 +14,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/GameTimerMaster.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/CameraUIDeterminer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/ConstantsHolder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Movement/PlayerAnimator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Movement/ThirdPersonControllerNew.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/MyOffScreenIndicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/PlayerPUNInfos.cs" root0="FORCE_HIGHLIGHTING" />
@@ -92,7 +93,7 @@
       <workItem from="1705846260850" duration="12281000" />
       <workItem from="1705867227502" duration="1590000" />
       <workItem from="1706079565439" duration="6365000" />
-      <workItem from="1706109638612" duration="817000" />
+      <workItem from="1706109638612" duration="6435000" />
     </task>
     <servers />
   </component>

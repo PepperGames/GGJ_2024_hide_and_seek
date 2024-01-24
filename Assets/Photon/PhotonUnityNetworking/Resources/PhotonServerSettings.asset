@@ -50,6 +50,10 @@ MonoBehaviour:
   - SyncStartTimer
   - TurningOnOtherClients
   - AnimateCopPunch
+  - ServerTriggerAnimate
+  - ServerAnimateBool
+  - ServerPlayAnimation
+  - ServerAnimateBobTurn
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
