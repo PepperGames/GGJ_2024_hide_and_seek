@@ -5,11 +5,15 @@ using UnityEngine.Events;
 
 public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 {
+    private float mouseX;
+    private float mouseY;
     public float rotationSpeed = 5f;
     public float pitchRangeTop = 80f;
     public float pitchRangeBot = -80f;
     protected float pitch = 0f;
+    public CameraMode _cameraMode = CameraMode.Hard;
     [SerializeField] protected GameObject _mainCamera;
+    [SerializeField] protected Transform _startCameraPosition;
 
     [SerializeField] protected Rigidbody rigidBody;
 
@@ -22,6 +26,24 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     public float groundedRadius = 0.28f;
     public float groundedOffset = 0.8f;
     public LayerMask groundLayers;
+
+    [SerializeField] private bool _canRotateCamera = true;
+    [SerializeField] private bool _canRotateCharacter = true;
+    [SerializeField] private bool _canMove = true;
+
+
+    public Transform target;
+    public float distance = 5.0f;
+    public float xSpeed = 120.0f;
+    public float ySpeed = 120.0f;
+
+    public float yMinLimit = -20f;
+    public float yMaxLimit = 80f;
+
+    public float distanceMin = .5f;
+    public float distanceMax = 15f;
+
+    public Vector3 _offset;
 
     public UnityEvent OnIdle;
     public UnityEvent OnMove;
@@ -45,7 +67,8 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         if (photonView.IsMine)
         {
             GroundedCheck();
-            Rotate();
+            RotateCamera();
+            RotateCharacter();
             Move();
             Jump();
 
@@ -56,12 +79,25 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         }
     }
 
-    private void Rotate()
+    private void RotateCamera()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        if (!_canRotateCamera)
+            return;
 
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+        if (_cameraMode == CameraMode.Hard)
+        {
+            RotateCameraWithCharacter();
+        }
+        else
+        {
+            RotateCameraAroundCharacter();
+        }
+    }
+
+    public void RotateCameraWithCharacter()
+    {
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
 
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
@@ -69,8 +105,45 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 
+    public void RotateCameraAroundCharacter()
+    {
+        distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
+
+        mouseX += Input.GetAxis("Mouse X") * xSpeed * distance * 0.02f;
+        mouseY -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+
+        mouseY = Mathf.Clamp(mouseY, yMinLimit, yMaxLimit);
+
+        Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
+
+        RaycastHit hit;
+        if (Physics.Linecast(target.position, transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
+        {
+            distance -= hit.distance;
+        }
+        Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        Vector3 position = rotation * negDistance + target.position + _offset;
+
+        _mainCamera.transform.rotation = rotation;
+        _mainCamera.transform.position = position;
+    }
+
+    private void RotateCharacter()
+    {
+        if (!_canRotateCharacter)
+            return;
+
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+    }
+
     private void Move()
     {
+        if (!_canMove)
+        {
+            OnIdle?.Invoke();
+            return;
+        }
+
         Vector3 playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         Vector3 moveVector = transform.TransformDirection(playerMovementInput) * movementSpeed;
         if (moveVector != Vector3.zero)
@@ -113,7 +186,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
             QueryTriggerInteraction.Ignore);
-        
+
     }
 
     private IEnumerator LandingCheck()
@@ -142,4 +215,37 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
             new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),
             groundedRadius);
     }
+
+    public void EnableRotateCamera()
+    {
+        _canRotateCamera = true;
+    }
+    public void DisableRotateCamera()
+    {
+        _canRotateCamera = false;
+    }
+
+    public void EnableRotateCharacter()
+    {
+        _canRotateCharacter = true;
+    }
+    public void DisableRotateCharacter()
+    {
+        _canRotateCharacter = false;
+    }
+
+    public void EnableMove()
+    {
+        _canMove = true;
+    }
+    public void DisableMove()
+    {
+        _canMove = false;
+    }
+}
+
+public enum CameraMode
+{
+    Hard,
+    FreelyRotating
 }
