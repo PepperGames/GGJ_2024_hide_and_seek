@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: BobsDash
-  cooldown: 4
+  cooldown: 1
   dashKeyCode: 304
   dashForce: 8000
 --- !u!114 &2944219660313572814

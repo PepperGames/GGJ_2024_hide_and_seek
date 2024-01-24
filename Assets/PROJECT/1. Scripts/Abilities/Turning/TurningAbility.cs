@@ -53,8 +53,8 @@ public class TurningAbility : BaseAbility
         PropsToTurningScriptableObject propsToTurningSO = _propsToTurningManager.GetPropsToTurningSOById(propsId);
         Debug.Log("propsToTurningSO " + propsToTurningSO.name);
 
-        _capsuleCollider.enabled = false;
         _meshCollider.enabled = true;
+        _capsuleCollider.enabled = false;
 
         _meshCollider.sharedMesh = propsToTurningSO.Mesh;
         _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
