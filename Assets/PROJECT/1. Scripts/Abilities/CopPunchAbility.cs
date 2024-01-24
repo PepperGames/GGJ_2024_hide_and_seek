@@ -23,13 +23,13 @@ public class CopPunchAbility : BaseAbility
     public override void LocalUseOfAbility()
     {
         OnPunch.Invoke();
+        photonView.RPC("AnimateCopPunch", RpcTarget.Others);
     }
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
     {
-        OnPunch.Invoke();
+        //OnPunch.Invoke();
         SpawnBobDeathProjectile();
-        anim.SetTrigger(ConstantsHolder.COP_PUNCH_TRIGGER_NAME);
     }
 
     public void SpawnBobDeathProjectile()
@@ -47,6 +47,12 @@ public class CopPunchAbility : BaseAbility
 
         // Создаем объект на сервере
         PhotonNetwork.Instantiate(bobDeathCollider.name, spawnPosition, spawnRotation);
+    }
+
+    [PunRPC]
+    void AnimateCopPunch()
+    {
+        anim.SetTrigger(ConstantsHolder.COP_PUNCH_TRIGGER_NAME);
     }
 
 }

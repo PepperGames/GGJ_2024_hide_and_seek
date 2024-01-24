@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8868125884203636614}
   - component: {fileID: 6114114094549816506}
   - component: {fileID: 7316396528791080117}
+  - component: {fileID: 7610338362168400188}
   m_Layer: 14
   m_Name: CopsPunchHitbox
   m_TagString: Untagged
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
 --- !u!65 &9154962044020072872
 BoxCollider:
@@ -127,7 +128,19 @@ MonoBehaviour:
       m_Calls: []
   OnStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7316396528791080117}
+        m_TargetAssemblyTypeName: DelayActivateComponent, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnOnDisable:
     m_PersistentCalls:
       m_Calls: []
@@ -145,4 +158,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnActivate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7610338362168400188}
+        m_TargetAssemblyTypeName: PhotonObjectDestroyer, Assembly-CSharp
+        m_MethodName: DestroyObjectPhoton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7610338362168400188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570177967116594527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2e760d6eb69844eb439d3b671bcca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

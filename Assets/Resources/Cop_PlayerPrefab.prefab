@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: CopsPunch
   cooldown: 2
-  anim: {fileID: 0}
+  anim: {fileID: 6357074334588563454}
   OnPunch:
     m_PersistentCalls:
       m_Calls:
