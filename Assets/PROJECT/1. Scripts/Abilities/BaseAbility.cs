@@ -1,12 +1,15 @@
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseAbility : MonoBehaviourPun
 {
     public string abilityName = "BaseSpell";
     public float cooldown = 5f; // Время перезарядки в секундах
-
+    public float abilityDuration = 1f;
+    public UnityEvent OnAbilityLocalStart;
+    public UnityEvent OnAbilityLocalEnd;
     private bool isCooldown = false;
 
     void Update()
@@ -33,6 +36,7 @@ public class BaseAbility : MonoBehaviourPun
 
         // Начало перезарядки
         StartCoroutine(Cooldown());
+        StartCoroutine(AbilityDuration());
     }
 
     IEnumerator Cooldown()
@@ -40,6 +44,13 @@ public class BaseAbility : MonoBehaviourPun
         isCooldown = true;
         yield return new WaitForSeconds(cooldown);
         isCooldown = false;
+    }
+    
+    IEnumerator AbilityDuration()
+    {
+        OnAbilityLocalStart.Invoke();
+        yield return new WaitForSeconds(abilityDuration);
+        OnAbilityLocalEnd.Invoke();
     }
 
     public virtual void LocalUseOfAbility()

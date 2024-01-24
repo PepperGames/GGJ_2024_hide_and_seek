@@ -261,6 +261,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: LaughterSpell
   cooldown: 0
+  abilityDuration: 5
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
   laughterSound: {fileID: 8300000, guid: 44aee40475e0b0d4bb7f88da384eba05, type: 3}
   audioSource: {fileID: 6223158903590736176}
 --- !u!114 &-1424951920428829711
@@ -484,6 +491,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: BobsDash
   cooldown: 1
+  abilityDuration: 5
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
   dashKeyCode: 304
   dashForce: 8000
 --- !u!114 &2944219660313572814
@@ -532,6 +546,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: TurningAbility
   cooldown: 1
+  abilityDuration: 5
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
   _keyCode: 304
   _propsToTurningManager: {fileID: 0}
   _meshCollider: {fileID: 4899974266259722006}
