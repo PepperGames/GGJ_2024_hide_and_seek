@@ -555,7 +555,7 @@ MonoBehaviour:
       m_Calls: []
   _keyCode: 304
   _propsToTurningManager: {fileID: 0}
-  _meshCollider: {fileID: 6062599088615107250}
+  _meshCollider: {fileID: 4899974266259722006}
   _skinnedMeshRenderer: {fileID: 1916116128345201148}
   _capsuleCollider: {fileID: 6869584291226208421}
 --- !u!1001 &1274483230271281564
