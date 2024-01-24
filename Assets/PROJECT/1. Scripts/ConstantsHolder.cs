@@ -10,7 +10,7 @@ public static class ConstantsHolder
     public static string LIVE_STATUS_LIVE_PARAM_NAME = "Alive";
     public static string LIVE_STATUS_DEAD_PARAM_NAME = "Dead"; 
     public static string PLAYERS_TAG = "Player";
-    public static string LEVEL_SCENENAME_NAME = "Gameplay";
+    public static string LEVEL_SCENENAME_NAME =  "Level"; //Gameplay
     public static string MAINSCENE_SCENENAME_NAME = "MainMenu";
     public static string COP_PUNCH_TRIGGER_NAME = "punch";
     public static float GAME_START_COUNTDOWN_TIME = 20;
