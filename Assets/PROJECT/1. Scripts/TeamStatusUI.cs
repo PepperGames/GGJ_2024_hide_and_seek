@@ -17,15 +17,26 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
     public bool timeIsOut;
     public UnityEvent OnTeamWin;
     public UnityEvent OnTeamLost;
+    public UnityEvent OnPause;
+    public UnityEvent OnUnPause;
 
     private Team myTeam;
     private bool initialize;
     private bool winnerDetermined;
+    private bool paused;
 
     private void Start()
     {
         DetermineTeam();
         UpdateTeamCounts();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !winnerDetermined)
+        {
+            CheckPauseState();
+        }
     }
 
     private void LateUpdate()
@@ -141,6 +152,28 @@ public class TeamStatusUI : MonoBehaviourPunCallbacks
     public void CallTimeOff()
     {
         Time.timeScale = 0;
+    }
+
+    public void UnpauseGame()
+    {
+        paused = false;
+        OnUnPause.Invoke();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void CheckPauseState()
+    {
+        paused = !paused;
+        if (paused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            OnPause.Invoke();
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            OnUnPause.Invoke();
+        }
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)

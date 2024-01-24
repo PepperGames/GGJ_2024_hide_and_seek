@@ -39,6 +39,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         SetRandomNick();
+        Time.timeScale = 1;
     }
     
     void Update()
