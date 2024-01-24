@@ -15,6 +15,7 @@ public class SpectratorCameraController : MonoBehaviour
     private Team myTeam;
     private List<Transform> potentialTargets;
     private int currentTargetIndex = 0; // Текущий индекс в списке целей
+    private string currentSpectratorName;
     
     private void Start()
     {
@@ -84,10 +85,17 @@ public class SpectratorCameraController : MonoBehaviour
         InitializeSpectrators();
 
         myCamera.enabled = true;
+
+        SpectratorNameDisplay display = FindObjectOfType<SpectratorNameDisplay>();
+        if (display != null)
+        {
+            display.spectratorCameraController = this;
+        }
     }
 
     public void InitializeSpectrators()
     {
+        currentSpectratorName = "";
         potentialTargets = new List<Transform>();
         
         foreach (var player in PhotonNetwork.PlayerList)
@@ -97,8 +105,9 @@ public class SpectratorCameraController : MonoBehaviour
                 lifeStatus.ToString().Equals(ConstantsHolder.LIVE_STATUS_LIVE_PARAM_NAME) &&
                 teamValue.ToString() == myTeam.ToString())
             {
-                Debug.Log("FIRST part is done!"); 
 
+                currentSpectratorName = player.NickName;
+                
                 if (myTeam.ToString().Equals("Bobs"))
                 {
                     LaughterAbility ally = FindBob(player.ActorNumber);
@@ -128,8 +137,17 @@ public class SpectratorCameraController : MonoBehaviour
             Debug.Log("No alive teammates found");
         }
     }
-    
-    
+
+    public string GetCurrentSpectrator()
+    {
+        if (!String.IsNullOrEmpty(currentSpectratorName))
+        {
+            return currentSpectratorName;
+        }
+
+        return null;
+    }
+
     LaughterAbility FindBob(int actorNumber)
     {
         foreach (var player in FindObjectsOfType<LaughterAbility>())
