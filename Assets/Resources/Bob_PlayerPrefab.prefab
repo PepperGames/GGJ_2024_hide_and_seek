@@ -387,17 +387,16 @@ MonoBehaviour:
   rotationSpeed: 5
   pitchRangeTop: 50
   pitchRangeBot: -45
-  jumpForce: 5
-  groundDistance: 0.5
   _mainCamera: {fileID: 5194695486177420615}
   rigidBody: {fileID: 8169780711870194636}
+  movementSpeed: 5
+  jumpForce: 5
   canDoubleJump: 0
-  GroundedRadius: 0.28
-  GroundedOffset: 0.8
-  GroundLayers:
+  groundedRadius: 0.28
+  groundedOffset: 0.8
+  groundLayers:
     serializedVersion: 2
     m_Bits: 1
-  movementSpeed: 5
 --- !u!64 &4899974266259722006
 MeshCollider:
   m_ObjectHideFlags: 0

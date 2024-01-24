@@ -1,28 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class ThirdPersonControllerNew : MonoBehaviourPun
+public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 {
     public float rotationSpeed = 5f;
     public float pitchRangeTop = 80f;
     public float pitchRangeBot = -80f;
-    private float pitch = 0f;
+    protected float pitch = 0f;
+    [SerializeField] protected GameObject _mainCamera;
+
+    [SerializeField] protected Rigidbody rigidBody;
+
+    public float movementSpeed = 5f;
 
     public float jumpForce = 5;
-    public float groundDistance = 0.5f;
-    bool isGrounded = false;
-    [SerializeField] private GameObject _mainCamera;
+    [SerializeField] protected bool canDoubleJump;
+    protected bool isGrounded = false;
 
-    [SerializeField] private Rigidbody rigidBody;
-    [SerializeField] private bool canDoubleJump;
-
-    public float GroundedRadius = 0.28f;
-    public float GroundedOffset = 0.8f;
-    public LayerMask GroundLayers;
-    public float movementSpeed = 5f;
+    public float groundedRadius = 0.28f;
+    public float groundedOffset = 0.8f;
+    public LayerMask groundLayers;
 
     private void Start()
     {
@@ -80,17 +77,12 @@ public class ThirdPersonControllerNew : MonoBehaviourPun
         }
     }
 
-    private void CheckIsGrounded()
-    {
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance);
-    }
-
     private void GroundedCheck()
     {
         // set sphere position, with offset
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
             transform.position.z);
-        isGrounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+        isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
             QueryTriggerInteraction.Ignore);
     }
 
@@ -104,7 +96,7 @@ public class ThirdPersonControllerNew : MonoBehaviourPun
 
         // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
         Gizmos.DrawSphere(
-            new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z),
-            GroundedRadius);
+            new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),
+            groundedRadius);
     }
 }
