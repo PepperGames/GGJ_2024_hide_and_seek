@@ -194,7 +194,7 @@ MonoBehaviour:
   jumpForce: 5
   canDoubleJump: 0
   groundedRadius: 0.19
-  groundedOffset: -0.2
+  groundedOffset: -0.05
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
