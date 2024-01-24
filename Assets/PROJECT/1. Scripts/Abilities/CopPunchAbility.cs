@@ -25,7 +25,7 @@ public class CopPunchAbility : BaseAbility
         OnPunch.Invoke();
         photonView.RPC("AnimateCopPunch", RpcTarget.Others);
 
-        SpawnBobDeathProjectile();
+        //SpawnBobDeathProjectile();
     }
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
@@ -36,19 +36,22 @@ public class CopPunchAbility : BaseAbility
 
     public void SpawnBobDeathProjectile()
     {
-        // Проверяем, существует ли префаб для спавна
-        if (bobDeathCollider == null)
+        if (photonView.IsMine)
         {
-            Debug.LogError("Bob Death Collider prefab is not assigned.");
-            return;
+            // Проверяем, существует ли префаб для спавна
+            if (bobDeathCollider == null)
+            {
+                Debug.LogError("Bob Death Collider prefab is not assigned.");
+                return;
+            }
+
+            // Рассчитываем позицию и направление спавна
+            Vector3 spawnPosition = deathColliderSpawnPoint.position;
+            Quaternion spawnRotation = deathColliderSpawnPoint.rotation;
+
+            // Создаем объект на сервере
+            PhotonNetwork.Instantiate(bobDeathCollider.name, spawnPosition, spawnRotation);
         }
-
-        // Рассчитываем позицию и направление спавна
-        Vector3 spawnPosition = deathColliderSpawnPoint.position;
-        Quaternion spawnRotation = deathColliderSpawnPoint.rotation;
-
-        // Создаем объект на сервере
-        PhotonNetwork.Instantiate(bobDeathCollider.name, spawnPosition, spawnRotation);
     }
 
     [PunRPC]
