@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 3119504746600372739}
   - component: {fileID: 8316879918416177442}
   - component: {fileID: 527031817023213338}
+  - component: {fileID: 4342269938843211462}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -505,6 +506,7 @@ MonoBehaviour:
   pitchRangeBot: -45
   _cameraMode: 0
   _mainCamera: {fileID: 5194695486177420615}
+  _startCameraPosition: {fileID: 0}
   rigidBody: {fileID: 8169780711870194636}
   movementSpeed: 5
   jumpForce: 5
@@ -763,6 +765,38 @@ MonoBehaviour:
   - {fileID: 7500464702501699913}
   objectsToEnable:
   - {fileID: 1980389589227427872}
+--- !u!114 &4342269938843211462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803ba84e70fd0f347af3317631bb7b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: PinAbility
+  cooldown: 0
+  abilityDuration: 0
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  _keyCode: 323
+  _rigidbody: {fileID: 8169780711870194636}
+  _bobThirdPersonController: {fileID: -5002821627191121955}
+  _isPinned: 0
+  _whoTouch: []
+  OnPin:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChipOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7476136812194673944
 GameObject:
   m_ObjectHideFlags: 0
