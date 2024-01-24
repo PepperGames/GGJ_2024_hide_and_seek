@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 {
@@ -20,6 +21,11 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     public float groundedRadius = 0.28f;
     public float groundedOffset = 0.8f;
     public LayerMask groundLayers;
+
+    public UnityEvent OnMove;
+    public UnityEvent OnJump;
+    public UnityEvent OnDoubleJump;
+    public UnityEvent OnLanding;
 
     private void Start()
     {
@@ -58,6 +64,10 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     {
         Vector3 playerMovementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         Vector3 moveVector = transform.TransformDirection(playerMovementInput) * movementSpeed;
+        if (moveVector != Vector3.zero)
+        {
+            OnMove?.Invoke();
+        }
         rigidBody.velocity = new Vector3(moveVector.x, rigidBody.velocity.y, moveVector.z);
     }
 
@@ -69,11 +79,14 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
             {
                 rigidBody.velocity = Vector3.up * jumpForce;
                 canDoubleJump = true;
+                OnJump?.Invoke();
             }
             else if (canDoubleJump)
             {
                 rigidBody.velocity = Vector3.up * jumpForce;
                 canDoubleJump = false;
+                OnJump?.Invoke();
+                OnDoubleJump?.Invoke();
             }
         }
     }
@@ -83,8 +96,15 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         // set sphere position, with offset
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
             transform.position.z);
+
+        bool prevIsGrounded = isGrounded;
+
         isGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
             QueryTriggerInteraction.Ignore);
+        if (prevIsGrounded == false && isGrounded == true)
+        {
+            OnLanding?.Invoke();
+        }
     }
 
     private void OnDrawGizmosSelected()

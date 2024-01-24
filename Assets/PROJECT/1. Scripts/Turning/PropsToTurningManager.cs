@@ -13,10 +13,8 @@ public class PropsToTurningManager : MonoBehaviour
         {
             sum += props.Chance;
         }
-        Debug.Log("sum " + sum);
 
         int random = Random.Range(0, sum + 1);
-        Debug.Log("random " + random);
 
         int prevSum = 0;
         sum = 0;
@@ -26,13 +24,8 @@ public class PropsToTurningManager : MonoBehaviour
             prevSum = sum;
             sum += _props[i].Chance;
 
-            Debug.Log("random+ " + random);
-            Debug.Log("prevSum+ " + prevSum);
-            Debug.Log("sum+ " + sum);
-
             if (random > prevSum && random <= sum)
             {
-                Debug.Log("i+ " + i);
                 return i;
             }
         }

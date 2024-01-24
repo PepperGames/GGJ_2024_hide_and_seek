@@ -1,7 +1,6 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TurningAbility : BaseAbility
 {
@@ -12,6 +11,8 @@ public class TurningAbility : BaseAbility
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     [SerializeField] private CapsuleCollider _capsuleCollider;
+
+    public UnityEvent OnTurning;
 
     void Awake()
     {
@@ -31,10 +32,11 @@ public class TurningAbility : BaseAbility
         int id = _propsToTurningManager.GetRandomPropsId();
 
         Turning(id);
+        OnTurning?.Invoke();
+
         Debug.Log("Выполнено локальное действие: " + abilityName);
 
         photonView.RPC("TurningOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, id);
-
     }
 
     [PunRPC]
@@ -49,16 +51,13 @@ public class TurningAbility : BaseAbility
 
     public void Turning(int propsId)
     {
-        Debug.Log("Turning1  propsId=" + propsId);
         PropsToTurningScriptableObject propsToTurningSO = _propsToTurningManager.GetPropsToTurningSOById(propsId);
-        Debug.Log("propsToTurningSO " + propsToTurningSO.name);
 
         _meshCollider.enabled = true;
         _capsuleCollider.enabled = false;
 
         _meshCollider.sharedMesh = propsToTurningSO.Mesh;
         _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
-        Debug.Log("Turning1  propsId=" + propsId);
     }
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
@@ -71,10 +70,8 @@ public class TurningAbility : BaseAbility
     {
         foreach (var player in FindObjectsOfType<TurningAbility>())
         {
-            Debug.Log("FindAbilityByActorNumber " + player.gameObject.name);
             if (player.photonView.Owner.ActorNumber == actorNumber)
             {
-                Debug.Log("actorNumber " + actorNumber);
                 return player;
             }
         }
