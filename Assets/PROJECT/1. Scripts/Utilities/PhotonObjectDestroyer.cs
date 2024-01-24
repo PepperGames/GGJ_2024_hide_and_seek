@@ -7,6 +7,9 @@ public class PhotonObjectDestroyer : MonoBehaviourPun
 {
     public void DestroyObjectPhoton()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if (photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }

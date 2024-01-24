@@ -20,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/PlayerSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/RoomPlayerListItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/TeamStatusUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/PhotonObjectDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/RoomExitHandler.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -89,7 +90,7 @@
       <updated>1705846241618</updated>
       <workItem from="1705846260850" duration="12281000" />
       <workItem from="1705867227502" duration="1590000" />
-      <workItem from="1706079565439" duration="5206000" />
+      <workItem from="1706079565439" duration="5775000" />
     </task>
     <servers />
   </component>
