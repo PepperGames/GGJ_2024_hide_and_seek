@@ -538,6 +538,8 @@ MonoBehaviour:
   copPunchTriggerKey: punch
   copPunchDashKey: 
   bobTurnKey: 
+  objectsToDisable: []
+  objectsToEnable: []
 --- !u!1 &2927605552989251642
 GameObject:
   m_ObjectHideFlags: 0
