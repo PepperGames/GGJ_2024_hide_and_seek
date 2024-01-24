@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class CopPunchAbility : BaseAbility
 {
+    public Animator anim;
     public UnityEvent OnPunch;
     public GameObject bobDeathCollider;
     public Transform deathColliderSpawnPoint;
@@ -28,6 +29,7 @@ public class CopPunchAbility : BaseAbility
     {
         OnPunch.Invoke();
         SpawnBobDeathProjectile();
+        anim.SetTrigger(ConstantsHolder.COP_PUNCH_TRIGGER_NAME);
     }
 
     public void SpawnBobDeathProjectile()

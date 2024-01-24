@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamStatusUI: {fileID: 345054746375933680}
   timerText: {fileID: 918697298716428544}
-  remainingTime: 20
+  remainingTime: 150
 --- !u!114 &2347882109490113045
 MonoBehaviour:
   m_ObjectHideFlags: 0
