@@ -405,6 +405,18 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
+  OnMove:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDoubleJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLanding:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!64 &4899974266259722006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -558,6 +570,9 @@ MonoBehaviour:
   _meshCollider: {fileID: 4899974266259722006}
   _skinnedMeshRenderer: {fileID: 1916116128345201148}
   _capsuleCollider: {fileID: 6869584291226208421}
+  OnTurning:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0
