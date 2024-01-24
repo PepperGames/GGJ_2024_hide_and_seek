@@ -24,12 +24,14 @@ public class CopPunchAbility : BaseAbility
     {
         OnPunch.Invoke();
         photonView.RPC("AnimateCopPunch", RpcTarget.Others);
+
+        SpawnBobDeathProjectile();
     }
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
     {
         //OnPunch.Invoke();
-        SpawnBobDeathProjectile();
+        //SpawnBobDeathProjectile();
     }
 
     public void SpawnBobDeathProjectile()
