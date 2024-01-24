@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: TurningAbility
-  cooldown: 5
+  cooldown: 1
   _keyCode: 304
   _propsToTurningManager: {fileID: 0}
   _meshCollider: {fileID: 4899974266259722006}
