@@ -20,7 +20,7 @@ public class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] private bool canDoubleJump;
 
     public float GroundedRadius = 0.28f;
-    public float GroundedOffset = -0.14f;
+    public float GroundedOffset = 0.8f;
     public LayerMask GroundLayers;
     public float movementSpeed = 5f;
 
@@ -48,14 +48,11 @@ public class ThirdPersonControllerNew : MonoBehaviourPun
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // �������� ��������� ������ ��� Y
         transform.Rotate(Vector3.up * mouseX * rotationSpeed);
 
-        // �������� ������ ������ ��� X � ������������ �� �����
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
 
-        // ���������� �������� ������
         _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 

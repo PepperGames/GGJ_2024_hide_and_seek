@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6056259179440491145}
   - component: {fileID: 7598135589879227762}
   - component: {fileID: 8278166370632368853}
-  - component: {fileID: -5582407531342326920}
+  - component: {fileID: 5319338849317032543}
   - component: {fileID: 6293670319810772771}
   - component: {fileID: 2776210761849850433}
   - component: {fileID: 8457601614620562489}
@@ -160,7 +160,7 @@ MonoBehaviour:
   OnDeathBaseEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -5582407531342326920}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -208,7 +208,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-5582407531342326920
+--- !u!114 &5319338849317032543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,12 +217,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2199194163272832008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e632447967530eb49851e0c8bc81c28e, type: 3}
+  m_Script: {fileID: 11500000, guid: 40eb56301d80c3a4ba5f7438ffb3d07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
-  pitchRangeTop: 50
-  pitchRangeBot: -45
+  pitchRangeTop: 80
+  pitchRangeBot: -80
   jumpForce: 5
   groundDistance: 0.5
   _mainCamera: {fileID: 1144387141785737046}
