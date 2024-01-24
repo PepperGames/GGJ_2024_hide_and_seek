@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 3119504746600372739}
   - component: {fileID: 2944219660313572814}
   - component: {fileID: 5922905394362607038}
+  - component: {fileID: 8316879918416177442}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -482,8 +483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: BobsDash
-  cooldown: 12
-  dashKeyCode: 0
+  cooldown: 4
+  dashKeyCode: 304
   dashForce: 8000
 --- !u!114 &2944219660313572814
 MonoBehaviour:
@@ -517,6 +518,25 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8316879918416177442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda85185133317647a421ee79c41a94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: TurningAbility
+  cooldown: 5
+  _keyCode: 304
+  _propsToTurningManager: {fileID: 0}
+  _meshCollider: {fileID: 4899974266259722006}
+  _skinnedMeshRenderer: {fileID: 1916116128345201148}
+  _capsuleCollider: {fileID: 6869584291226208421}
 --- !u!1001 &1274483230271281564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1165,6 +1185,12 @@ PrefabInstance:
       addedObject: {fileID: 5246576757841303647}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a71738add6483c4e8a1479556240d54, type: 3}
+--- !u!137 &1916116128345201148 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137468952617510086, guid: 6a71738add6483c4e8a1479556240d54,
+    type: 3}
+  m_PrefabInstance: {fileID: 1981313630020369722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1977533849522780748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4106335723276150, guid: 6a71738add6483c4e8a1479556240d54,
@@ -1197,17 +1223,17 @@ PrefabInstance:
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 1.18
       objectReference: {fileID: 0}
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.42
+      value: 2.79
       objectReference: {fileID: 0}
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.51
+      value: -2.19
       objectReference: {fileID: 0}
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}

@@ -18,12 +18,21 @@ public class PropsToTurningManager : MonoBehaviour
         int random = Random.Range(0, sum + 1);
         Debug.Log("random " + random);
 
+        int prevSum = 0;
+        sum = 0;
+
         for (int i = 0; i < _props.Count; i++)
         {
+            prevSum = sum;
             sum += _props[i].Chance;
-            if (sum <= random)
+
+            Debug.Log("random+ " + random);
+            Debug.Log("prevSum+ " + prevSum);
+            Debug.Log("sum+ " + sum);
+
+            if (random > prevSum && random <= sum)
             {
-                Debug.Log("i " + i);
+                Debug.Log("i+ " + i);
                 return i;
             }
         }
@@ -32,7 +41,7 @@ public class PropsToTurningManager : MonoBehaviour
         return -1;
     }
 
-    public PropsToTurningScriptableObject GetPropsToTurningScriptableObject(int id)
+    public PropsToTurningScriptableObject GetPropsToTurningSOById(int id)
     {
         return _props[id];
     }
