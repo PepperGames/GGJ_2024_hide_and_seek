@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,12 +30,6 @@ public class PinAbility : BaseAbility
     public UnityEvent OnPin;
     public UnityEvent OnChipOff;
 
-
-    //void Awake()
-    //{
-    //    _propsToTurningManager = FindObjectOfType<PropsToTurningManager>();
-    //}
-
     public override void CheckAbilityUse()
     {
         if (Input.GetKeyDown(_keyCode))
@@ -52,11 +47,11 @@ public class PinAbility : BaseAbility
 
         if (CanPin && !_isPinned)
         {
-            Pin();
+            LocalPin();
         }
         else if (_isPinned)
         {
-            ChipOff();
+            LocalChipOff();
         }
 
         Debug.Log("Выполнено локальное действие: " + abilityName);
@@ -64,18 +59,70 @@ public class PinAbility : BaseAbility
         //photonView.RPC("TurningOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, id);
     }
 
-    public void Pin()
+    public void LocalPin()
     {
-        _bobThirdPersonController.DisableMove();
-        _rigidbody.isKinematic = true;
-         _isPinned = true;
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
+
+        Pin(position, rotation);
+
+        photonView.RPC("PinOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
+        _isPinned = true;
     }
 
-    public void ChipOff()
+    public void Pin(Vector3 position, Quaternion rotation)
     {
+        transform.position = position;
+        transform.rotation = rotation;
+
+        _bobThirdPersonController.DisableMove();
+        _rigidbody.isKinematic = true;
+
+        _isPinned = true;
+        OnPin?.Invoke();
+    }
+
+    [PunRPC]
+    private void PinOnOtherClients(int actorNumber, Vector3 position, Quaternion rotation)
+    {
+        PinAbility ability = FindAbilityByActorNumber(actorNumber);
+        if (ability != null)
+        {
+            ability.Pin(position, rotation);
+        }
+    }
+
+    public void LocalChipOff()
+    {
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
+
+        ChipOff(position, rotation);
+
+        photonView.RPC("ChipOffOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
+        _isPinned = false;
+    }
+
+    public void ChipOff(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+
         _bobThirdPersonController.EnableMove();
         _rigidbody.isKinematic = false;
+
         _isPinned = false;
+        OnChipOff?.Invoke();
+    }
+
+    [PunRPC]
+    private void ChipOffOnOtherClients(int actorNumber, Vector3 position, Quaternion rotation)
+    {
+        PinAbility ability = FindAbilityByActorNumber(actorNumber);
+        if (ability != null)
+        {
+            ability.ChipOff(position, rotation);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -98,16 +145,6 @@ public class PinAbility : BaseAbility
         }
     }
 
-    //[PunRPC]
-    //void TurningOnOtherClients(int actorNumber, int propsId)
-    //{
-    //    TurningAbility ability = FindAbilityByActorNumber(actorNumber);
-    //    if (ability != null)
-    //    {
-    //        ability.Turning(propsId);
-    //    }
-    //}
-
     //public void Turning(int propsId)
     //{
     //    PropsToTurningScriptableObject propsToTurningSO = _propsToTurningManager.GetPropsToTurningSOById(propsId);
@@ -125,16 +162,15 @@ public class PinAbility : BaseAbility
     //    Debug.Log(playerName + " used spell = " + usedAbility + " (other player see this)");
     //}
 
-    //private TurningAbility FindAbilityByActorNumber(int actorNumber)
-    //{
-    //    foreach (var player in FindObjectsOfType<TurningAbility>())
-    //    {
-    //        if (player.photonView.Owner.ActorNumber == actorNumber)
-    //        {
-    //            return player;
-    //        }
-    //    }
-    //    return null;
-    //}
-
+    private PinAbility FindAbilityByActorNumber(int actorNumber)
+    {
+        foreach (var player in FindObjectsOfType<PinAbility>())
+        {
+            if (player.photonView.Owner.ActorNumber == actorNumber)
+            {
+                return player;
+            }
+        }
+        return null;
+    }
 }
