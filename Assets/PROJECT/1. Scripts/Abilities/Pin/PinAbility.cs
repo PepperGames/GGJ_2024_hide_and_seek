@@ -13,8 +13,6 @@ public class PinAbility : BaseAbility
 
     [SerializeField] private bool _isPinned = false;
 
-    //private bool _collisionEnter = false;
-    //private bool _collisionStay = false;
     [SerializeField] private List<GameObject> _whoTouch = new List<GameObject>();
 
     private bool CanPin
@@ -40,11 +38,6 @@ public class PinAbility : BaseAbility
 
     public override void LocalUseOfAbility()
     {
-        //int id = _propsToTurningManager.GetRandomPropsId();
-
-        //Turning(id);
-        //OnTurning?.Invoke();
-
         if (CanPin && !_isPinned)
         {
             LocalPin();
@@ -55,8 +48,6 @@ public class PinAbility : BaseAbility
         }
 
         Debug.Log("¬ыполнено локальное действие: " + abilityName);
-
-        //photonView.RPC("TurningOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, id);
     }
 
     public void LocalPin()
@@ -96,21 +87,15 @@ public class PinAbility : BaseAbility
 
     public void LocalChipOff()
     {
-        Vector3 position = transform.position;
-        Quaternion rotation = transform.rotation;
-
         _bobThirdPersonController.ChangeCameraMode(CameraMode.Hard);
-        ChipOff(position, rotation);
+        ChipOff();
 
-        photonView.RPC("ChipOffOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
+        photonView.RPC("ChipOffOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
         _isPinned = false;
     }
 
-    public void ChipOff(Vector3 position, Quaternion rotation)
+    public void ChipOff()
     {
-        transform.position = position;
-        transform.rotation = rotation;
-
         _bobThirdPersonController.EnableMove();
         _bobThirdPersonController.EnableRotateCharacter();
         _rigidbody.isKinematic = false;
@@ -120,12 +105,12 @@ public class PinAbility : BaseAbility
     }
 
     [PunRPC]
-    private void ChipOffOnOtherClients(int actorNumber, Vector3 position, Quaternion rotation)
+    private void ChipOffOnOtherClients(int actorNumber)
     {
         PinAbility ability = FindAbilityByActorNumber(actorNumber);
         if (ability != null)
         {
-            ability.ChipOff(position, rotation);
+            ability.ChipOff();
         }
     }
 
@@ -148,23 +133,6 @@ public class PinAbility : BaseAbility
             Debug.Log("OnCollisionEnter: " + targetObject.name);
         }
     }
-
-    //public void Turning(int propsId)
-    //{
-    //    PropsToTurningScriptableObject propsToTurningSO = _propsToTurningManager.GetPropsToTurningSOById(propsId);
-
-    //    _meshCollider.enabled = true;
-    //    _capsuleCollider.enabled = false;
-
-    //    _meshCollider.sharedMesh = propsToTurningSO.Mesh;
-    //    _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
-    //}
-
-    //public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
-    //{
-    //    // Ћогика, видима€ другим игрокам дл€ способности "Dash"
-    //    Debug.Log(playerName + " used spell = " + usedAbility + " (other player see this)");
-    //}
 
     private PinAbility FindAbilityByActorNumber(int actorNumber)
     {
