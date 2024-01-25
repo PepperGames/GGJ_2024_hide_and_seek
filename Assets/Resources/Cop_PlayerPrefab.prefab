@@ -338,8 +338,8 @@ MonoBehaviour:
   _startCameraPosition: {fileID: 413484588459814413}
   target: {fileID: 0}
   distance: 5
-  xSpeed: 120
-  ySpeed: 120
+  xSpeed: 150
+  ySpeed: 150
   yMinLimit: -20
   yMaxLimit: 80
   distanceMin: 0.6
