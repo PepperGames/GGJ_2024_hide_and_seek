@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b248442e723c52a4abd41e45b1349903, type: 3}
+  m_Name: PropsToTurning 15
+  m_EditorClassIdentifier: 
+  _mesh: {fileID: -9155208714471877315, guid: 1b5311bb2033af643b212f2b2f3374b6, type: 3}
+  _chance: 50

@@ -891,6 +891,7 @@ MonoBehaviour:
   jumpKey: jump_InAir
   landAnimationName: jump_Land
   copPunchTriggerKey: punch
+  copPunchDashAnimClipName: 
   copPunchDashKey: 
   bobTurnKey: bob_turning
   objectsToDisable:
