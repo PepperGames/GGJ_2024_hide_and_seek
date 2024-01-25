@@ -798,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: BobsDash
-  cooldown: 1
+  cooldown: 4
   abilityDuration: 5
   OnAbilityLocalStart:
     m_PersistentCalls:
@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: TurningAbility
-  cooldown: 10
+  cooldown: 4
   abilityDuration: 1
   OnAbilityLocalStart:
     m_PersistentCalls:
