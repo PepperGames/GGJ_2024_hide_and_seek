@@ -5,32 +5,42 @@ using UnityEngine.Events;
 
 public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 {
-    private float mouseX;
-    private float mouseY;
-    public float rotationSpeed = 5f;
-    public float pitchRangeTop = 80f;
-    public float pitchRangeBot = -80f;
-    protected float pitch = 0f;
-    public CameraMode _cameraMode = CameraMode.Hard;
-    [SerializeField] protected GameObject _mainCamera;
-    [SerializeField] protected Transform _startCameraPosition;
+    private bool _canRotateCamera = true;
+    private bool _canRotateCharacter = true;
+    private bool _canMove = true;
 
     [SerializeField] protected Rigidbody rigidBody;
 
+    [Header("Movement")]
     public float movementSpeed = 5f;
 
+    [Header("Jump")]
     public float jumpForce = 5;
     [SerializeField] protected bool canDoubleJump;
-    protected bool isGrounded = false;
 
+    [Header("Grounded")]
     public float groundedRadius = 0.28f;
     public float groundedOffset = 0.8f;
+    protected bool isGrounded = false;
     public LayerMask groundLayers;
 
-    [SerializeField] private bool _canRotateCamera = true;
-    [SerializeField] private bool _canRotateCharacter = true;
-    [SerializeField] private bool _canMove = true;
+    [Header("Camera Hard")]
 
+    public float rotationSpeed = 5f;
+
+    public float pitchRangeTop = 80f;
+    public float pitchRangeBot = -80f;
+    protected float pitch = 0f;
+
+    private float mouseX;
+    private float mouseY;
+
+    public CameraMode _cameraMode = CameraMode.Hard;
+
+    [SerializeField] protected GameObject _mainCamera;
+    [SerializeField] protected Transform _startCameraPosition;
+
+    [Header("Camera FreelyRotating")]
     public Transform target;
     public float distance = 5.0f;
     public float xSpeed = 120.0f;
@@ -44,6 +54,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
     public Vector3 _offset;
 
+    [Header("UnityEvents")]
     public UnityEvent OnIdle;
     public UnityEvent OnMove;
     public UnityEvent OnJump;
