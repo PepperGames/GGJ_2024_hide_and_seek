@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/CopDashAbility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/CopPunchAbility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/DashBobsAbility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/Death/DeathTrigger.cs" root0="FORCE_HIGHLIGHTING" />
@@ -95,7 +96,7 @@
       <workItem from="1705867227502" duration="1590000" />
       <workItem from="1706079565439" duration="6365000" />
       <workItem from="1706109638612" duration="9137000" />
-      <workItem from="1706175074900" duration="4038000" />
+      <workItem from="1706175074900" duration="5225000" />
     </task>
     <servers />
   </component>

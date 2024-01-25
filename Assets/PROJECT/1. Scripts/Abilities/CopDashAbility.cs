@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CopDashAbility : BaseAbility
 {
     public KeyCode dashKeyCode = KeyCode.LeftShift;
-    public float dashForce = 500f; // Сила толчка
+    public float dashSpeed = 10f; // Скорость дэша
+    public float dashDuration = 0.5f; // Продолжительность дэша в секундах
+    public float dashRaycastLength = 1f; // Длина рейкаста
 
     private Rigidbody playerRigidbody;
+    private bool isDashing;
 
     void Awake()
     {
@@ -16,7 +18,7 @@ public class CopDashAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetKeyDown(dashKeyCode))
+        if (Input.GetKeyDown(dashKeyCode) && !isDashing)
         {
             ActivateAbility();
         }
@@ -24,23 +26,41 @@ public class CopDashAbility : BaseAbility
 
     public override void LocalUseOfAbility()
     {
-        // Локальное действие для способности "Dash"
         if (playerRigidbody != null)
         {
-            Vector3 dashDirection = transform.forward; // Вперед относительно направления игрока
-            playerRigidbody.AddForce(dashDirection * dashForce, ForceMode.Acceleration); // Применяем силу для толчка
+            StartCoroutine(Dash());
         }
         else
         {
-            Debug.LogError("Rigidbody not found on the player for DashBobsAbility");
+            Debug.LogError("Rigidbody not found on the player for CopDashAbility");
         }
 
         Debug.Log("Выполнено локальное действие: " + abilityName);
     }
 
+    IEnumerator Dash()
+    {
+        isDashing = true;
+
+        float startTime = Time.time;
+        while (Time.time < startTime + dashDuration)
+        {
+            // Проверка на столкновение с помощью рейкаста
+            if (Physics.Raycast(transform.position, transform.forward, dashRaycastLength))
+            {
+                Debug.Log("Dash interrupted due to collision");
+                break; // Прерываем дэш при столкновении
+            }
+
+            playerRigidbody.MovePosition(playerRigidbody.position + transform.forward * dashSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+
+        isDashing = false;
+    }
+
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
     {
-        // Логика, видимая другим игрокам для способности "Dash"
-        Debug.Log(playerName + " used spell = " + usedAbility +" (other player see this)");
+        Debug.Log(playerName + " used spell = " + usedAbility + " (other players see this)");
     }
 }
