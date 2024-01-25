@@ -11,6 +11,7 @@ public class TurningAbility : BaseAbility
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
 
     [SerializeField] private CapsuleCollider _capsuleCollider;
+    [SerializeField] private AudioSource _turningAudioSource;
 
     [SerializeField] private int lastId = -1;
 
@@ -66,6 +67,8 @@ public class TurningAbility : BaseAbility
 
         _meshCollider.sharedMesh = propsToTurningSO.Mesh;
         _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
+
+        _turningAudioSource.Play();
     }
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b248442e723c52a4abd41e45b1349903, type: 3}
   m_Name: PropsToTurning 11
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 4300000, guid: 6f5cacaa9c9e12e46b12d25a11ae624d, type: 3}
+  _mesh: {fileID: 4300000, guid: c329c264317b3ee4d8b9c73e4547547e, type: 3}
   _chance: 50
