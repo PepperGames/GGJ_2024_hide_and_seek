@@ -15,7 +15,7 @@ public class PinAbility : BaseAbility
 
     [SerializeField] private List<GameObject> _whoTouch = new List<GameObject>();
 
-    private bool CanPin
+        private bool CanPin
     {
         get
         {

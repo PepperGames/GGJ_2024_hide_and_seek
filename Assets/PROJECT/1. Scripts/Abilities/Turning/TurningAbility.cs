@@ -12,6 +12,8 @@ public class TurningAbility : BaseAbility
 
     [SerializeField] private CapsuleCollider _capsuleCollider;
 
+    [SerializeField] private int lastId = -1;
+
     public UnityEvent OnTurning;
 
     void Awake()
@@ -30,6 +32,12 @@ public class TurningAbility : BaseAbility
     public override void LocalUseOfAbility()
     {
         int id = _propsToTurningManager.GetRandomPropsId();
+
+        while (id == lastId)
+        {
+            id = _propsToTurningManager.GetRandomPropsId();
+        }
+        lastId = id;
 
         Turning(id);
         OnTurning?.Invoke();
