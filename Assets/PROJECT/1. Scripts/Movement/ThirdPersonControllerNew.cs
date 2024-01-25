@@ -31,7 +31,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] private bool _canRotateCharacter = true;
     [SerializeField] private bool _canMove = true;
 
-
     public Transform target;
     public float distance = 5.0f;
     public float xSpeed = 120.0f;
