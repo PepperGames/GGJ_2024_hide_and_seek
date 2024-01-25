@@ -179,7 +179,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
     private void GroundedCheck()
     {
-        // set sphere position, with offset
         Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
             transform.position.z);
 
@@ -209,7 +208,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         if (isGrounded) Gizmos.color = transparentGreen;
         else Gizmos.color = transparentRed;
 
-        // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
         Gizmos.DrawSphere(
             new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z),
             groundedRadius);
@@ -252,7 +250,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
                 Quaternion characterRotation = Quaternion.LookRotation(directionToCharacter);
                 transform.rotation = Quaternion.Euler(0, characterRotation.eulerAngles.y, 0);
                 _mainCamera.transform.position = _startCameraPosition.position;
-                //_mainCamera.transform.rotation = _startCameraPosition.position;
                 break;
 
             case CameraMode.FreelyRotating:
