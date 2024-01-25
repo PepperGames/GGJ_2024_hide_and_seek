@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
+using Unity.Mathematics;
+using UnityEngine.Events;
 
 public class CopDashAbility : BaseAbility
 {
@@ -7,8 +10,14 @@ public class CopDashAbility : BaseAbility
     public float dashSpeed = 10f; // Скорость дэша
     public float dashDuration = 0.5f; // Продолжительность дэша в секундах
     public float dashRaycastLength = 1f; // Длина рейкаста
+    public GameObject dashHitBox;
+    public LayerMask forbiddenlayers;
+
+    public UnityEvent OnStartDash;
+    public UnityEvent OnEndDash;
 
     private Rigidbody playerRigidbody;
+    private GameObject spawnedHitBox;
     private bool isDashing;
 
     void Awake()
@@ -41,21 +50,25 @@ public class CopDashAbility : BaseAbility
     IEnumerator Dash()
     {
         isDashing = true;
+        OnStartDash.Invoke();
 
+        //spawnedHitBox = PhotonNetwork.Instantiate(dashHitBox.name, transform.position, quaternion.identity);
+        //spawnedHitBox.transform.parent = transform;
+        
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
             // Проверка на столкновение с помощью рейкаста
-            if (Physics.Raycast(transform.position, transform.forward, dashRaycastLength))
+            if (Physics.Raycast(transform.position, transform.forward, dashRaycastLength, forbiddenlayers))
             {
                 Debug.Log("Dash interrupted due to collision");
                 break; // Прерываем дэш при столкновении
             }
-
+            
             playerRigidbody.MovePosition(playerRigidbody.position + transform.forward * dashSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
-
+        OnEndDash.Invoke();
         isDashing = false;
     }
 
