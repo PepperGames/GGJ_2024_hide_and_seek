@@ -655,6 +655,7 @@ MonoBehaviour:
   _meshCollider: {fileID: 4899974266259722006}
   _skinnedMeshRenderer: {fileID: 1916116128345201148}
   _capsuleCollider: {fileID: 6869584291226208421}
+  lastId: -1
   OnTurning:
     m_PersistentCalls:
       m_Calls:
