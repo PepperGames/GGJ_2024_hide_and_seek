@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: StunAbility
-  cooldown: 2
+  cooldown: 9
   abilityDuration: 4
   OnAbilityLocalStart:
     m_PersistentCalls:
