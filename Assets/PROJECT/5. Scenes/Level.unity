@@ -20861,6 +20861,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BobCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6678590864413080077, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: remainingTime
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21273,6 +21278,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1286846659}
+    - target: {fileID: 6739885646667378744, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: remainingTime
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 7581007088840031329, guid: 86646ef9d0a332440a4c5ac8b6949fed,
         type: 3}
       propertyPath: cam
