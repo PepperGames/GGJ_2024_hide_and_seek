@@ -10,10 +10,13 @@ public class PlayerAnimator : MonoBehaviourPun
     public string jumpKey;
     public string landAnimationName;
     public string copPunchTriggerKey;
+    public string copPunchDashAnimClipName;
     public string copPunchDashKey;
     public string bobTurnKey;
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
+
+    
     
     public void AnimateIdle()
     {
@@ -42,7 +45,13 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateCopDash()
     {
-        AnimateTrigger(copPunchDashKey);
+        PlayAnimationClip(copPunchDashAnimClipName);
+        AnimateBol(copPunchDashKey, true);
+    }
+    
+    public void StopAnimateCopDash()
+    {
+        AnimateBol(copPunchDashKey, false);
     }
     
     public void AnimateBobTurnAbility()
