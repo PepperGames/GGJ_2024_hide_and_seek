@@ -11,11 +11,14 @@ public class PinAbility : BaseAbility
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private BobThirdPersonController _bobThirdPersonController;
 
-    [SerializeField] private bool _isPinned = false;
-
     [SerializeField] private List<GameObject> _whoTouch = new List<GameObject>();
 
-        private bool CanPin
+    private bool _isPinned = false;
+
+    [SerializeField] private AudioSource _pinAudioSource;
+    [SerializeField] private LayerMask _layersToNotPin;
+
+    private bool CanPin
     {
         get
         {
@@ -41,6 +44,7 @@ public class PinAbility : BaseAbility
         if (CanPin && !_isPinned)
         {
             LocalPin();
+            _pinAudioSource.Play();
         }
         else if (_isPinned)
         {
@@ -117,6 +121,10 @@ public class PinAbility : BaseAbility
     private void OnCollisionEnter(Collision collision)
     {
         GameObject targetObject = collision.collider.gameObject;
+
+        if (targetObject.layer == _layersToNotPin)
+            return;
+
         if (!_whoTouch.Contains(targetObject))
         {
             _whoTouch.Add(targetObject);
