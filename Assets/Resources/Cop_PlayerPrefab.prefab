@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 2652105433934195931}
   - component: {fileID: 1196189824364220141}
   - component: {fileID: 231223458081310596}
+  - component: {fileID: 692033187922971938}
   m_Layer: 14
   m_Name: Cop_PlayerPrefab
   m_TagString: Player
@@ -320,12 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40eb56301d80c3a4ba5f7438ffb3d07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
-  pitchRangeTop: 80
-  pitchRangeBot: -80
-  _cameraMode: 0
-  _mainCamera: {fileID: 1144387141785737046}
-  _startCameraPosition: {fileID: 413484588459814413}
   rigidBody: {fileID: 6293670319810772771}
   movementSpeed: 5
   jumpForce: 5
@@ -335,9 +330,12 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 1
-  _canRotateCamera: 1
-  _canRotateCharacter: 1
-  _canMove: 1
+  rotationSpeed: 5
+  pitchRangeTop: 80
+  pitchRangeBot: -80
+  _cameraMode: 0
+  _mainCamera: {fileID: 1144387141785737046}
+  _startCameraPosition: {fileID: 413484588459814413}
   target: {fileID: 0}
   distance: 5
   xSpeed: 120
@@ -776,6 +774,28 @@ MonoBehaviour:
   bobTurnKey: 
   objectsToDisable: []
   objectsToEnable: []
+--- !u!114 &692033187922971938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5572d54ac70ea0341a839715c7fdf29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thirdPersonController: {fileID: 5319338849317032543}
+  _baseAbilities:
+  - {fileID: 1196189824364220141}
+  - {fileID: 2652105433934195931}
+  OnStartStun:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndStun:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0
