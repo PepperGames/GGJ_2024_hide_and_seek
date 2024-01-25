@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e326c1c27f3bef4dbb9ccb943efd59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistanceToReact: 7
+  minDistanceToReact: 13
   indicatorDisableDelay: 2
 --- !u!114 &8278166370632368853
 MonoBehaviour:
