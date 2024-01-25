@@ -1,9 +1,17 @@
+using System;
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BaseAbility : MonoBehaviourPun
+public interface IAbility
+{
+    public float GetCurrentCooldown();
+    public bool GetCooldownBool();
+    public float GetMaxCooldown();
+}
+
+public class BaseAbility : MonoBehaviourPun, IAbility
 {
     public string abilityName = "BaseSpell";
     public float cooldown = 5f; // Время перезарядки в секундах
@@ -12,11 +20,28 @@ public class BaseAbility : MonoBehaviourPun
     public UnityEvent OnAbilityLocalEnd;
     private bool isCooldown = false;
 
+    private float currentCooldown = 0;
+
+    private void Start()
+    {
+        InitializeDisplay();
+    }
+
     void Update()
     {
         if (photonView.IsMine && !isCooldown)
         {
             CheckAbilityUse();
+        }
+
+        if (isCooldown)
+        {
+            currentCooldown += Time.deltaTime;
+            if (currentCooldown >= cooldown)
+            {
+                currentCooldown = 0;
+                isCooldown = false;
+            }
         }
     }
 
@@ -34,18 +59,11 @@ public class BaseAbility : MonoBehaviourPun
         // Отправка уведомления и активация действия у других игроков
         photonView.RPC("OtherPlayersAbilityUseRPC", RpcTarget.Others, PhotonNetwork.LocalPlayer.NickName, abilityName);
 
+        isCooldown = true;
         // Начало перезарядки
-        StartCoroutine(Cooldown());
         StartCoroutine(AbilityDuration());
     }
 
-    IEnumerator Cooldown()
-    {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldown);
-        isCooldown = false;
-    }
-    
     IEnumerator AbilityDuration()
     {
         OnAbilityLocalStart.Invoke();
@@ -70,4 +88,38 @@ public class BaseAbility : MonoBehaviourPun
         // Переопределите этот метод в производных классах для реализации действия способности, видимого другим игрокам
         Debug.Log("Player: " + playerName + " used spell: " + usedAbility + " on SERVER, (other players see this)");
     }
+
+    private void InitializeDisplay()
+    {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+        AbilitiesCooldownDisplay[] cooldownDisplays = FindObjectsOfType<AbilitiesCooldownDisplay>();
+        foreach (var display in cooldownDisplays)
+        {
+            if (abilityName.Equals(display.myAbilityName))
+            {
+                display.myAbility = this;
+                break;
+            }
+        }
+    }
+
+    public float GetCurrentCooldown()
+    {
+        return currentCooldown;
+    }
+
+    public bool GetCooldownBool()
+    {
+        return isCooldown;
+    }
+
+    public float GetMaxCooldown()
+    {
+        return cooldown;
+    }
+    
 }

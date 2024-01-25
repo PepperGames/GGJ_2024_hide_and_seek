@@ -21,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/PlayerSpawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/RoomPlayerListItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/TeamStatusUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/AbilitiesCooldownDisplay.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/PhotonObjectDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/RoomExitHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Utilities/SpectratorNameDisplay.cs" root0="FORCE_HIGHLIGHTING" />
@@ -94,6 +95,7 @@
       <workItem from="1705867227502" duration="1590000" />
       <workItem from="1706079565439" duration="6365000" />
       <workItem from="1706109638612" duration="9137000" />
+      <workItem from="1706175074900" duration="2850000" />
     </task>
     <servers />
   </component>
