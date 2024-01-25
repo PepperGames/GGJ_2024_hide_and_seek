@@ -11,7 +11,7 @@ public class StunAbility : BaseAbility
     [SerializeField] private AudioSource _stunAudioSource;
     private StunResponse[] _stunResponses;
 
-    public UnityEvent OnPin;
+    public UnityEvent OnUseStun;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class StunAbility : BaseAbility
     {
         LocalStun();
 
-        Debug.Log("Выполнено локальное действие: " + abilityName);
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + abilityName);
     }
 
     public void LocalStun()
@@ -49,7 +49,7 @@ public class StunAbility : BaseAbility
                 item.GetStan(abilityDuration);
             }
         }
-        OnPin?.Invoke();
+        OnUseStun?.Invoke();
     }
 
     [PunRPC]

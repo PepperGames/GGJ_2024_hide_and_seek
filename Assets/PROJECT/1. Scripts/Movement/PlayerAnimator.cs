@@ -12,7 +12,14 @@ public class PlayerAnimator : MonoBehaviourPun
     public string copPunchTriggerKey;
     public string copPunchDashAnimClipName;
     public string copPunchDashKey;
+    public string copStunAnimClipKey;
+    public string copStunBoolKey;
+    public string bobStunKey;
+    
+    
     public string bobTurnKey;
+    public ParticleSystem bobStunEffect;
+    public ParticleSystem bobTurnEffect;
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
 
@@ -49,6 +56,25 @@ public class PlayerAnimator : MonoBehaviourPun
         AnimateBol(copPunchDashKey, true);
     }
     
+    public void AnimateBobStun()
+    {
+        bobStunEffect.gameObject.SetActive(true);
+        bobStunEffect.Play(true);
+        photonView.RPC("ServerAnimateBobStun", RpcTarget.Others);
+    }
+    
+    public void AnimateCopStun()
+    {
+        PlayAnimationClip(copStunAnimClipKey);
+        AnimateBol(copStunBoolKey, true);
+    }
+    
+    public void StopAnimateCopStun()
+    {
+        PlayAnimationClip(copStunAnimClipKey);
+        AnimateBol(copStunBoolKey, false);
+    }
+    
     public void StopAnimateCopDash()
     {
         AnimateBol(copPunchDashKey, false);
@@ -56,6 +82,7 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateBobTurnAbility()
     {
+        bobTurnEffect.Play(true);
         photonView.RPC("ServerAnimateBobTurn", RpcTarget.Others);
     }
 
@@ -97,9 +124,17 @@ public class PlayerAnimator : MonoBehaviourPun
     }
     
     [PunRPC]
+    void ServerAnimateBobStun()
+    {
+        bobStunEffect.gameObject.SetActive(true);
+        bobStunEffect.Play(true);
+    }
+    
+    [PunRPC]
     void ServerAnimateBobTurn()
     {
-        anim.Play(bobTurnKey);
+        //anim.Play(bobTurnKey);
+        bobTurnEffect.Play(true);
         foreach (var ob in objectsToDisable)
         {
             ob.SetActive(false);

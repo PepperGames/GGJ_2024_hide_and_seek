@@ -771,7 +771,12 @@ MonoBehaviour:
   copPunchTriggerKey: punch
   copPunchDashAnimClipName: cop_dash
   copPunchDashKey: punchDash
+  copStunAnimClipKey: cop_Stun
+  copStunBoolKey: stuned
+  bobStunKey: 
   bobTurnKey: 
+  bobStunEffect: {fileID: 0}
+  bobTurnEffect: {fileID: 0}
   objectsToDisable: []
   objectsToEnable: []
 --- !u!114 &692033187922971938
@@ -792,10 +797,34 @@ MonoBehaviour:
   - {fileID: 2652105433934195931}
   OnStartStun:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 231223458081310596}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateCopStun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnEndStun:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 231223458081310596}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: StopAnimateCopStun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,6 +3350,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: punchDash
+  - Type: 4
+    SynchronizeType: 0
+    Name: stuned
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
