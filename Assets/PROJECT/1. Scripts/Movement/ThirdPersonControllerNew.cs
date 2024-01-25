@@ -31,7 +31,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] private bool _canRotateCharacter = true;
     [SerializeField] private bool _canMove = true;
 
-
     public Transform target;
     public float distance = 5.0f;
     public float xSpeed = 120.0f;
@@ -241,6 +240,27 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     public void DisableMove()
     {
         _canMove = false;
+    }
+
+    public void ChangeCameraMode(CameraMode cameraMode)
+    {
+        switch (cameraMode)
+        {
+            case CameraMode.Hard:
+                Vector3 directionToCharacter = transform.position - _mainCamera.transform.position;
+                directionToCharacter.y = 0;
+                Quaternion characterRotation = Quaternion.LookRotation(directionToCharacter);
+                transform.rotation = Quaternion.Euler(0, characterRotation.eulerAngles.y, 0);
+                _mainCamera.transform.position = _startCameraPosition.position;
+                //_mainCamera.transform.rotation = _startCameraPosition.position;
+                break;
+
+            case CameraMode.FreelyRotating:
+                break;
+            default:
+                break;
+        }
+        _cameraMode = cameraMode;
     }
 }
 

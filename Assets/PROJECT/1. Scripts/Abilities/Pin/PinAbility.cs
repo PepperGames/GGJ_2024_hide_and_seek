@@ -65,6 +65,7 @@ public class PinAbility : BaseAbility
         Quaternion rotation = transform.rotation;
 
         Pin(position, rotation);
+        _bobThirdPersonController.ChangeCameraMode(CameraMode.FreelyRotating);
 
         photonView.RPC("PinOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
         _isPinned = true;
@@ -76,6 +77,7 @@ public class PinAbility : BaseAbility
         transform.rotation = rotation;
 
         _bobThirdPersonController.DisableMove();
+        _bobThirdPersonController.DisableRotateCharacter();
         _rigidbody.isKinematic = true;
 
         _isPinned = true;
@@ -97,6 +99,7 @@ public class PinAbility : BaseAbility
         Vector3 position = transform.position;
         Quaternion rotation = transform.rotation;
 
+        _bobThirdPersonController.ChangeCameraMode(CameraMode.Hard);
         ChipOff(position, rotation);
 
         photonView.RPC("ChipOffOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
@@ -109,6 +112,7 @@ public class PinAbility : BaseAbility
         transform.rotation = rotation;
 
         _bobThirdPersonController.EnableMove();
+        _bobThirdPersonController.EnableRotateCharacter();
         _rigidbody.isKinematic = false;
 
         _isPinned = false;
