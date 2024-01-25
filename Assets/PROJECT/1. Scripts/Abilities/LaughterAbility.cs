@@ -94,7 +94,7 @@ public class LaughterAbility : BaseAbility
         }
     }
 
-    private void StopLaughter()
+    public void StopLaughter()
     {
         laughterMeter.isUsingLaughter = false;
         audioSource.loop = false;
@@ -133,8 +133,6 @@ public class LaughterAbility : BaseAbility
             ability.audioSource.loop = false; // Отключаем зацикливание
             ability.audioSource.Stop();
         }
-        
-        
     }
     
     LaughterAbility FindAbilityByActorNumber(int actorNumber)
