@@ -13,12 +13,13 @@ public class CopDashAbility : BaseAbility
     public GameObject dashHitBox;
     public LayerMask forbiddenlayers;
 
-    public UnityEvent OnStartDash;
-    public UnityEvent OnEndDash;
-
+    [SerializeField] private Transform _raycastTransform;
     private Rigidbody playerRigidbody;
     private GameObject spawnedHitBox;
     private bool isDashing;
+
+    public UnityEvent OnStartDash;
+    public UnityEvent OnEndDash;
 
     void Awake()
     {
@@ -59,7 +60,7 @@ public class CopDashAbility : BaseAbility
         while (Time.time < startTime + dashDuration)
         {
             // Проверка на столкновение с помощью рейкаста
-            if (Physics.Raycast(transform.position, transform.forward, dashRaycastLength, forbiddenlayers))
+            if (Physics.Raycast(_raycastTransform.position, transform.forward, dashRaycastLength, forbiddenlayers))
             {
                 Debug.Log("Dash interrupted due to collision");
                 break; // Прерываем дэш при столкновении

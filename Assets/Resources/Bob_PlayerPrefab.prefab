@@ -761,17 +761,17 @@ MonoBehaviour:
   dashKeyCode: 304
   dashSpeed: 10
   dashDuration: 0.5
+  _raycastTransform: {fileID: 2680241401543040689}
   dashRaycastLength: 1
   forbiddenlayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 55
   OnStartDash:
     m_PersistentCalls:
       m_Calls: []
   OnEndDash:
     m_PersistentCalls:
       m_Calls: []
-  _raycastTransform: {fileID: 2680241401543040689}
 --- !u!114 &8316879918416177442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,7 +971,7 @@ Transform:
   m_GameObject: {fileID: 7028077922809145598}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2505,6 +2505,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130256896780846924, guid: d9ec729e14ee91a4d9ae602fa37891b3,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456075068062357905, guid: d9ec729e14ee91a4d9ae602fa37891b3,
         type: 3}

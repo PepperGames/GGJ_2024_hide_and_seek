@@ -5,13 +5,12 @@ using UnityEngine.Events;
 public class DashBobsAbility : BaseAbility
 {
     public KeyCode dashKeyCode = KeyCode.LeftShift;
-    //public float dashForce = 500f; // Сила толчка
 
-    public float dashSpeed = 10f; // Скорость дэша
-    public float dashDuration = 0.5f; // Продолжительность дэша в секундах
+    public float dashSpeed = 10f; 
+    public float dashDuration = 0.5f; 
 
     [SerializeField] private Transform _raycastTransform;
-    public float dashRaycastLength = 1f; // Длина рейкаста
+    public float dashRaycastLength = 1f;
     public LayerMask forbiddenlayers;
 
     private Rigidbody playerRigidbody;
