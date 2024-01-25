@@ -247,11 +247,12 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         switch (cameraMode)
         {
             case CameraMode.Hard:
-                Vector3 directionToCamera = transform.position - _mainCamera.transform.position;
-                directionToCamera.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(directionToCamera);
-                transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+                Vector3 directionToCharacter = transform.position - _mainCamera.transform.position;
+                directionToCharacter.y = 0;
+                Quaternion characterRotation = Quaternion.LookRotation(directionToCharacter);
+                transform.rotation = Quaternion.Euler(0, characterRotation.eulerAngles.y, 0);
                 _mainCamera.transform.position = _startCameraPosition.position;
+                //_mainCamera.transform.rotation = _startCameraPosition.position;
                 break;
 
             case CameraMode.FreelyRotating:
