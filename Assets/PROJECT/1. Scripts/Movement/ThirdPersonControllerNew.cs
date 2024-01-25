@@ -242,6 +242,26 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     {
         _canMove = false;
     }
+
+    public void ChangeCameraMode(CameraMode cameraMode)
+    {
+        switch (cameraMode)
+        {
+            case CameraMode.Hard:
+                Vector3 directionToCamera = transform.position - _mainCamera.transform.position;
+                directionToCamera.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(directionToCamera);
+                transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+                _mainCamera.transform.position = _startCameraPosition.position;
+                break;
+
+            case CameraMode.FreelyRotating:
+                break;
+            default:
+                break;
+        }
+        _cameraMode = cameraMode;
+    }
 }
 
 public enum CameraMode
