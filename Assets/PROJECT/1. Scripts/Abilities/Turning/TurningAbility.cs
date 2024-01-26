@@ -13,7 +13,9 @@ public class TurningAbility : BaseAbility
     [SerializeField] private CapsuleCollider _capsuleCollider;
     [SerializeField] private AudioSource _turningAudioSource;
 
-    [SerializeField] private int lastId = -1;
+    [SerializeField] private ThirdPersonControllerNew _thirdPersonController;
+
+    private int lastId = -1;
 
     public UnityEvent OnTurning;
 
@@ -67,6 +69,8 @@ public class TurningAbility : BaseAbility
 
         _meshCollider.sharedMesh = propsToTurningSO.Mesh;
         _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
+
+        _thirdPersonController.Distance = propsToTurningSO.CameraDistance;
 
         _turningAudioSource.Play();
     }

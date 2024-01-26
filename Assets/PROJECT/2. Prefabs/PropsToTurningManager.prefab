@@ -46,10 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _props:
   - {fileID: 11400000, guid: fe50575d0fd012940b9f08cef7283e95, type: 2}
-  - {fileID: 11400000, guid: 00a39c07991664b4096b960ae08092ea, type: 2}
   - {fileID: 11400000, guid: bc6e270531ec0fa4eb74fffbe7665357, type: 2}
-  - {fileID: 11400000, guid: c357c9d8e975ad44a843f93457450a78, type: 2}
-  - {fileID: 11400000, guid: 956dadd129c32c14dbfe52373cb78f75, type: 2}
   - {fileID: 11400000, guid: e061d9097737544449eb62749a4f82a7, type: 2}
   - {fileID: 11400000, guid: 8661adb7014b284468c18b9ed3f66008, type: 2}
   - {fileID: 11400000, guid: f52e6d5ffffb7c74184808c0f4463457, type: 2}

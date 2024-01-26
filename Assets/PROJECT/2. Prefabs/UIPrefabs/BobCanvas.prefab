@@ -3716,7 +3716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamStatusUI: {fileID: 2748352946417334648}
   timerText: {fileID: 7081899267600008074}
-  remainingTime: 150
+  _settingsSO: {fileID: 11400000, guid: f1831106449c97440a645b1824ed3943, type: 2}
 --- !u!114 &1208094033843509894
 MonoBehaviour:
   m_ObjectHideFlags: 0
