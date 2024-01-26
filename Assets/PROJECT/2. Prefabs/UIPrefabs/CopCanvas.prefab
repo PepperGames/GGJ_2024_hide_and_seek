@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -771,6 +771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6672077838729602398}
   - component: {fileID: 2382896946161360986}
+  - component: {fileID: 2552222704814140835}
   m_Layer: 0
   m_Name: Ability_Punch
   m_TagString: Untagged
@@ -843,6 +844,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
+--- !u!114 &2552222704814140835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110350121940072356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a48bf0399344d488637e27f85b5ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 530024759089454559}
+  _blockedColorr: {r: 1, g: 1, b: 1, a: 0.29411766}
+  baseAbility: {fileID: 0}
 --- !u!1 &2377420414345331576
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +869,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8893625021656328849}
   - component: {fileID: 7471237709037367186}
+  - component: {fileID: 3946101707832857730}
   m_Layer: 0
   m_Name: Ability_Dash
   m_TagString: Untagged
@@ -926,6 +943,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 0
+--- !u!114 &3946101707832857730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2377420414345331576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a48bf0399344d488637e27f85b5ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 3922011374810068202}
+  _blockedColorr: {r: 1, g: 1, b: 1, a: 0.29411766}
+  baseAbility: {fileID: 0}
 --- !u!1 &2531601022305339135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1523,7 +1555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.84313726}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
