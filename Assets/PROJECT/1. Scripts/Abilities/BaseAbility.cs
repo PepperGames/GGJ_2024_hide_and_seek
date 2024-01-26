@@ -108,7 +108,11 @@ public class BaseAbility : MonoBehaviourPun, IAbility
             if (abilityName.Equals(display.myAbilityName))
             {
                 display.myAbility = this;
-                display.gameObject.GetComponent<AbilityBlockDisplay>().baseAbility = this;
+                AbilityBlockDisplay abilityBlockDisplay = display.gameObject.GetComponent<AbilityBlockDisplay>();
+                if (abilityBlockDisplay != null)
+                {
+                    abilityBlockDisplay.baseAbility = this;
+                }
                 break;
             }
         }
