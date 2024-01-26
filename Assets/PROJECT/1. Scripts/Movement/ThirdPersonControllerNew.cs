@@ -28,6 +28,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] private float mouseX;
     [SerializeField] private float mouseY;
     public float distance = 5.0f;
+    public Transform target;
 
     [Header("Camera Hard")]
     [SerializeField] private float rotationSpeed = 5f;
@@ -42,7 +43,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] protected Transform _startCameraPosition;
 
     [Header("Camera FreelyRotating")]
-    public Transform target;
     [SerializeField] private float xSpeed = 120.0f;
     [SerializeField] private float ySpeed = 120.0f;
 
@@ -118,7 +118,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Vector3 direction = _startCameraPosition.transform.position - transform.position;
         direction = direction.normalized;
-        Vector3 newPosition = target.position + direction * distance;
+        Vector3 newPosition = transform.position + direction * distance;
 
         _mainCamera.transform.position = newPosition;
     }

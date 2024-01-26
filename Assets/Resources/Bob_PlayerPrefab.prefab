@@ -314,6 +314,7 @@ Transform:
   - {fileID: 1569750674312985225}
   - {fileID: 5656442339978472061}
   - {fileID: 1004821165700147571}
+  - {fileID: 411521985828027274}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-5002821627191121955
@@ -339,14 +340,14 @@ MonoBehaviour:
     m_Bits: 1
   mouseX: 0
   mouseY: 0
-  distance: 5
+  distance: 4
+  target: {fileID: 411521985828027274}
   rotationSpeed: 5
   pitchRangeTop: 50
   pitchRangeBot: -45
   _cameraMode: 0
   _mainCamera: {fileID: 5194695486177420615}
   _startCameraPosition: {fileID: 1767192580694456045}
-  target: {fileID: 565894529610270420}
   xSpeed: 48
   ySpeed: 48
   yMaxLimit: 85
@@ -1108,12 +1109,43 @@ Transform:
   m_GameObject: {fileID: 7476136812194673944}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19034413, y: -0.068474844, z: 0.013310157, w: 0.97923607}
-  m_LocalPosition: {x: 1.18, y: 2.79, z: -2.19}
+  m_LocalPosition: {x: 1.36, y: 1.88, z: -2.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2811724584671076097}
   m_LocalEulerAnglesHint: {x: 22, y: -8, z: 0}
+--- !u!1 &8683946135847580104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411521985828027274}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411521985828027274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8683946135847580104}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2811724584671076097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9007244679651382595
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,12 +3662,12 @@ PrefabInstance:
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.18
+      value: 1.36
       objectReference: {fileID: 0}
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.79
+      value: 1.8800001
       objectReference: {fileID: 0}
     - target: {fileID: 8542695903516535524, guid: 298cc572bfcebf045b252613b8883485,
         type: 3}
