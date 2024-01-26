@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2811724584671076097}
+  - component: {fileID: -5002821627191121955}
   - component: {fileID: 4899974266259722006}
   - component: {fileID: 8169780711870194636}
   - component: {fileID: 6869584291226208421}
@@ -276,7 +277,6 @@ GameObject:
   - component: {fileID: 3685828444586502812}
   - component: {fileID: 975447698259729727}
   - component: {fileID: 1734278868276519339}
-  - component: {fileID: -5002821627191121955}
   - component: {fileID: 3119504746600372739}
   - component: {fileID: 8316879918416177442}
   - component: {fileID: 527031817023213338}
@@ -316,6 +316,122 @@ Transform:
   - {fileID: 1004821165700147571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5002821627191121955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e440fecca5b42e46abcc2f508184c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 8169780711870194636}
+  movementSpeed: 5
+  jumpForce: 5
+  canDoubleJump: 0
+  groundedRadius: 0.25
+  groundedOffset: 0.05
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  mouseX: 0
+  mouseY: 0
+  rotationSpeed: 5
+  pitchRangeTop: 50
+  pitchRangeBot: -45
+  _cameraMode: 0
+  _mainCamera: {fileID: 5194695486177420615}
+  _startCameraPosition: {fileID: 1767192580694456045}
+  target: {fileID: 565894529610270420}
+  distance: 5
+  xSpeed: 80
+  ySpeed: 80
+  yMinLimit: -45
+  yMaxLimit: 85
+  distanceMin: 0.5
+  distanceMax: 15
+  _offset: {x: 0, y: 0, z: 0}
+  OnIdle:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 527031817023213338}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateIdle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnMove:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 527031817023213338}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateRun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 527031817023213338}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDoubleJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 527031817023213338}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateJump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLanding:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 527031817023213338}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: AnimateLand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!64 &4899974266259722006
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -674,120 +790,6 @@ MonoBehaviour:
       - m_Target: {fileID: 975447698259729727}
         m_TargetAssemblyTypeName: LaughterAbility, Assembly-CSharp
         m_MethodName: StopLaughter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &-5002821627191121955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263300691575067562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e440fecca5b42e46abcc2f508184c02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 8169780711870194636}
-  movementSpeed: 5
-  jumpForce: 5
-  canDoubleJump: 0
-  groundedRadius: 0.25
-  groundedOffset: 0.05
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  rotationSpeed: 5
-  pitchRangeTop: 50
-  pitchRangeBot: -45
-  _cameraMode: 0
-  _mainCamera: {fileID: 5194695486177420615}
-  _startCameraPosition: {fileID: 1767192580694456045}
-  target: {fileID: 565894529610270420}
-  distance: 5
-  xSpeed: 80
-  ySpeed: 80
-  yMinLimit: -20
-  yMaxLimit: 80
-  distanceMin: 0.5
-  distanceMax: 15
-  _offset: {x: 0, y: 0, z: 0}
-  OnIdle:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 527031817023213338}
-        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
-        m_MethodName: AnimateIdle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnMove:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 527031817023213338}
-        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
-        m_MethodName: AnimateRun
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnJump:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 527031817023213338}
-        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
-        m_MethodName: AnimateJump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDoubleJump:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNotGrounded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 527031817023213338}
-        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
-        m_MethodName: AnimateJump
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnLanding:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 527031817023213338}
-        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
-        m_MethodName: AnimateLand
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -24,16 +24,16 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     protected bool isGrounded = false;
     public LayerMask groundLayers;
 
-    [Header("Camera Hard")]
+    [Header("Camera")]
+    [SerializeField] private float mouseX;
+    [SerializeField] private float mouseY;
 
+    [Header("Camera Hard")]
     public float rotationSpeed = 5f;
 
     public float pitchRangeTop = 80f;
     public float pitchRangeBot = -80f;
     protected float pitch = 0f;
-
-    private float mouseX;
-    private float mouseY;
 
     public CameraMode _cameraMode = CameraMode.Hard;
 
@@ -111,8 +111,49 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
+        distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
 
-        _mainCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        Quaternion rotation = Quaternion.Euler(pitch, 0f, 0f);
+        _mainCamera.transform.localRotation = rotation;
+
+
+
+        ////////////////////////////////////////////////
+        //Transform playerTransform = target;
+        //Transform mainCameraTransform = _mainCamera.transform;
+
+        //Vector3 playerPosition = playerTransform.position;
+
+        //// Задаем направление от камеры к целевой точке
+        //Vector3 direction = mainCameraTransform.localPosition - playerPosition;
+
+        //// Нормализуем направление и умножаем на заданное расстояние
+        //Vector3 targetPosition = playerPosition + direction.normalized * distance;
+
+        //// Перемещаем камеру моментально
+        //mainCameraTransform.position = targetPosition;
+
+        //////////////////////////////
+        //Vector3 direction = _mainCamera.transform.localPosition - target.transform.localPosition;
+        //Debug.DrawRay(target.transform.position, direction, Color.green);
+
+        //// Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        //Vector3 localPosition = direction * -distance + target.localPosition + _offset;
+        //_mainCamera.transform.localPosition = localPosition;
+        ////////////////////////////
+        //= Quaternion.Euler(mouseX, mouseY, 0);
+        //     Debug.Log(rotation);
+
+        //     RaycastHit hit;
+        //     if (Physics.Linecast(target.position, _mainCamera.transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
+        //     {
+        //         distance -= hit.distance;
+        //     }
+        //Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        //Vector3 position = rotation * negDistance;
+
+        //_mainCamera.transform.localRotation = rotation;
+        //_mainCamera.transform.localPosition = position;
     }
 
     public void RotateCameraAroundCharacter()
@@ -126,11 +167,11 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
 
-        RaycastHit hit;
-        if (Physics.Linecast(target.position, transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
-        {
-            distance -= hit.distance;
-        }
+        //RaycastHit hit;
+        //if (Physics.Linecast(target.position, transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
+        //{
+        //    distance -= hit.distance;
+        //}
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         Vector3 position = rotation * negDistance + target.position + _offset;
 
@@ -264,6 +305,8 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
                 break;
 
             case CameraMode.FreelyRotating:
+                mouseX = transform.eulerAngles.y;
+
                 break;
             default:
                 break;
