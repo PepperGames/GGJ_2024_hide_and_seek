@@ -72,7 +72,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (photonView.IsMine)
         {
