@@ -6,12 +6,14 @@ public class GameTimerMaster : MonoBehaviourPunCallbacks
 {
     public TeamStatusUI teamStatusUI;
     public TMP_Text timerText; // Текстовое поле для отображения таймера
-    public float remainingTime = 150f; // 2 минуты и 30 секунд
+    private float remainingTime = 150f; // 2 минуты и 30 секунд
+    public SettingsSO _settingsSO;
     
     private bool timerIsRunning = false;
 
     private void Start()
     {
+        remainingTime = _settingsSO.RemainingTime;
         StartTimer();
     }
 
