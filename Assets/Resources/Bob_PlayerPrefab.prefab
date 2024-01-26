@@ -339,6 +339,7 @@ MonoBehaviour:
     m_Bits: 1
   mouseX: 0
   mouseY: 0
+  distance: 5
   rotationSpeed: 5
   pitchRangeTop: 50
   pitchRangeBot: -45
@@ -346,11 +347,10 @@ MonoBehaviour:
   _mainCamera: {fileID: 5194695486177420615}
   _startCameraPosition: {fileID: 1767192580694456045}
   target: {fileID: 565894529610270420}
-  distance: 5
-  xSpeed: 80
-  ySpeed: 80
-  yMinLimit: -45
+  xSpeed: 48
+  ySpeed: 48
   yMaxLimit: 85
+  yMinLimit: -45
   distanceMin: 0.5
   distanceMax: 15
   _offset: {x: 0, y: 0, z: 0}

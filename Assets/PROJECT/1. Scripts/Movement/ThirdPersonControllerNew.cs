@@ -27,12 +27,13 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [Header("Camera")]
     [SerializeField] private float mouseX;
     [SerializeField] private float mouseY;
+    public float distance = 5.0f;
 
     [Header("Camera Hard")]
-    public float rotationSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 5f;
 
-    public float pitchRangeTop = 80f;
-    public float pitchRangeBot = -80f;
+    [SerializeField] private float pitchRangeTop = 80f;
+    [SerializeField] private float pitchRangeBot = -80f;
     protected float pitch = 0f;
 
     public CameraMode _cameraMode = CameraMode.Hard;
@@ -42,17 +43,16 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
     [Header("Camera FreelyRotating")]
     public Transform target;
-    public float distance = 5.0f;
-    public float xSpeed = 120.0f;
-    public float ySpeed = 120.0f;
+    [SerializeField] private float xSpeed = 120.0f;
+    [SerializeField] private float ySpeed = 120.0f;
 
-    public float yMinLimit = -20f;
-    public float yMaxLimit = 80f;
+    [SerializeField] private float yMaxLimit = 80f;
+    [SerializeField] private float yMinLimit = -20f;
 
-    public float distanceMin = .5f;
-    public float distanceMax = 15f;
+    [SerializeField] private float distanceMin = .5f;
+    [SerializeField] private float distanceMax = 15f;
 
-    public Vector3 _offset;
+    [SerializeField] private Vector3 _offset;
 
     [Header("UnityEvents")]
     public UnityEvent OnIdle;
@@ -72,7 +72,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (photonView.IsMine)
         {
@@ -115,28 +115,12 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Quaternion rotation = Quaternion.Euler(pitch, 0f, 0f);
         _mainCamera.transform.localRotation = rotation;
-        /////////////////
-        //Vector3 direction = _mainCamera.transform.position - transform.position;
-        //Debug.Log("global " + direction);
-        //Debug.DrawRay(transform.position, direction, Color.red);
 
-        //direction = direction.normalized;
-        //Debug.Log("normalized " + direction.normalized);
+        Vector3 direction = _startCameraPosition.transform.position - transform.position;
+        direction = direction.normalized;
+        Vector3 newPosition = target.position + direction * distance;
 
-        //Vector3 np = target.position + direction * -distance;
-
-        //Debug.DrawRay(np, Vector3.down, Color.green);
-
-        //_mainCamera.transform.position = np;
-        //_startCameraPosition.transform.position = np;
-
-        ////--------------------------
-        //Vector3 parentPosition = transform.localPosition;
-        //Transform childTransform = _mainCamera.transform;
-        //Vector3 childPosition = childTransform.localPosition;
-        //Vector3 direction = childPosition - parentPosition;
-        //Debug.DrawRay(parentPosition, direction, Color.red);
-        //////////////////////////////////////////////////
+        _mainCamera.transform.position = newPosition;
     }
 
     public void RotateCameraAroundCharacter()
@@ -285,7 +269,11 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
             case CameraMode.FreelyRotating:
                 mouseX = transform.eulerAngles.y;
                 mouseY = _mainCamera.transform.eulerAngles.x;
-
+                if (mouseY < 0)
+                {
+                    mouseY = -mouseY;
+                }
+                mouseY = Mathf.Clamp(mouseY, yMinLimit, yMaxLimit);
                 break;
             default:
                 break;
