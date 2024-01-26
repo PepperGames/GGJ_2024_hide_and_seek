@@ -26,7 +26,7 @@ public class TurningAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetKeyDown(_keyCode))
+        if (Input.GetKeyDown(_keyCode) && canUse)
         {
             ActivateAbility();
         }

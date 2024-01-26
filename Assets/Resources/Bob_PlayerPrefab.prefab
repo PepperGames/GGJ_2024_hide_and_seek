@@ -661,6 +661,12 @@ MonoBehaviour:
   OnAbilityLocalEnd:
     m_PersistentCalls:
       m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
+    m_PersistentCalls:
+      m_Calls: []
   laughterSound: {fileID: 8300000, guid: 44aee40475e0b0d4bb7f88da384eba05, type: 3}
   audioSource: {fileID: 6223158903590736176}
 --- !u!114 &1734278868276519339
@@ -821,6 +827,12 @@ MonoBehaviour:
   OnAbilityLocalEnd:
     m_PersistentCalls:
       m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
+    m_PersistentCalls:
+      m_Calls: []
   dashKeyCode: 304
   dashSpeed: 10
   dashDuration: 0.5
@@ -854,6 +866,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
     m_PersistentCalls:
       m_Calls: []
   _keyCode: 304
@@ -1000,6 +1018,12 @@ MonoBehaviour:
   OnAbilityLocalEnd:
     m_PersistentCalls:
       m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
+    m_PersistentCalls:
+      m_Calls: []
   _keyCode: 323
   _rigidbody: {fileID: 8169780711870194636}
   _bobThirdPersonController: {fileID: -5002821627191121955}
@@ -1008,6 +1032,9 @@ MonoBehaviour:
   _layersToNotPin:
     serializedVersion: 2
     m_Bits: 16384
+  _abilitiesThatWillBeBlocked:
+  - {fileID: 8316879918416177442}
+  - {fileID: 3119504746600372739}
   OnPin:
     m_PersistentCalls:
       m_Calls: []
@@ -1033,6 +1060,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
     m_PersistentCalls:
       m_Calls: []
   _keyCode: 101

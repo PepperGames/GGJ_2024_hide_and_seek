@@ -6,8 +6,8 @@ public class DashBobsAbility : BaseAbility
 {
     public KeyCode dashKeyCode = KeyCode.LeftShift;
 
-    public float dashSpeed = 10f; 
-    public float dashDuration = 0.5f; 
+    public float dashSpeed = 10f;
+    public float dashDuration = 0.5f;
 
     [SerializeField] private Transform _raycastTransform;
     public float dashRaycastLength = 1f;
@@ -25,7 +25,7 @@ public class DashBobsAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetKeyDown(dashKeyCode))
+        if (Input.GetKeyDown(dashKeyCode) && canUse)
         {
             ActivateAbility();
         }

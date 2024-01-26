@@ -16,11 +16,17 @@ public class BaseAbility : MonoBehaviourPun, IAbility
     public string abilityName = "BaseSpell";
     public float cooldown = 5f; // Время перезарядки в секундах
     public float abilityDuration = 1f;
-    public UnityEvent OnAbilityLocalStart;
-    public UnityEvent OnAbilityLocalEnd;
+
     private bool isCooldown = false;
+    protected bool canUse = true; //флажек который блочит использование по нажатию клавиши
 
     private float currentCooldown = 0;
+
+    public UnityEvent OnAbilityLocalStart;
+    public UnityEvent OnAbilityLocalEnd;
+
+    public UnityEvent OnBlockUse;
+    public UnityEvent OnUnblockUse;
 
     private void Start()
     {
@@ -102,6 +108,11 @@ public class BaseAbility : MonoBehaviourPun, IAbility
             if (abilityName.Equals(display.myAbilityName))
             {
                 display.myAbility = this;
+                AbilityBlockDisplay abilityBlockDisplay = display.gameObject.GetComponent<AbilityBlockDisplay>();
+                if (abilityBlockDisplay != null)
+                {
+                    abilityBlockDisplay.baseAbility = this;
+                }
                 break;
             }
         }
@@ -121,5 +132,16 @@ public class BaseAbility : MonoBehaviourPun, IAbility
     {
         return cooldown;
     }
-    
+
+    public void BlockUse()
+    {
+        canUse = false;
+        OnBlockUse?.Invoke();
+    }
+
+    public void UnblockUse()
+    {
+        canUse = true;
+        OnUnblockUse?.Invoke();
+    }
 }
