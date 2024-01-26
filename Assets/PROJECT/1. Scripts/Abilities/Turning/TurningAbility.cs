@@ -36,9 +36,10 @@ public class TurningAbility : BaseAbility
     {
         int id = _propsToTurningManager.GetRandomPropsId();
 
-        while (id == lastId)
+        for (int i = 0; i < 3 || id != lastId; i++)
         {
             id = _propsToTurningManager.GetRandomPropsId();
+
         }
         lastId = id;
 
