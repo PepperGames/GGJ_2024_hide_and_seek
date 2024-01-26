@@ -28,7 +28,10 @@ public class TurningAbility : BaseAbility
     {
         if (Input.GetKeyDown(_keyCode))
         {
-            ActivateAbility();
+            if (canUse)
+            {
+                ActivateAbility();
+            }
         }
     }
 

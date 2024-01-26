@@ -18,6 +18,8 @@ public class PinAbility : BaseAbility
     [SerializeField] private AudioSource _pinAudioSource;
     [SerializeField] private LayerMask _layersToNotPin;
 
+    [SerializeField] private BaseAbility[] _abilitiesThatWillBeBlocked;
+
     private bool CanPin
     {
         get
@@ -62,6 +64,11 @@ public class PinAbility : BaseAbility
         Pin(position, rotation);
         _bobThirdPersonController.ChangeCameraMode(CameraMode.FreelyRotating);
 
+        foreach (var item in _abilitiesThatWillBeBlocked)
+        {
+            item.BlockUse();
+        }
+
         photonView.RPC("PinOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber, position, rotation);
         _isPinned = true;
     }
@@ -93,6 +100,11 @@ public class PinAbility : BaseAbility
     {
         _bobThirdPersonController.ChangeCameraMode(CameraMode.Hard);
         ChipOff();
+
+        foreach (var item in _abilitiesThatWillBeBlocked)
+        {
+            item.UnblockUse();
+        }
 
         photonView.RPC("ChipOffOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
         _isPinned = false;

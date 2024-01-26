@@ -27,7 +27,10 @@ public class DashBobsAbility : BaseAbility
     {
         if (Input.GetKeyDown(dashKeyCode))
         {
-            ActivateAbility();
+            if (canUse)
+            {
+                ActivateAbility();
+            }
         }
     }
 
