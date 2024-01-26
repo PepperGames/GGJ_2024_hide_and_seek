@@ -56,13 +56,21 @@ public class LaughterAbility : BaseAbility
         }
     }
 
-    public void HandleUncontrollableLaughter()
+    private void HandleUncontrollableLaughter()
     {
+        // Проверяем, достигла ли шкала смеха нуля
+        if (laughterMeter.currentLaughter <= 0)
+        {
+            StopLaughter();
+            return; // Выходим из метода, так как шкала смеха пуста
+        }
+
         if (!audioSource.isPlaying)
         {
             StartLaughter();
         }
     }
+
 
     private void StartLaughter()
     {
