@@ -15,3 +15,4 @@ MonoBehaviour:
   _mesh: {fileID: 4300000, guid: 0f2d3bff67e486e40bdd967af726a86e, type: 3}
   _chance: 50
   _cameraDistance: 5
+  _laughtMeterHeight: 2

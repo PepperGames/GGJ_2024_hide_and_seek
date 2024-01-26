@@ -31,7 +31,7 @@ public class PropsToTurningManager : MonoBehaviour
         }
 
         Debug.LogError("Didn't give props id");
-        return -1;
+        return GetRandomPropsId();
     }
 
     public PropsToTurningScriptableObject GetPropsToTurningSOById(int id)

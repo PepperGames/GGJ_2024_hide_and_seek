@@ -881,6 +881,7 @@ MonoBehaviour:
   _capsuleCollider: {fileID: 6869584291226208421}
   _turningAudioSource: {fileID: 6739988160969172666}
   _thirdPersonController: {fileID: -5002821627191121955}
+  _heightController: {fileID: 4878076286064067731}
   OnTurning:
     m_PersistentCalls:
       m_Calls:
@@ -3076,6 +3077,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1639479469982004818}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4878076286064067731 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6157249092008915649, guid: d9ec729e14ee91a4d9ae602fa37891b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1639479469982004818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6734929531014639555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8159eaea0e9ab0d4d8351807e68bc0f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6734929531014639555 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5456075068062357905, guid: d9ec729e14ee91a4d9ae602fa37891b3,

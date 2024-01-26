@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: 4300000, guid: 63a1961903c909f45a3883379ad3b0fe, type: 3}
   _chance: 50
+  _cameraDistance: 4
+  _laughtMeterHeight: 1.8
