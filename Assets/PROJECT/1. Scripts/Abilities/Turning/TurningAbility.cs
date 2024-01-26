@@ -14,6 +14,7 @@ public class TurningAbility : BaseAbility
     [SerializeField] private AudioSource _turningAudioSource;
 
     [SerializeField] private ThirdPersonControllerNew _thirdPersonController;
+    [SerializeField] private HeightController _heightController;
 
     private int lastId = -1;
 
@@ -72,6 +73,7 @@ public class TurningAbility : BaseAbility
         _skinnedMeshRenderer.sharedMesh = propsToTurningSO.Mesh;
 
         _thirdPersonController.Distance = propsToTurningSO.CameraDistance;
+        _heightController.SetHeight(propsToTurningSO.LaughtMeterHeight);
 
         _turningAudioSource.Play();
     }
