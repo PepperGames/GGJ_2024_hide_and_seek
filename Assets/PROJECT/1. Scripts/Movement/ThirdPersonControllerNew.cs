@@ -62,10 +62,10 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
         }
         set
         {
-            if (value > distance)
-            {
-                distance = Mathf.Clamp(value, distanceMin, distanceMax);
-            }
+            //if (value > distance)
+            //{
+            distance = Mathf.Clamp(value, distanceMin, distanceMax);
+            //}
         }
     }
 
@@ -127,7 +127,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
-        distance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
+        //distance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
 
         Quaternion rotation = Quaternion.Euler(pitch, 0f, 0f);
         _mainCamera.transform.localRotation = rotation;
@@ -141,9 +141,9 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
     public void RotateCameraAroundCharacter()
     {
-        distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
+        //distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
 
-        mouseX += Input.GetAxis("Mouse X") * xSpeed * distance * 0.02f;
+        mouseX += Input.GetAxis("Mouse X") * xSpeed * Distance * 0.02f;
         mouseY -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
         mouseY = Mathf.Clamp(mouseY, yMinLimit, yMaxLimit);
