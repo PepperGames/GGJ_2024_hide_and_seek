@@ -295,4 +295,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //UpdatePlayerList();
     }
+    
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        base.OnMasterClientSwitched(newMasterClient);
+        Debug.Log("New master client is now: " + newMasterClient.NickName);
+
+        // Вызовите вашу проверку здесь
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        {
+            OnIRoomOwner.Invoke();
+        }
+    }
+
 }
