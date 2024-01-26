@@ -38,7 +38,7 @@ public class LaughterAbility : BaseAbility
         }
         else if (Input.GetMouseButton(1))
         {
-            if (laughterMeter.currentLaughter <= laughterMeter.laughterIncreaseRate)
+            if (laughterMeter.currentLaughter <= 0) //laughterMeter.laughterIncreaseRate
             {
                 StopLaughter();
                 return; // Выходим из метода, если шкала смеха опустела
@@ -56,7 +56,7 @@ public class LaughterAbility : BaseAbility
         }
     }
 
-    private void HandleUncontrollableLaughter()
+    public void HandleUncontrollableLaughter()
     {
         if (!audioSource.isPlaying)
         {
