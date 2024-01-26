@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b248442e723c52a4abd41e45b1349903, type: 3}
-  m_Name: PropsToTurning 7
+  m_Name: cow
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 4300000, guid: cfa2065df5e7e23408429e19a6592005, type: 3}
+  _mesh: {fileID: -7885169902697446279, guid: 68aab17ee80e85643bcb8f6961934077, type: 3}
   _chance: 50
+  _cameraDistance: 5

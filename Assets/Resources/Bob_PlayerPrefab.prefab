@@ -862,6 +862,7 @@ MonoBehaviour:
   _skinnedMeshRenderer: {fileID: 1916116128345201148}
   _capsuleCollider: {fileID: 6869584291226208421}
   _turningAudioSource: {fileID: 6739988160969172666}
+  _thirdPersonController: {fileID: -5002821627191121955}
   lastId: -1
   OnTurning:
     m_PersistentCalls:

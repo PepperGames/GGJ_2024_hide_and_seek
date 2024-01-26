@@ -27,7 +27,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [Header("Camera")]
     [SerializeField] private float mouseX;
     [SerializeField] private float mouseY;
-    public float distance = 5.0f;
+    [SerializeField] private float distance;
     public Transform target;
 
     [Header("Camera Hard")]
@@ -53,6 +53,22 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
     [SerializeField] private float distanceMax = 15f;
 
     [SerializeField] private Vector3 _offset;
+
+    public float Distance
+    {
+        get
+        {
+            return distance;
+        }
+        set
+        {
+            if (value > distance)
+            {
+                distance = Mathf.Clamp(value, distanceMin, distanceMax);
+            }
+        }
+    }
+
 
     [Header("UnityEvents")]
     public UnityEvent OnIdle;
@@ -111,14 +127,14 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         pitch -= mouseY * rotationSpeed;
         pitch = Mathf.Clamp(pitch, pitchRangeBot, pitchRangeTop);
-        distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
+        distance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel"), distanceMin, distanceMax);
 
         Quaternion rotation = Quaternion.Euler(pitch, 0f, 0f);
         _mainCamera.transform.localRotation = rotation;
 
         Vector3 direction = _startCameraPosition.transform.position - transform.position;
         direction = direction.normalized;
-        Vector3 newPosition = transform.position + direction * distance;
+        Vector3 newPosition = transform.position + direction * Distance;
 
         _mainCamera.transform.position = newPosition;
     }
@@ -134,7 +150,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
 
-        Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+        Vector3 negDistance = new Vector3(0.0f, 0.0f, -Distance);
         Vector3 position = rotation * negDistance + target.position + _offset;
 
         _mainCamera.transform.rotation = rotation;
