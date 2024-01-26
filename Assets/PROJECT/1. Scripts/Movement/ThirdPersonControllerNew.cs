@@ -115,45 +115,28 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Quaternion rotation = Quaternion.Euler(pitch, 0f, 0f);
         _mainCamera.transform.localRotation = rotation;
+        /////////////////
+        //Vector3 direction = _mainCamera.transform.position - transform.position;
+        //Debug.Log("global " + direction);
+        //Debug.DrawRay(transform.position, direction, Color.red);
 
+        //direction = direction.normalized;
+        //Debug.Log("normalized " + direction.normalized);
 
+        //Vector3 np = target.position + direction * -distance;
 
-        ////////////////////////////////////////////////
-        //Transform playerTransform = target;
-        //Transform mainCameraTransform = _mainCamera.transform;
+        //Debug.DrawRay(np, Vector3.down, Color.green);
 
-        //Vector3 playerPosition = playerTransform.position;
+        //_mainCamera.transform.position = np;
+        //_startCameraPosition.transform.position = np;
 
-        //// Задаем направление от камеры к целевой точке
-        //Vector3 direction = mainCameraTransform.localPosition - playerPosition;
-
-        //// Нормализуем направление и умножаем на заданное расстояние
-        //Vector3 targetPosition = playerPosition + direction.normalized * distance;
-
-        //// Перемещаем камеру моментально
-        //mainCameraTransform.position = targetPosition;
-
-        //////////////////////////////
-        //Vector3 direction = _mainCamera.transform.localPosition - target.transform.localPosition;
-        //Debug.DrawRay(target.transform.position, direction, Color.green);
-
-        //// Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-        //Vector3 localPosition = direction * -distance + target.localPosition + _offset;
-        //_mainCamera.transform.localPosition = localPosition;
-        ////////////////////////////
-        //= Quaternion.Euler(mouseX, mouseY, 0);
-        //     Debug.Log(rotation);
-
-        //     RaycastHit hit;
-        //     if (Physics.Linecast(target.position, _mainCamera.transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
-        //     {
-        //         distance -= hit.distance;
-        //     }
-        //Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
-        //Vector3 position = rotation * negDistance;
-
-        //_mainCamera.transform.localRotation = rotation;
-        //_mainCamera.transform.localPosition = position;
+        ////--------------------------
+        //Vector3 parentPosition = transform.localPosition;
+        //Transform childTransform = _mainCamera.transform;
+        //Vector3 childPosition = childTransform.localPosition;
+        //Vector3 direction = childPosition - parentPosition;
+        //Debug.DrawRay(parentPosition, direction, Color.red);
+        //////////////////////////////////////////////////
     }
 
     public void RotateCameraAroundCharacter()
@@ -167,11 +150,6 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
         Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
 
-        //RaycastHit hit;
-        //if (Physics.Linecast(target.position, transform.position, out hit, 7/*дальность вроде*/, QueryTriggerInteraction.Collide))
-        //{
-        //    distance -= hit.distance;
-        //}
         Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
         Vector3 position = rotation * negDistance + target.position + _offset;
 
@@ -306,6 +284,7 @@ public abstract class ThirdPersonControllerNew : MonoBehaviourPun
 
             case CameraMode.FreelyRotating:
                 mouseX = transform.eulerAngles.y;
+                mouseY = _mainCamera.transform.eulerAngles.x;
 
                 break;
             default:
