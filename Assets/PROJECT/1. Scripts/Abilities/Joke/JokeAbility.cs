@@ -8,7 +8,6 @@ public class JokeAbility : BaseAbility
     [SerializeField] private KeyCode _keyCode = KeyCode.E;
 
     [SerializeField] private float _range = 7f;
-    [SerializeField] private float _laughtDuration = 5f;
 
     [SerializeField] private AudioSource _jokeAudioSource;
 
@@ -61,35 +60,10 @@ public class JokeAbility : BaseAbility
         {
             if (Vector3.Distance(transform.position, item.transform.position) <= _range)
             {
-                item.StartJoke(_laughtDuration);
+                item.StartJoke(abilityDuration);
             }
         }
     }
-
-    ////v2
-    //private IEnumerator JokeLoop()
-    //{
-    //    float step = 0.1f;
-    //    float duration = abilityDuration;
-
-    //    while (duration > 0)
-    //    {
-    //        foreach (var item in _jokeResponse)
-    //        {
-    //            if (Vector3.Distance(transform.position, item.transform.position) <= _range)
-    //            {
-    //                item.StartJoke();
-    //            }
-    //        }
-    //        duration -= step;
-    //        yield return new WaitForSeconds(step);
-    //    }
-    //    foreach (var item in _jokeResponse)
-    //    {
-    //        item.StopJoke();
-    //    }
-    //}
-
 
     [PunRPC]
     private void JokeOnOtherClients(int actorNumber)

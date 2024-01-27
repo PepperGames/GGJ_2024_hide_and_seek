@@ -857,8 +857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: JokeAbility
-  cooldown: 5
-  abilityDuration: 8.5
+  cooldown: 60
+  abilityDuration: 5
   OnAbilityLocalStart:
     m_PersistentCalls:
       m_Calls: []
