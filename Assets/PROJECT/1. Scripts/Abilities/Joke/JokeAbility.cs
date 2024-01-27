@@ -8,6 +8,7 @@ public class JokeAbility : BaseAbility
     [SerializeField] private KeyCode _keyCode = KeyCode.E;
 
     [SerializeField] private float _range = 7f;
+    [SerializeField] private float _laughtDuration = 5f;
 
     [SerializeField] private AudioSource _jokeAudioSource;
 
@@ -38,40 +39,56 @@ public class JokeAbility : BaseAbility
 
     public void LocalJoke()
     {
-        Joke();
+        TellAJoke();
 
         photonView.RPC("JokeOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
     }
 
-    public void Joke()
+    public void TellAJoke()
     {
+        float d = _jokeAudioSource.clip.length;
+        Debug.Log("_jokeAudioSource.clip.length " + _jokeAudioSource.clip.length);
+        _jokeAudioSource.loop = false;
         _jokeAudioSource.Play();
-        StartCoroutine(JokeLoop());
+        StartCoroutine(MakeYouLaugh(d));
         OnUseJoke?.Invoke();
     }
 
-    private IEnumerator JokeLoop()
+    private IEnumerator MakeYouLaugh(float delay)
     {
-        float step = 0.1f;
-        float duration = abilityDuration;
-
-        while (duration > 0)
-        {
-            foreach (var item in _jokeResponse)
-            {
-                if (Vector3.Distance(transform.position, item.transform.position) <= _range)
-                {
-                    item.StartJoke();
-                }
-            }
-            duration -= step;
-            yield return new WaitForSeconds(step);
-        }
+        yield return new WaitForSeconds(delay);
         foreach (var item in _jokeResponse)
         {
-            item.StopJoke();
+            if (Vector3.Distance(transform.position, item.transform.position) <= _range)
+            {
+                item.StartJoke(_laughtDuration);
+            }
         }
     }
+
+    ////v2
+    //private IEnumerator JokeLoop()
+    //{
+    //    float step = 0.1f;
+    //    float duration = abilityDuration;
+
+    //    while (duration > 0)
+    //    {
+    //        foreach (var item in _jokeResponse)
+    //        {
+    //            if (Vector3.Distance(transform.position, item.transform.position) <= _range)
+    //            {
+    //                item.StartJoke();
+    //            }
+    //        }
+    //        duration -= step;
+    //        yield return new WaitForSeconds(step);
+    //    }
+    //    foreach (var item in _jokeResponse)
+    //    {
+    //        item.StopJoke();
+    //    }
+    //}
 
 
     [PunRPC]
@@ -80,7 +97,7 @@ public class JokeAbility : BaseAbility
         JokeAbility ability = FindAbilityByActorNumber(actorNumber);
         if (ability != null)
         {
-            ability.Joke();
+            ability.TellAJoke();
         }
     }
 

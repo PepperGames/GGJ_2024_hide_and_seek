@@ -177,7 +177,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4150747938441109573}
   - {fileID: 8870292600393827345}
   - {fileID: 1190461039711303732}
   - {fileID: 1760185038168934885}
@@ -185,6 +184,7 @@ Transform:
   - {fileID: 413484588459814413}
   - {fileID: 1788102083720810370}
   - {fileID: 6024583938110698658}
+  - {fileID: 4150747938441109573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5319338849317032543
@@ -873,6 +873,7 @@ MonoBehaviour:
       m_Calls: []
   _keyCode: 101
   _range: 9
+  _laughtDuration: 5
   _jokeAudioSource: {fileID: 6534373021192195837}
   OnUseJoke:
     m_PersistentCalls:
@@ -1043,7 +1044,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ba5af5c5161127f439e7d9c5046a5dd2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 38b530018cfe81b4d8373d6fa182cfab, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1054,9 +1055,9 @@ AudioSource:
   Priority: 111
   DopplerLevel: 1
   MinDistance: 0.5
-  MaxDistance: 9
+  MaxDistance: 3.46
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1064,7 +1065,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.125
+      time: 0.055555556
       value: 1
       inSlope: 0
       outSlope: 0
@@ -1073,13 +1074,22 @@ AudioSource:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1.0057068
-      inSlope: 0.027510885
-      outSlope: 0.027510885
+      time: 0.981227
+      value: 0.881482
+      inSlope: -0.48513794
+      outSlope: -0.48513794
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.14805569
+      inWeight: 0.12845163
+      outWeight: 0.79191685
+    - serializedVersion: 3
+      time: 0.99432373
+      value: 0
+      inSlope: -6.5295916
+      outSlope: -6.5295916
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22664899
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -1114,6 +1114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laughterAbility: {fileID: 975447698259729727}
+  OnStartStun:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndStun:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7028077922809145598
 GameObject:
   m_ObjectHideFlags: 0
