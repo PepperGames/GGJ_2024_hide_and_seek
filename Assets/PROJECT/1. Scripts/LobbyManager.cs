@@ -19,6 +19,7 @@ public enum Team
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public TMP_InputField nicknameInputField; // Поле ввода для ника
+    public TMP_InputField roomCodeInputField;
     public TMP_Text nicknameDisplay; // TextMeshPro элемент для отображения никнейма
     public TMP_Text roomCodeDisplay;
     public TMP_Text timerText;
@@ -142,7 +143,40 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }
 
+    public void JoinRoomByCode()
+    {
+        string roomCode = roomCodeInputField.text; // Получаем код комнаты из поля ввода
+        if (!string.IsNullOrEmpty(roomCode))
+        {
+            string roomName = ConstantsHolder.ROOM_NAME_PREFIX + roomCode;
+            PhotonNetwork.JoinRoom(roomName); // Попытка присоединиться к комнате с указанным именем
+            AssignTeam();
+        }
+        else
+        {
+            Debug.LogError("Room code is empty.");
+        }
+    }
+    
+    public void CreateAndJoinRoom()
+    {
+        // Создаем уникальное имя для комнаты
+        string roomName = "Room_" + Random.Range(1000, 9999).ToString();
 
+        // Создаем опции комнаты
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 10; // Максимальное количество игроков
+        roomOptions.IsVisible = true; // Комната видима для других игроков
+        roomOptions.IsOpen = true; // Комната доступна для присоединения
+
+        // Попытка создать комнату
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
+
+        // Устанавливаем команду игрока
+        AssignTeam();
+    }
+
+    
     private string ChooseTeam()
     {
         // Проверяем, существует ли текущая комната
