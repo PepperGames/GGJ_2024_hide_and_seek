@@ -192,6 +192,43 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void SwitchTeams()
+    {
+        Team playerTeam = Team.None;
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(ConstantsHolder.TEAM_PARAM_NAME, out object teamValue))
+        {
+            if (Enum.TryParse(teamValue.ToString(), out Team parsedTeam))
+            {
+                playerTeam = parsedTeam;
+            }
+            else
+            {
+                Debug.LogError("Failed to parse team value: " + teamValue);
+                return; // Или установите значение по умолчанию для playerTeam
+            }
+        }
+        else
+        {
+            Debug.LogError("Team property not set for player: " + PhotonNetwork.LocalPlayer.NickName);
+            return; // Или установите значение по умолчанию для playerTeam
+        }
+
+        if (playerTeam == Team.Bobs)
+        {
+            playerTeam = Team.Cops;
+        }
+        else if (playerTeam == Team.Cops)
+        {
+            playerTeam = Team.Bobs;
+        }
+        
+        Hashtable props = new Hashtable
+        {
+            {ConstantsHolder.TEAM_PARAM_NAME, playerTeam.ToString()}
+        };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    }
+
 
 
     private void UpdatePlayerList()
@@ -327,7 +364,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        //UpdatePlayerList();
+        UpdatePlayerList();
     }
     
     public override void OnMasterClientSwitched(Player newMasterClient)
