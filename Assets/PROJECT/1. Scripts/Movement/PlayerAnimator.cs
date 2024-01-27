@@ -59,9 +59,9 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateBobStun()
     {
-        bobStunEffect.gameObject.SetActive(true);
-        bobStunEffect.Play(true);
-        photonView.RPC("ServerAnimateBobStun", RpcTarget.Others);
+        //bobStunEffect.gameObject.SetActive(true);
+        //bobStunEffect.Play(true);
+        photonView.RPC("ServerAnimateBobStun", RpcTarget.All);
     }
     
     public void AnimateCopStun()
