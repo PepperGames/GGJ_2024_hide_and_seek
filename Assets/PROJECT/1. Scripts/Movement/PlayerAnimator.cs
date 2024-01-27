@@ -20,6 +20,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public string bobTurnKey;
     public ParticleSystem bobStunEffect;
     public ParticleSystem bobTurnEffect;
+    public ParticleSystem fermerFlyingBobsDecor;
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
 
@@ -82,6 +83,7 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateBobTurnAbility()
     {
+        fermerFlyingBobsDecor.Stop();
         bobTurnEffect.Play(true);
         photonView.RPC("ServerAnimateBobTurn", RpcTarget.Others);
     }
@@ -134,6 +136,7 @@ public class PlayerAnimator : MonoBehaviourPun
     void ServerAnimateBobTurn()
     {
         //anim.Play(bobTurnKey);
+        fermerFlyingBobsDecor.Stop();
         bobTurnEffect.Play(true);
         foreach (var ob in objectsToDisable)
         {
