@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 1196189824364220141}
   - component: {fileID: 231223458081310596}
   - component: {fileID: 692033187922971938}
+  - component: {fileID: 4913752022426012874}
   m_Layer: 14
   m_Name: Cop_PlayerPrefab
   m_TagString: Player
@@ -176,6 +177,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4150747938441109573}
   - {fileID: 8870292600393827345}
   - {fileID: 1190461039711303732}
   - {fileID: 1760185038168934885}
@@ -792,6 +794,7 @@ MonoBehaviour:
   bobTurnKey: 
   bobStunEffect: {fileID: 0}
   bobTurnEffect: {fileID: 0}
+  fermerFlyingBobsDecor: {fileID: 0}
   objectsToDisable: []
   objectsToEnable: []
 --- !u!114 &692033187922971938
@@ -840,6 +843,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4913752022426012874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e19bc5cd99e4e24c82f610e9a0f74a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: JokeAbility
+  cooldown: 5
+  abilityDuration: 10
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  _keyCode: 101
+  _range: 9
+  _jokeAudioSource: {fileID: 6534373021192195837}
+  _laughterAbilitys: []
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +998,134 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2508577765235283258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7881924967051192388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4150747938441109573}
+  - component: {fileID: 6534373021192195837}
+  m_Layer: 14
+  m_Name: Joke_AudioSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4150747938441109573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881924967051192388}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.23524666, y: -0.81263673, z: -1.3073387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2508577765235283258}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &6534373021192195837
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881924967051192388}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ba5af5c5161127f439e7d9c5046a5dd2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 111
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 9
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.125
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.0057068
+      inSlope: 0.027510885
+      outSlope: 0.027510885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.14805569
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &24923905769917094
 PrefabInstance:
   m_ObjectHideFlags: 0

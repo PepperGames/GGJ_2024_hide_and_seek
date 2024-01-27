@@ -30,7 +30,7 @@ public class StunAbility : BaseAbility
     {
         LocalStun();
 
-        Debug.Log("��������� ��������� ��������: " + abilityName);
+        Debug.Log("Выполнено локальное действие: " + abilityName);
     }
 
     public void LocalStun()

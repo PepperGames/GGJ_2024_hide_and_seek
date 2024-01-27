@@ -8,7 +8,7 @@ public class LaughterAbility : BaseAbility
     public AudioSource audioSource;
     private LaughterMeter laughterMeter;
     private Coroutine laughterBroadcastCoroutine;
-    
+
 
     void Start()
     {
@@ -56,7 +56,7 @@ public class LaughterAbility : BaseAbility
         }
     }
 
-    private void HandleUncontrollableLaughter()
+    public void HandleUncontrollableLaughter()
     {
         // Проверяем, достигла ли шкала смеха нуля
         if (laughterMeter.currentLaughter <= 0)
@@ -89,7 +89,7 @@ public class LaughterAbility : BaseAbility
             cop.photonView.RPC("TryFindLaughterSource", RpcTarget.All, photonView.Owner.ActorNumber);
         }
     }
-    
+
     private IEnumerator LaughterBroadcastLoop()
     {
         while (laughterMeter.isUsingLaughter)
@@ -107,13 +107,13 @@ public class LaughterAbility : BaseAbility
         laughterMeter.isUsingLaughter = false;
         audioSource.loop = false;
         audioSource.Stop();
-        
+
         if (laughterBroadcastCoroutine != null)
         {
             StopCoroutine(laughterBroadcastCoroutine);
             laughterBroadcastCoroutine = null;
         }
-        
+
         photonView.RPC("StopLaughterSoundOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
     }
 
@@ -142,7 +142,7 @@ public class LaughterAbility : BaseAbility
             ability.audioSource.Stop();
         }
     }
-    
+
     LaughterAbility FindAbilityByActorNumber(int actorNumber)
     {
         foreach (var player in FindObjectsOfType<LaughterAbility>())
