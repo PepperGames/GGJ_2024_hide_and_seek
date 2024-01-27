@@ -1672,6 +1672,7 @@ GameObject:
   - component: {fileID: 8994968972522496618}
   - component: {fileID: 2576934781014413761}
   - component: {fileID: 8024926200390345263}
+  - component: {fileID: 2006867075752791040}
   m_Layer: 0
   m_Name: PunchIcon
   m_TagString: Untagged
@@ -1737,6 +1738,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2006867075752791040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017808319747442886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &4134851822422218663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,6 +2172,7 @@ GameObject:
   - component: {fileID: 9034173810569457958}
   - component: {fileID: 3747271209661882589}
   - component: {fileID: 3712212496893330126}
+  - component: {fileID: 8189342277788240382}
   m_Layer: 0
   m_Name: PunchIcon
   m_TagString: Untagged
@@ -2223,6 +2238,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8189342277788240382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258475684215830650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5274153340261575092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2493,7 @@ GameObject:
   - component: {fileID: 7876341458238261416}
   - component: {fileID: 5233504303818181768}
   - component: {fileID: 128701478446864841}
+  - component: {fileID: 7371202509953697729}
   m_Layer: 0
   m_Name: PunchIcon
   m_TagString: Untagged
@@ -2530,6 +2559,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7371202509953697729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5452465056450613307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &5786281749764605782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4175,6 +4217,7 @@ GameObject:
   - component: {fileID: 8496936747315262239}
   - component: {fileID: 2636259614742656095}
   - component: {fileID: 6683764148227815448}
+  - component: {fileID: 3295928060921325539}
   m_Layer: 0
   m_Name: PunchIcon
   m_TagString: Untagged
@@ -4240,6 +4283,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3295928060921325539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559100753301743643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &7780547340588845924
 GameObject:
   m_ObjectHideFlags: 0
