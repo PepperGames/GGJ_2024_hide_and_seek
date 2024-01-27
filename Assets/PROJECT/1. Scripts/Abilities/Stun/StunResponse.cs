@@ -21,13 +21,13 @@ public class StunResponse : MonoBehaviour
         _thirdPersonController.enabled = false;
         foreach (var item in _baseAbilities)
         {
-            item.enabled = false;
+            item.BlockUse();
         }
         yield return new WaitForSeconds(duration);
         _thirdPersonController.enabled = true;
         foreach (var item in _baseAbilities)
         {
-            item.enabled = true;
+            item.UnblockUse();
         }
         OnEndStun.Invoke();
     }

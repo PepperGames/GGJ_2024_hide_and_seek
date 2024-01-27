@@ -813,6 +813,7 @@ MonoBehaviour:
   _baseAbilities:
   - {fileID: 1196189824364220141}
   - {fileID: 2652105433934195931}
+  - {fileID: 4913752022426012874}
   OnStartStun:
     m_PersistentCalls:
       m_Calls:
@@ -857,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: JokeAbility
   cooldown: 5
-  abilityDuration: 10
+  abilityDuration: 8.5
   OnAbilityLocalStart:
     m_PersistentCalls:
       m_Calls: []
@@ -873,7 +874,9 @@ MonoBehaviour:
   _keyCode: 101
   _range: 9
   _jokeAudioSource: {fileID: 6534373021192195837}
-  _laughterAbilitys: []
+  OnUseJoke:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1056,7 @@ AudioSource:
   MinDistance: 0.5
   MaxDistance: 9
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

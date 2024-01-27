@@ -1,26 +1,29 @@
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class JokeAbility : BaseAbility
 {
     [SerializeField] private KeyCode _keyCode = KeyCode.E;
 
-    [SerializeField] private float _range = 15f;
+    [SerializeField] private float _range = 7f;
 
     [SerializeField] private AudioSource _jokeAudioSource;
 
-    [SerializeField] private LaughterAbility[] _laughterAbilitys;
+    private JokeResponse[] _jokeResponse;
+
+    public UnityEvent OnUseJoke;
 
     private void Awake()
     {
-        _laughterAbilitys = FindObjectsByType<LaughterAbility>(FindObjectsSortMode.None);
+        _jokeResponse = FindObjectsByType<JokeResponse>(FindObjectsSortMode.None);
+        _jokeAudioSource.maxDistance = _range;
     }
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetKeyDown(_keyCode) && canUse)
+        if (Input.GetKeyDown(_keyCode))
         {
             ActivateAbility();
         }
@@ -28,50 +31,56 @@ public class JokeAbility : BaseAbility
 
     public override void LocalUseOfAbility()
     {
-        LocalMakeYouLaugh();
+        LocalJoke();
 
         Debug.Log("¬ыполнено локальное действие: " + abilityName);
     }
 
-    public void LocalMakeYouLaugh()
+    public void LocalJoke()
     {
-        MakeYouLaugh();
+        Joke();
 
-        photonView.RPC("MakeYouLaughOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
+        photonView.RPC("JokeOnOtherClients", RpcTarget.Others, photonView.Owner.ActorNumber);
     }
 
-    public void MakeYouLaugh()
+    public void Joke()
     {
         _jokeAudioSource.Play();
-        StartCoroutine(LookBobAndMakeHimLaugh());
+        StartCoroutine(JokeLoop());
+        OnUseJoke?.Invoke();
     }
 
-    private IEnumerator LookBobAndMakeHimLaugh()
+    private IEnumerator JokeLoop()
     {
         float step = 0.1f;
         float duration = abilityDuration;
+
         while (duration > 0)
         {
-            foreach (var item in _laughterAbilitys)
+            foreach (var item in _jokeResponse)
             {
                 if (Vector3.Distance(transform.position, item.transform.position) <= _range)
                 {
-                    item.HandleUncontrollableLaughter();
+                    item.StartJoke();
                 }
             }
-            yield return new WaitForSeconds(step);
             duration -= step;
+            yield return new WaitForSeconds(step);
         }
-        _jokeAudioSource.Stop();
+        foreach (var item in _jokeResponse)
+        {
+            item.StopJoke();
+        }
     }
 
+
     [PunRPC]
-    private void MakeYouLaughOnOtherClients(int actorNumber)
+    private void JokeOnOtherClients(int actorNumber)
     {
         JokeAbility ability = FindAbilityByActorNumber(actorNumber);
         if (ability != null)
         {
-            ability.MakeYouLaugh();
+            ability.Joke();
         }
     }
 
@@ -85,11 +94,5 @@ public class JokeAbility : BaseAbility
             }
         }
         return null;
-    }
-
-    public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
-    {
-        // Ћогика, видима€ другим игрокам дл€ способности "Dash"
-        Debug.Log(playerName + " used spell = " + usedAbility + " (other player see this)");
     }
 }

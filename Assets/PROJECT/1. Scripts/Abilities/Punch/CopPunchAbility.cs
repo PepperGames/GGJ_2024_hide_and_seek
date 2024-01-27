@@ -9,16 +9,16 @@ public class CopPunchAbility : BaseAbility
     public UnityEvent OnPunch;
     public GameObject bobDeathCollider;
     public Transform deathColliderSpawnPoint;
-    
-    
+
+
     public override void CheckAbilityUse()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canUse)
         {
             ActivateAbility();
         }
     }
-    
+
     public override void LocalUseOfAbility()
     {
         OnPunch.Invoke();
