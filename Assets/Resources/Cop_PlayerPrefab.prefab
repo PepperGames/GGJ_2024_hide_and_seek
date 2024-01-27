@@ -308,7 +308,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2199194163272832008}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 9a548edde724b2643a996aa72596163a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -792,6 +792,7 @@ MonoBehaviour:
   bobTurnKey: 
   bobStunEffect: {fileID: 0}
   bobTurnEffect: {fileID: 0}
+  fermerFlyingBobsDecor: {fileID: 0}
   objectsToDisable: []
   objectsToEnable: []
 --- !u!114 &692033187922971938
