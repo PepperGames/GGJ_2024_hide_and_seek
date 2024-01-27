@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1910926529732549319}
   - component: {fileID: 6223158903590736176}
+  - component: {fileID: 1608804363924237036}
   m_Layer: 14
   m_Name: Laughter_AudioSource
   m_TagString: Untagged
@@ -128,6 +129,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1608804363924237036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145838943674071788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303d6d75dcb00994cbecd42bb724ea68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 6223158903590736176}
+  _audioClips:
+  - {fileID: 8300000, guid: 01546210e4c86444ba61796b11db8365, type: 3}
+  - {fileID: 8300000, guid: f2d913b1758178144a9347cf577e2353, type: 3}
+  - {fileID: 8300000, guid: 5809caf526531fc49b427e8d28aeff49, type: 3}
 --- !u!1 &656976319518367875
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +688,7 @@ MonoBehaviour:
       m_Calls: []
   laughterSound: {fileID: 8300000, guid: 44aee40475e0b0d4bb7f88da384eba05, type: 3}
   audioSource: {fileID: 6223158903590736176}
+  _randomAudioClipSetter: {fileID: 1608804363924237036}
 --- !u!114 &1734278868276519339
 MonoBehaviour:
   m_ObjectHideFlags: 0

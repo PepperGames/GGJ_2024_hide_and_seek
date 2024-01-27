@@ -8,12 +8,13 @@ public class LaughterAbility : BaseAbility
     public AudioSource audioSource;
     private LaughterMeter laughterMeter;
     private Coroutine laughterBroadcastCoroutine;
+    [SerializeField] private RandomAudioClipSetter _randomAudioClipSetter;
 
 
     void Start()
     {
         laughterMeter = GetComponent<LaughterMeter>();
-        //audioSource = GetComponent<AudioSource>();
+        laughterSound = _randomAudioClipSetter.GetRandomClip(); ;
     }
 
     public override void CheckAbilityUse()
