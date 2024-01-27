@@ -10,7 +10,7 @@ public class StunAbility : BaseAbility
 
     [SerializeField] private AudioSource _stunAudioSource;
     private StunResponse[] _stunResponses;
-
+    
     public UnityEvent OnUseStun;
 
     private void Awake()
@@ -30,7 +30,7 @@ public class StunAbility : BaseAbility
     {
         LocalStun();
 
-        Debug.Log("��������� ��������� ��������: " + abilityName);
+        Debug.Log("Выполнено локальное действие: " + abilityName);
     }
 
     public void LocalStun()

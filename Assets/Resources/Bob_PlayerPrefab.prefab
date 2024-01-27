@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 527031817023213338}
   - component: {fileID: 4342269938843211462}
   - component: {fileID: 5691230318628538179}
+  - component: {fileID: 7811186188911507371}
   m_Layer: 14
   m_Name: Bob_PlayerPrefab
   m_TagString: Player
@@ -1100,6 +1101,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7811186188911507371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263300691575067562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e21b0dd8a852e94f8d0101b70c52163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _laughterAbility: {fileID: 975447698259729727}
+  OnStartStun:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEndStun:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7028077922809145598
 GameObject:
   m_ObjectHideFlags: 0

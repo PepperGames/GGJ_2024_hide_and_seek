@@ -28,7 +28,7 @@ public class CopDashAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetKeyDown(dashKeyCode) && !isDashing)
+        if (Input.GetKeyDown(dashKeyCode) && !isDashing && canUse)
         {
             ActivateAbility();
         }
@@ -55,7 +55,7 @@ public class CopDashAbility : BaseAbility
 
         //spawnedHitBox = PhotonNetwork.Instantiate(dashHitBox.name, transform.position, quaternion.identity);
         //spawnedHitBox.transform.parent = transform;
-        
+
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
@@ -65,7 +65,7 @@ public class CopDashAbility : BaseAbility
                 Debug.Log("Dash interrupted due to collision");
                 break; // Прерываем дэш при столкновении
             }
-            
+
             playerRigidbody.MovePosition(playerRigidbody.position + transform.forward * dashSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
