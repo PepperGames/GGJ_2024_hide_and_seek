@@ -54,7 +54,7 @@ AudioSource:
   Priority: 130
   DopplerLevel: 1
   MinDistance: 0.1
-  MaxDistance: 4
+  MaxDistance: 27
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -7442,6 +7442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130256896780846924, guid: d9ec729e14ee91a4d9ae602fa37891b3,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5456075068062357905, guid: d9ec729e14ee91a4d9ae602fa37891b3,
         type: 3}
