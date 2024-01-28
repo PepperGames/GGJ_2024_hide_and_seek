@@ -63,7 +63,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void SetRandomNick()
     {
-        nicknameInputField.text = "Narik#" + Random.Range(1000, 10000).ToString();
+        nicknameInputField.text = ConstantsHolder.PLAYER_DEFAULT_NAME + Random.Range(1000, 10000).ToString();
     }
 
     public void ConnectToPhoton()
