@@ -49,6 +49,7 @@ public class SpectratorCameraController : MonoBehaviour
         Transform newTarget = potentialTargets[currentTargetIndex];
         myCamera.Follow = newTarget;
         myCamera.LookAt = newTarget;
+        currentSpectratorName = newTarget.gameObject.GetComponent<PhotonView>().Owner.NickName;
     }
 
     private void DetermineTeam()
