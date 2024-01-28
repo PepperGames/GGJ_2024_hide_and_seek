@@ -731,7 +731,7 @@ MonoBehaviour:
       m_Calls: []
   dashKeyCode: 304
   dashSpeed: 30
-  dashDuration: 0.23
+  dashDuration: 0.3174
   dashRaycastLength: 1
   dashHitBox: {fileID: 2613280299411524988, guid: a8ed658335882104dbd1634d4a660c38,
     type: 3}

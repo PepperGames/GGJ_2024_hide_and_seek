@@ -855,7 +855,7 @@ MonoBehaviour:
       m_Calls: []
   dashKeyCode: 304
   dashSpeed: 10
-  dashDuration: 0.5
+  dashDuration: 0.8
   _raycastTransform: {fileID: 2680241401543040689}
   dashRaycastLength: 1
   forbiddenlayers:
