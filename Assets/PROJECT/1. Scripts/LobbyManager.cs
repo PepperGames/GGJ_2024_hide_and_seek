@@ -23,6 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public TMP_Text nicknameDisplay; // TextMeshPro элемент для отображения никнейма
     public TMP_Text roomCodeDisplay;
     public TMP_Text timerText;
+    public TMP_Text roomVisibleText;
     public int maxNickLength;
     public int minNickLength;
     public GameObject playerListItemPrefab; // Префаб для элемента списка игроков
@@ -59,6 +60,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 
             }
         }
+
+        UpdateRoomVisibleText();
     }
 
     public void SetRandomNick()
@@ -161,12 +164,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void CreateAndJoinRoom()
     {
         // Создаем уникальное имя для комнаты
-        string roomName = "Room_" + Random.Range(1000, 9999).ToString();
+        string roomName = ConstantsHolder.ROOM_NAME_PREFIX + Random.Range(1000, 9999).ToString();
 
         // Создаем опции комнаты
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 10; // Максимальное количество игроков
-        roomOptions.IsVisible = true; // Комната видима для других игроков
+        roomOptions.IsVisible = false; // Комната видима для других игроков
         roomOptions.IsOpen = true; // Комната доступна для присоединения
 
         // Попытка создать комнату
@@ -175,8 +178,39 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // Устанавливаем команду игрока
         AssignTeam();
     }
-
     
+    public void ToggleRoomVisibility()
+    {
+        if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom != null)
+        {
+            PhotonNetwork.CurrentRoom.IsVisible = !PhotonNetwork.CurrentRoom.IsVisible;
+        }
+        else
+        {
+            Debug.LogError("Only master client can toggle room visibility.");
+        }
+
+        UpdateRoomVisibleText();
+    }
+
+    private void UpdateRoomVisibleText()
+    {
+        if (PhotonNetwork.CurrentRoom == null)
+        {
+            return;
+        }
+
+        if (PhotonNetwork.CurrentRoom.IsVisible)
+        {
+            roomVisibleText.text = ConstantsHolder.ROOM_VISIBLE_TEXT;
+        }
+        else
+        {
+            roomVisibleText.text = ConstantsHolder.ROOM_NOT_VISIBLE_TEXT;
+        }
+    }
+
+
     private string ChooseTeam()
     {
         // Проверяем, существует ли текущая комната
@@ -323,6 +357,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("Connected to Photon with nickname: " + PhotonNetwork.NickName);
         nicknameDisplay.text = "Hi " + PhotonNetwork.NickName + "!"; // Обновляем отображаемый никнейм
         OnConnected.Invoke();
+        
         //AssignTeam();
         // Здесь можно перейти к следующей сцене или отобразить дополнительные опции
     }
@@ -342,7 +377,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         OnJoinedRoomEvent.Invoke();
         //AssignTeam();
         UpdatePlayerList();
-        
+
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             OnIRoomOwner.Invoke();
@@ -371,7 +406,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         base.OnMasterClientSwitched(newMasterClient);
         Debug.Log("New master client is now: " + newMasterClient.NickName);
-
+        
         // Вызовите вашу проверку здесь
         if (PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {

@@ -5,6 +5,8 @@ using UnityEngine;
 public static class ConstantsHolder
 {
     public static string ROOM_NAME_PREFIX = "Room_";  
+    public static string ROOM_VISIBLE_TEXT = "Public room";  
+    public static string ROOM_NOT_VISIBLE_TEXT = "Private room";  
     public static string TEAM_PARAM_NAME = "Team";
     public static string PLAYER_DEFAULT_NAME = "Cowboy#";
     public static string LIVE_STATUS_PARAM_NAME = "LifeStatus";
