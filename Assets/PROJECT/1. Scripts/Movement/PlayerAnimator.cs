@@ -10,6 +10,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public string jumpKey;
     public string landAnimationName;
     public string copPunchTriggerKey;
+    public string copPunchAnimClipName;
     public string copPunchDashAnimClipName;
     public string copPunchDashKey;
     public string copStunAnimClipKey;
@@ -24,8 +25,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
 
-    
-    
+
     public void AnimateIdle()
     {
         AnimateBol(runKey, false);
@@ -48,6 +48,7 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateCopPunch()
     {
+        //PlayAnimationClip(copPunchAnimClipName);
         AnimateTrigger(copPunchTriggerKey);
     }
     

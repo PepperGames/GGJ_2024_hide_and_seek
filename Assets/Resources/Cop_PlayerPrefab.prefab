@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 231223458081310596}
   - component: {fileID: 692033187922971938}
   - component: {fileID: 4913752022426012874}
+  - component: {fileID: 6306308923092774097}
   m_Layer: 14
   m_Name: Cop_PlayerPrefab
   m_TagString: Player
@@ -569,6 +570,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6306308923092774097}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5201265591984252447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +799,7 @@ MonoBehaviour:
   jumpKey: cop_inAir
   landAnimationName: cop_land
   copPunchTriggerKey: punch
+  copPunchAnimClipName: cop_punch_InAir
   copPunchDashAnimClipName: cop_dash
   copPunchDashKey: punchDash
   copStunAnimClipKey: cop_Stun
@@ -877,6 +891,36 @@ MonoBehaviour:
   OnUseJoke:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6306308923092774097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2199194163272832008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a1c97c344ba6f45ae7d05cd319d5eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityName: MarkerSpell
+  cooldown: 0.1
+  abilityDuration: 0.1
+  OnAbilityLocalStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAbilityLocalEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBlockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnblockUse:
+    m_PersistentCalls:
+      m_Calls: []
+  markerPrefab: {fileID: 8929937941196485604, guid: 234a958d34c90734b8b05c48785635b1,
+    type: 3}
+  rayLength: 100
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/Death/DeathTrigger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/GameTimerMaster.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/Marker/MarkerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Abilities/Marker/RaycastAbility.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/CameraUIDeterminer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/ConstantsHolder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/PROJECT/1. Scripts/Movement/PlayerAnimator.cs" root0="FORCE_HIGHLIGHTING" />
@@ -99,6 +101,7 @@
       <workItem from="1706336475316" duration="2692000" />
       <workItem from="1706350097141" duration="3544000" />
       <workItem from="1706426835261" duration="281000" />
+      <workItem from="1706526106343" duration="5681000" />
     </task>
     <servers />
   </component>
