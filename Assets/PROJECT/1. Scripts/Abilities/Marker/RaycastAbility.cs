@@ -23,7 +23,7 @@ public class RaycastAbility : BaseAbility
 
     public override void CheckAbilityUse()
     {
-        if (Input.GetMouseButtonDown(3))
+        if (Input.GetKey(KeyCode.Mouse2))
         {
             ActivateAbility();
         }
