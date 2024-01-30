@@ -8,7 +8,8 @@ using UnityEngine.Events;
 public class MarkerBehaviour : MonoBehaviourPun
 {
     public float activeDuration = 5f; // Время активности маркера
-    public UnityEvent OnMarkerActivated;
+    public UnityEvent OnEnemyMarkerActivated;
+    public UnityEvent OnNormalMarkerActivated;
     public UnityEvent OnMarkerDeactivated;
 
     private Coroutine activeCoroutine;
@@ -23,15 +24,49 @@ public class MarkerBehaviour : MonoBehaviourPun
         }
 
         activeCoroutine = StartCoroutine(DeactivateMarker());
-        photonView.RPC("ActivateMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+        
+        // Проверяем, выделен ли вражеский игрок
+        if (IsEnemyPlayerMarked(position, team))
+        {
+            photonView.RPC("ActivateEnemyMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+        }
+        else
+        {
+            photonView.RPC("ActivateNormalMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+        }
+    }
+
+    private bool IsEnemyPlayerMarked(Vector3 position, Team team)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, 1f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (team == Team.Bobs && hitCollider.gameObject.GetComponent<CopPunchAbility>() != null)
+            {
+                return true;
+            }
+            else if (team == Team.Cops && hitCollider.gameObject.GetComponent<StunAbility>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     [PunRPC]
-    void ActivateMarkerOnAllClients(Vector3 position, string team)
+    void ActivateEnemyMarkerOnAllClients(Vector3 position, string team)
     {
         gameObject.SetActive(ShouldBeVisible(team));
         transform.position = position;
-        OnMarkerActivated?.Invoke();
+        OnEnemyMarkerActivated?.Invoke();
+    }
+
+    [PunRPC]
+    void ActivateNormalMarkerOnAllClients(Vector3 position, string team)
+    {
+        gameObject.SetActive(ShouldBeVisible(team));
+        transform.position = position;
+        OnNormalMarkerActivated?.Invoke();
     }
 
     private bool ShouldBeVisible(string team)
