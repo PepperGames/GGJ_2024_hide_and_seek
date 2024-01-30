@@ -24,11 +24,18 @@ public class MarkerBehaviour : MonoBehaviourPun
         }
 
         activeCoroutine = StartCoroutine(DeactivateMarker());
-        
-        // Проверяем, выделен ли вражеский игрок
-        if (IsEnemyPlayerMarked(position, team))
+
+        if (team == Team.Bobs)
         {
-            photonView.RPC("ActivateEnemyMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+            // Проверяем, выделен ли вражеский игрок
+            if (IsEnemyPlayerMarked(position, team))
+            {
+                photonView.RPC("ActivateEnemyMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+            }
+            else
+            {
+                photonView.RPC("ActivateNormalMarkerOnAllClients", RpcTarget.AllBuffered, position, team.ToString());
+            }
         }
         else
         {

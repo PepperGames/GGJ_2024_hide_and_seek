@@ -43831,6 +43831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTargets: -1
+  deathReason: fall off the clif
 --- !u!65 &1104489022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86163,6 +86164,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1767705552427093201, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1767705552427093201, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939863503604660599, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1939863503604660599, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2190552384519278903, guid: cb10c1860996f984785389d79387413f,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -86171,6 +86192,21 @@ PrefabInstance:
     - target: {fileID: 2190552384519278903, guid: cb10c1860996f984785389d79387413f,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541363234979600688, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541363234979600688, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2541363234979600688, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6382184844565783629, guid: cb10c1860996f984785389d79387413f,
@@ -86822,6 +86858,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1286846659}
+    - target: {fileID: 3928311059422612803, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928311059422612803, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4591764726280555029, guid: 86646ef9d0a332440a4c5ac8b6949fed,
         type: 3}
       propertyPath: m_Name
@@ -86932,6 +86978,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1286846659}
+    - target: {fileID: 6370741507968159325, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370741507968159325, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6739885646667378744, guid: 86646ef9d0a332440a4c5ac8b6949fed,
         type: 3}
       propertyPath: remainingTime
@@ -86942,6 +86998,16 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1286846659}
+    - target: {fileID: 8223112858100262974, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223112858100262974, guid: 86646ef9d0a332440a4c5ac8b6949fed,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTargets: 2
+  deathReason: 
 --- !u!114 &6114114094549816506
 MonoBehaviour:
   m_ObjectHideFlags: 0

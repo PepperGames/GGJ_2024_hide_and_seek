@@ -10,7 +10,7 @@ public class DeathManager : MonoBehaviourPun
     public GameObject spectratorCamera;
     public UnityEvent OnDeathBaseEvent;
 
-    public void HandleDeath()
+    public void HandleDeath(string reason)
     {
         if (photonView.IsMine)
         {
@@ -25,16 +25,17 @@ public class DeathManager : MonoBehaviourPun
             cam.Initialize(GetInstanceID());
         }
         
-        photonView.RPC("OnDeathRPC", RpcTarget.All, photonView.Owner.ActorNumber);
+        photonView.RPC("OnDeathRPC", RpcTarget.All, photonView.Owner.ActorNumber, reason);
     }
     
     [PunRPC]
-    void OnDeathRPC(int actorNumber)
+    void OnDeathRPC(int actorNumber, string reason)
     {
         DeathManager playerThatDied = FindDeadPlayerByActorNumber(actorNumber);
         if (playerThatDied != null)
         {
             playerThatDied.VisualizeDeath();
+            FindObjectOfType<KillFeedManager>().AddMessage(playerThatDied.photonView.Owner.NickName, reason);
         }
     }
 

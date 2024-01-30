@@ -11,7 +11,9 @@ public class DeathTrigger : MonoBehaviour
         Bobs = 1 << 1
     }
 
+    
     public Team deathTargets; // Выбор команд, которые будут реагировать на триггер
+    public string deathReason; // Причина смерти или ник убийцы
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,9 +27,13 @@ public class DeathTrigger : MonoBehaviour
                     Team playerTeam = (Team)System.Enum.Parse(typeof(Team), teamValue.ToString());
                     if ((deathTargets & playerTeam) != 0) // Проверяем, соответствует ли команда игрока одной из целевых команд
                     {
-                        Debug.Log("Player from team " + playerTeam + " entered the death trigger.");
-                        // Здесь можно добавить дополнительную логику обработки события
-                        other.GetComponent<DeathManager>().HandleDeath();
+                        if (string.IsNullOrEmpty(deathReason))
+                        {
+                            // Если причина смерти не задана, используем ник убийцы
+                            deathReason = gameObject.GetComponent<PhotonView>().Owner.NickName;
+                        }
+            
+                        other.GetComponent<DeathManager>().HandleDeath(deathReason);
                     }
                 }
             }

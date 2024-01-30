@@ -969,8 +969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: MarkerSpell
-  cooldown: 0.1
-  abilityDuration: 0.1
+  cooldown: 1
+  abilityDuration: 1
   OnAbilityLocalStart:
     m_PersistentCalls:
       m_Calls: []
@@ -985,7 +985,7 @@ MonoBehaviour:
       m_Calls: []
   markerPrefab: {fileID: 8929937941196485604, guid: 234a958d34c90734b8b05c48785635b1,
     type: 3}
-  rayLength: 100
+  rayLength: 60
 --- !u!1 &2648123323062696312
 GameObject:
   m_ObjectHideFlags: 0
