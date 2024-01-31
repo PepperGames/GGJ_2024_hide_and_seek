@@ -14,7 +14,9 @@ public class PlayerPUNInfos : MonoBehaviourPun
     public UnityEvent OnPlayerIsEnemy;
     public Camera mainCamera;
     public CameraUIDeterminer UIDeterminer;
-    public GameObject playerMarker; // Маркер игрока
+    public int defaultLayer = 0;
+    public int alyLayer = 13;
+    public GameObject[] playerModels; // Маркер игрока
 
     private void Awake()
     {
@@ -79,9 +81,19 @@ public class PlayerPUNInfos : MonoBehaviourPun
 
     private void SetMarkerVisibility(bool isVisible)
     {
-        if (playerMarker != null)
+        if (playerModels.Length > 0)
         {
-            playerMarker.SetActive(isVisible);
+            foreach (var mesh in playerModels)
+            {
+                if (isVisible)
+                {
+                    mesh.layer = alyLayer;
+                }
+                else
+                {
+                    mesh.layer = defaultLayer;
+                }
+            }
         }
     }
 

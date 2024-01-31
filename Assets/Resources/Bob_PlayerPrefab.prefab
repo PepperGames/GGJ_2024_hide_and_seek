@@ -698,18 +698,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2045490976505791225}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_layer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 13
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   OnPlayerIsEnemy:
     m_PersistentCalls:
       m_Calls:
@@ -725,21 +713,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2045490976505791225}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_layer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   mainCamera: {fileID: 0}
   UIDeterminer: {fileID: 0}
-  playerMarker: {fileID: 5630111063470993329}
+  defaultLayer: 0
+  alyLayer: 13
+  playerModels:
+  - {fileID: 2045490976505791225}
+  - {fileID: 1980665912288950862}
 --- !u!114 &3685828444586502812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8905,12 +8885,6 @@ PrefabInstance:
 --- !u!4 &5001806497967977739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43fab219ea9b95243a03af497aef9ccd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4819772988341768928}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5630111063470993329 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43fab219ea9b95243a03af497aef9ccd,
     type: 3}
   m_PrefabInstance: {fileID: 4819772988341768928}
   m_PrefabAsset: {fileID: 0}

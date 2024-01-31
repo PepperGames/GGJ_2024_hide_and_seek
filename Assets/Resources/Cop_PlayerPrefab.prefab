@@ -526,18 +526,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 5882103136295676814}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_layer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 13
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   OnPlayerIsEnemy:
     m_PersistentCalls:
       m_Calls:
@@ -553,21 +541,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5882103136295676814}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: set_layer
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   mainCamera: {fileID: 0}
   UIDeterminer: {fileID: 0}
-  playerMarker: {fileID: 128659076740240613}
+  defaultLayer: 0
+  alyLayer: 13
+  playerModels:
+  - {fileID: 5882103136295676814}
 --- !u!114 &7598135589879227762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,12 +1584,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43fab219ea9b95243a03af497aef9ccd, type: 3}
---- !u!1 &128659076740240613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 43fab219ea9b95243a03af497aef9ccd,
-    type: 3}
-  m_PrefabInstance: {fileID: 939140633840740788}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &757385473274089055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 43fab219ea9b95243a03af497aef9ccd,
