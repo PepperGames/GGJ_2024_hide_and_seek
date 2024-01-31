@@ -698,6 +698,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 2045490976505791225}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: set_layer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 13
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnPlayerIsEnemy:
     m_PersistentCalls:
       m_Calls:
@@ -705,6 +717,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2045490976505791225}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: set_layer
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1153,7 +1177,7 @@ MonoBehaviour:
   _pinAudioSource: {fileID: 4073599935852151397}
   _layersToNotPin:
     serializedVersion: 2
-    m_Bits: 16384
+    m_Bits: 24576
   _abilitiesThatWillBeBlocked:
   - {fileID: 8316879918416177442}
   - {fileID: 3119504746600372739}
@@ -7770,7 +7794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1045742843447156, guid: 6a71738add6483c4e8a1479556240d54, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1045742843447156, guid: 6a71738add6483c4e8a1479556240d54, type: 3}
       propertyPath: m_IsActive
@@ -8840,6 +8864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 43fab219ea9b95243a03af497aef9ccd,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 43fab219ea9b95243a03af497aef9ccd,
+        type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8861,7 +8890,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 43fab219ea9b95243a03af497aef9ccd,
         type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 43fab219ea9b95243a03af497aef9ccd,
         type: 3}
@@ -9739,6 +9768,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00004012735
+      objectReference: {fileID: 0}
+    - target: {fileID: -3225004021743654520, guid: 7a2e1349068775a47bc9b8b37d139aeb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -2966412291512351884, guid: 7a2e1349068775a47bc9b8b37d139aeb,
         type: 3}
