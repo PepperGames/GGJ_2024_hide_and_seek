@@ -53,25 +53,28 @@ public class CopDashAbility : BaseAbility
         isDashing = true;
         OnStartDash.Invoke();
 
-        //spawnedHitBox = PhotonNetwork.Instantiate(dashHitBox.name, transform.position, quaternion.identity);
-        //spawnedHitBox.transform.parent = transform;
+        // Получаем полное направление взгляда камеры, включая вертикальную составляющую
+        Vector3 cameraForward = Camera.main.transform.forward;
+        cameraForward.Normalize(); // Нормализуем вектор
 
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
             // Проверка на столкновение с помощью рейкаста
-            if (Physics.Raycast(_raycastTransform.position, transform.forward, dashRaycastLength, forbiddenlayers))
+            if (Physics.Raycast(_raycastTransform.position, cameraForward, dashRaycastLength, forbiddenlayers))
             {
                 Debug.Log("Dash interrupted due to collision");
                 break; // Прерываем дэш при столкновении
             }
 
-            playerRigidbody.MovePosition(playerRigidbody.position + transform.forward * dashSpeed * Time.fixedDeltaTime);
+            playerRigidbody.MovePosition(playerRigidbody.position + cameraForward * dashSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
         OnEndDash.Invoke();
         isDashing = false;
     }
+
+
 
     public override void OtherPlayersAbilityUse(string playerName, string usedAbility)
     {
