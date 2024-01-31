@@ -1228,8 +1228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityName: MarkerSpell
-  cooldown: 0.1
-  abilityDuration: 0.1
+  cooldown: 1
+  abilityDuration: 1
   OnAbilityLocalStart:
     m_PersistentCalls:
       m_Calls: []
