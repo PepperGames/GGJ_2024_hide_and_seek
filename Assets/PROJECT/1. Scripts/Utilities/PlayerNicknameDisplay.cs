@@ -72,7 +72,7 @@ public class PlayerNicknameDisplay : MonoBehaviourPun
         float distanceToPlayer = Vector3.Distance(transform.position, cameraTransform.position);
 
         // Масштабируем объект в зависимости от расстояния
-        float newSize = Mathf.Clamp((distanceToPlayer +d) * distanceScaleFactor, minSize, maxSize);
+        float newSize = Mathf.Clamp((distanceToPlayer) * distanceScaleFactor, minSize, maxSize);
         transform.localScale = new Vector3(newSize, newSize, newSize);
     }
 }
