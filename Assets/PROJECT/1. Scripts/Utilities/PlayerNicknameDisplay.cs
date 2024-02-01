@@ -7,6 +7,10 @@ public class PlayerNicknameDisplay : MonoBehaviourPun
     public TMP_Text nicknameText; // Ссылка на TextMeshPro объект
     private Transform cameraTransform; // Для хранения ссылки на трансформ камеры
 
+    [SerializeField] private float minSize = 1f; // Минимальный размер объекта
+    [SerializeField] private float maxSize = 5f; // Максимальный размер объекта
+    [SerializeField] private float distanceScaleFactor = 0.12f; // Коэффициент масштабирования
+
     private void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -26,11 +30,8 @@ public class PlayerNicknameDisplay : MonoBehaviourPun
 
     private void Update()
     {
-        // Поворачиваем никнейм всегда к камере
-        if (nicknameText.gameObject.activeSelf) // Обновляем только если никнейм активен
-        {
-            nicknameText.transform.rotation = Quaternion.LookRotation(nicknameText.transform.position - cameraTransform.position);
-        }
+        RotateNicknameText();
+        ResizeNicknameText();
     }
 
     private void CheckAndSetNicknameVisibility()
@@ -54,6 +55,25 @@ public class PlayerNicknameDisplay : MonoBehaviourPun
     {
         nicknameText.text = nickname;
         CheckAndSetNicknameVisibility(); // Повторная проверка видимости после синхронизации
+    }
+
+    private void RotateNicknameText()
+    {
+        // Поворачиваем никнейм всегда к камере
+        if (nicknameText.gameObject.activeSelf) // Обновляем только если никнейм активен
+        {
+            nicknameText.transform.rotation = Quaternion.LookRotation(nicknameText.transform.position - cameraTransform.position);
+        }
+    }
+
+    void ResizeNicknameText()
+    {
+        // Вычисляем расстояние от объекта до камеры
+        float distanceToPlayer = Vector3.Distance(transform.position, cameraTransform.position);
+
+        // Масштабируем объект в зависимости от расстояния
+        float newSize = Mathf.Clamp((distanceToPlayer +d) * distanceScaleFactor, minSize, maxSize);
+        transform.localScale = new Vector3(newSize, newSize, newSize);
     }
 }
 

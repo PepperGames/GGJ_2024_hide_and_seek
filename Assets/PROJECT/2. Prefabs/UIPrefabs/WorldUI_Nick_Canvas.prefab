@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 1563427547064653691}
   - component: {fileID: 630326431877642705}
   - component: {fileID: 6802442222191630097}
-  - component: {fileID: 8097651320094480532}
   - component: {fileID: 2873370512298029350}
   m_Layer: 13
   m_Name: WorldUI_Nick_Canvas
@@ -174,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.05, y: 2.077}
+  m_AnchoredPosition: {x: 0.049987793, y: 2.0770264}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &730299332986819288
@@ -222,7 +221,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &630326431877642705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,18 +261,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8097651320094480532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4666050587816413331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be223342eb4b53498e169c3e182ea2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2873370512298029350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nicknameText: {fileID: 7308818460775676220}
+  minSize: 1
+  maxSize: 15
+  distanceScaleFactor: 0.12
+  d: 0
