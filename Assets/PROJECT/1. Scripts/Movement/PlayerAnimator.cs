@@ -10,7 +10,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public string jumpKey;
     public string landAnimationName;
     public string copPunchTriggerKey;
-    public string copPunchAnimClipName;
+    public string copAirPunchAnimClipName;
     public string copPunchDashAnimClipName;
     public string copPunchDashKey;
     public string copStunAnimClipKey;
@@ -25,6 +25,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public GameObject[] objectsToDisable;
     public GameObject[] objectsToEnable;
 
+    private bool punching;
 
     public void AnimateIdle()
     {
@@ -33,7 +34,10 @@ public class PlayerAnimator : MonoBehaviourPun
     
     public void AnimateJump()
     {
-        PlayAnimationClip(jumpKey);
+        if (!punching)
+        {
+            PlayAnimationClip(jumpKey);
+        }
     }
 
     public void AnimateRun()
@@ -49,6 +53,7 @@ public class PlayerAnimator : MonoBehaviourPun
     public void AnimateCopPunch()
     {
         //PlayAnimationClip(copPunchAnimClipName);
+
         AnimateTrigger(copPunchTriggerKey);
     }
     
@@ -149,5 +154,10 @@ public class PlayerAnimator : MonoBehaviourPun
             ob.SetActive(true);
         }
     }
-    
+
+    public void SetPunchingBool(bool state)
+    {
+        punching = state;
+    }
+
 }

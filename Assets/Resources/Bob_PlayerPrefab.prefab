@@ -1109,7 +1109,7 @@ MonoBehaviour:
   jumpKey: inAir
   landAnimationName: land
   copPunchTriggerKey: 
-  copPunchAnimClipName: 
+  copAirPunchAnimClipName: 
   copPunchDashAnimClipName: 
   copPunchDashKey: 
   copStunAnimClipKey: 

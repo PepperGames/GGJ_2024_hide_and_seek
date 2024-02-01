@@ -50258,7 +50258,7 @@ Transform:
   m_GameObject: {fileID: 1286846654}
   serializedVersion: 2
   m_LocalRotation: {x: 0.19034413, y: -0.068474844, z: 0.013310157, w: 0.97923607}
-  m_LocalPosition: {x: 1.15, y: 3.12, z: -2.72}
+  m_LocalPosition: {x: 1.3852466, y: 3.9326367, z: -1.4126613}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86313,6 +86313,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BobCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6651372250276450752, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653111325410716093, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653111325410716093, guid: cb10c1860996f984785389d79387413f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 6678590864413080077, guid: cb10c1860996f984785389d79387413f,
         type: 3}

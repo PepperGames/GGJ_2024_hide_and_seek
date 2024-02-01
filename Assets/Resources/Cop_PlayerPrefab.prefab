@@ -704,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: CopsPunch
   cooldown: 0.6
-  abilityDuration: 1
+  abilityDuration: 0.5
   OnAbilityLocalStart:
     m_PersistentCalls:
       m_Calls:
@@ -735,6 +735,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 231223458081310596}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: SetPunchingBool
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnBlockUse:
     m_PersistentCalls:
       m_Calls: []
@@ -755,6 +767,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 231223458081310596}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: SetPunchingBool
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   bobDeathCollider: {fileID: 8570177967116594527, guid: 0cd22986de19b184ba8814944f08fbf5,
     type: 3}
@@ -891,7 +915,7 @@ MonoBehaviour:
   jumpKey: cop_inAir
   landAnimationName: cop_land
   copPunchTriggerKey: punch
-  copPunchAnimClipName: cop_punch_InAir
+  copAirPunchAnimClipName: cop_AirPunch
   copPunchDashAnimClipName: cop_dash
   copPunchDashKey: punchDash
   copStunAnimClipKey: cop_Stun
